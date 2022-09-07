@@ -1,0 +1,7 @@
+.hex {
+	stroke-width: 2;
+}
+
+.hex:hover {
+	fill: red;
+}

@@ -1,0 +1,23 @@
+/* Define the precious font face */
+@font-face {
+  font-family: 'precious';
+  src: url('../fonts/Precious.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-size:30px;
+}
+
+.btn {
+  font-size: 30px;
+}
+	
+.h1,h1 {
+	font-family: 'precious';
+	font-size:8.5rem;
+	margin-top: 60px;
+}
+
+
