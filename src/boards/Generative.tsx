@@ -58,7 +58,7 @@ export default function GenerativeBoard(props: any) {
 		let tempHexList: hexagon[] = []
 		let q = 0;
 		let r = 0;
-		tempHexList.push({q:0,r:0,cssClasses:"bg-white"})
+		tempHexList.push({q:0,r:0,cssClasses:"gameboard-space bg-white"})
 		for (let i = 0; i < numberOfSpaces; i++) {
 			let found = false;
 			let nextMove: vector = randomMove()
