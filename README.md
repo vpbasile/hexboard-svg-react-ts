@@ -1,6 +1,10 @@
-# Getting Started with Create React App
+# Hex Board Maker
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Cloning Repository
+
+If you clone the repository, you will need to run `npm install`
 
 ## Available Scripts
 
