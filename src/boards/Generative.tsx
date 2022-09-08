@@ -8,6 +8,7 @@ import { alreadyThere, hexOrientations, randomMove } from "../components/hexFunc
 export default function GenerativeBoard(props: any) {
 
 	const [numberOfSpaces, SETnumberOfSpaces] = useState(30);
+	const [sizeOfSpaces, SETsizeOfSpaces] = useState(30);
 
 	const canvasGlobals = props.canvasGlobals;
 	const canvasHeight = canvasGlobals.canvasHeight;
@@ -25,8 +26,8 @@ export default function GenerativeBoard(props: any) {
 		canvasWidth: canvasWidth,
 		// Hexagons
 		orientation: hexOrientations["flat-top"],
-		gridOrigin: { 'x': canvasWidth/2, 'y': canvasHeight/2 },
-		hexRadius: hexSize,
+		gridOrigin: { 'x': canvasWidth / 2, 'y': canvasHeight / 2 },
+		hexRadius: sizeOfSpaces,
 		separationMultiplier: 1.1,
 		textSize: hexSize / 1.25
 		// Style
@@ -47,30 +48,41 @@ export default function GenerativeBoard(props: any) {
 
 	let q = 0;
 	let r = 0;
-	for(let i=0; i < numberOfSpaces; i++){
+	for (let i = 0; i < numberOfSpaces; i++) {
 		let found = false;
-		let nextMove:vector = randomMove()
+		let nextMove: vector = randomMove()
 		// Prevent overlap
-		while (!found){
+		while (!found) {
 			q += nextMove.q;
 			r += nextMove.r;
-			found = !alreadyThere({q,r},hexList)
+			found = !alreadyThere({ q, r }, hexList)
 		}
 		console.log(`q:${q},r:${r}`)
-		hexList.push({q,r})
+		hexList.push({ q, r })
 	}
 
 	// Give the hexes some color
 	colorHexes(hexList);
 
 	// Interface for changing things
-	const numberPicker = <input type="number" defaultValue={numberOfSpaces} onChange={(e)=>SETnumberOfSpaces(+e.target.value)} />
+	const numberPicker =
+		<div>
+			<label htmlFor="pickSpace">Number of cells: </label>
+			<input type="number" defaultValue={numberOfSpaces} onChange={(e) => SETnumberOfSpaces(+e.target.value)} />
+		</div>
+
+	const sizePicker = 
+	<div>
+		<label htmlFor="pickSize">Size in px: </label>
+		<input type="number" defaultValue={hexSize} onChange={(e) => SETsizeOfSpaces(+e.target.value)} />
+	</div>
 
 	return (
 		<div id='generativeBoard'>
 			<h1>Generative board</h1>
 			<h2>Orientation: flat-top</h2>
 			{numberPicker}
+			{sizePicker}
 			<ErrorBoundary>
 				<GameBoard
 					hexRoster={hexList}
