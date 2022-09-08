@@ -16,7 +16,6 @@ export default function GenerativeBoard(props: any) {
 	const canvasCenter = canvasGlobals.canvasCenter;
 
 	// <> Gameboard Parameters
-	const hexSize: number = 20
 	const gameGlobals = {
 		// Utility
 		canvasBackgroundColor: '#000',
@@ -29,7 +28,7 @@ export default function GenerativeBoard(props: any) {
 		gridOrigin: { 'x': canvasWidth / 2, 'y': canvasHeight / 2 },
 		hexRadius: sizeOfSpaces,
 		separationMultiplier: 1.1,
-		textSize: hexSize / 1.25
+		textSize: sizeOfSpaces / 1.25
 		// Style
 	}
 
@@ -74,7 +73,7 @@ export default function GenerativeBoard(props: any) {
 	const sizePicker = 
 	<div>
 		<label htmlFor="pickSize">Size in px: </label>
-		<input type="number" defaultValue={hexSize} onChange={(e) => SETsizeOfSpaces(+e.target.value)} />
+		<input type="number" defaultValue={sizeOfSpaces} onChange={(e) => SETsizeOfSpaces(+e.target.value)} />
 	</div>
 
 	return (
