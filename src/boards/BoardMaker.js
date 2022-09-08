@@ -1,6 +1,6 @@
-import GameBoard from './GameBoard';
+import GameBoard from '../components/HexBoardSVG';
 // import logo from './logo.svg';
-import ErrorBoundary from './ErrorBoundary';
+import ErrorBoundary from '../components/ErrorBoundary';
 import { useState } from 'react';
 
 export default function BoardMaker(props) {
@@ -38,15 +38,8 @@ export default function BoardMaker(props) {
 
 
 	// <> Gameboard building
-	function blackHexes(hexes) {
-		hexes.forEach(hex => {
-			hex.cssClasses = "gameboard-space bg-black"
-		})
-	}
 
-	function colorHexes(hexes) {
-		hexes.forEach(hex => { hex.cssClasses = `gameboard-space ${gameGlobals.getNextCssClass()}` })
-	}
+	
 
 	// Create a center hexagon
 	const centerHexagon = { "q": 0, "r": 0, "cssClasses": "gameboard-center bg-gray" }
@@ -60,7 +53,7 @@ export default function BoardMaker(props) {
 		}
 	}
 
-	var tempHexRoster = tempHexData.map(hex => {
+	let tempHexRoster = tempHexData.map(hex => {
 		// Give all the hexes a cssClasses if they don't already have one
 		if (hex.cssClasses === undefined) { hex.cssClasses = "gameboard-space bg-gray" }
 		return hex;

@@ -1,9 +1,9 @@
-import Hexagon from './Hexagon';
-import ErrorBoundary from './ErrorBoundary';
-import GameBoard from './GameBoard';
+import ErrorBoundary from '../components/ErrorBoundary';
+import GameBoard from '../components/HexBoardSVG';
+import { canvasGlobals, hexagon } from '../components/hexDefinitions';
 
-export default function Keyboard(props) {
 
+export default function Keyboard(props: { canvasGlobals: canvasGlobals; }) {
 	const canvasGlobals = props.canvasGlobals;
 	const canvasHeight = canvasGlobals.canvasHeight;
 	const canvasWidth = canvasGlobals.canvasWidth;
@@ -27,28 +27,16 @@ export default function Keyboard(props) {
 		// Style
 	}
 
-	const hexList = [];
+	const hexList: hexagon[] = [];
 
-	let keyboardCharList = [`qwertyuiop[]`,`asdfghjkl;'`,`zxcvbnm,./`].forEach((row, rowIndex) => {
+	let keyboardCharList = [`qwertyuiop[]`, `asdfghjkl;'`, `zxcvbnm,./`]
+	keyboardCharList.forEach((row, rowIndex) => {
 		Array.from(row).forEach((key, keyIndex) => {
-			hexList.push({
-				"q": keyIndex,
-				"r": rowIndex,
-				"hexText": key}
-			)
+			let thisOne: hexagon = { q: keyIndex, r: rowIndex, hexText: key }
+			hexList.push(thisOne)
 
 		})
 	})
-
-	// for (let row = 0; row < 5; row++) {
-	// 	for (let q = 0; q < 12; q++) {
-	// 		hexList.push({
-	// 			"q": q,
-	// 			"r": row,
-	// 			"hexText": keyboardCharList.shift(),
-	// 		});
-	// 	}
-	// }
 
 	const cssClasses = ["bg-green", "bg-red", "bg-blue", "bg-purple", "bg-orange"]
 	let cssClassIndex = 0;
@@ -57,7 +45,7 @@ export default function Keyboard(props) {
 		cssClassIndex = (cssClassIndex + 1) % cssClasses.length;
 		return cssClass;
 	}
-	function colorHexes(hexes) {
+	function colorHexes(hexes: hexagon[]) {
 		hexes.forEach(hex => { hex.cssClasses = `gameboard-space ${getNextCssClass()}` })
 	}
 
@@ -73,13 +61,15 @@ export default function Keyboard(props) {
 	return (
 		<div id='keyboard'>
 			<h1>Keyboard</h1>
+			<h2>Orientation: pointy-top</h2>
 			<ErrorBoundary>
 				<GameBoard
 					hexRoster={keyboardHexes}
 					canvasGlobals={canvasGlobals}
 					gameGlobals={gameGlobals}
 					rotation={"90deg"}
-					textSize={`${gameGlobals.textSize}px`}
+					textSize={gameGlobals.textSize}
+					whichOrientation={"pointy-top"}
 				//   logo={logo}
 				/>
 			</ErrorBoundary>

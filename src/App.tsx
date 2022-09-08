@@ -8,11 +8,12 @@ import './css/trivia-color-dark.css';
 
 // <> Import components
 import ErrorBoundary from './components/ErrorBoundary';
-import TriviaBoard from './components/Game-triviaBoard';
-import Keyboard from './components/Game-Keyboard';
-import BoardMaker from './components/Game-boardMaker';
-import Generative from './components/Game-generative';
-// import consistentButton from './components/NeatButtons';
+import TriviaBoard from './boards/TriviaBoard';
+import Keyboard from './boards/Keyboard';
+// import BoardMaker from './boards/BoardMaker';
+import Generative from './boards/Generative';
+import { canvasGlobals } from './components/hexDefinitions';
+// import consistentButton from './boards/NeatButtons';
 // import { Button } from 'bootstrap-react';
 
 // Import UI elements
@@ -22,10 +23,11 @@ function App() {
   // <> Global Constants for Utility
   const canvasWidth = window.innerWidth
   const canvasHeight = window.innerHeight
-  const canvasGlobals = {
+  const canvasGlobals:canvasGlobals = {
     canvasWidth: canvasWidth,
     canvasHeight: canvasHeight,
     canvasCenter: { 'x': canvasWidth / 2, 'y': canvasHeight / 2 }
+    
   }
 
   let buttonID = 0;
@@ -33,9 +35,9 @@ function App() {
   // <> Global constants for choosing a game
   const options = [
     { key: 'generative', text:'Generative', value:'generative'},
-    { key: 'maker', text: 'Gameboard Maker', value: 'maker' },
-    { key: 'keyboard', text: 'Keyboard', value: 'keyboard' },
     { key: 'trivia', text: 'Trivia', value: 'trivia' },
+    // { key: 'maker', text: 'Gameboard Maker', value: 'maker' },
+    { key: 'keyboard', text: 'Keyboard', value: 'keyboard' },
   ]
   const [game, setGame] = useState('')
   const navBar = options.map(option => {
@@ -46,13 +48,13 @@ function App() {
   )
 })
 
-var chosenGameBoard
+let chosenGameBoard
 
 // const chosenGameBoard = game === 'trivia' ? <TriviaBoard /> : <KeyboardBoard />
 switch (game) {
-  case 'maker': chosenGameBoard = <BoardMaker
-    canvasGlobals={canvasGlobals}
-  />; break;
+  // case 'maker': chosenGameBoard = <BoardMaker
+  //   canvasGlobals={canvasGlobals}
+  // />; break;
   case 'trivia': chosenGameBoard = <TriviaBoard
     canvasGlobals={canvasGlobals}
   />; break;

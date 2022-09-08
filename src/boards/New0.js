@@ -1,5 +1,5 @@
-import GameBoard from './GameBoard';
-import ErrorBoundary from './ErrorBoundary';
+import GameBoard from '../components/HexBoardSVG';
+import ErrorBoundary from '../components/ErrorBoundary';
 
 export default function Game(props) {
 
@@ -24,7 +24,7 @@ export default function Game(props) {
 		orientationName: "flat-top",
 		// Style
 	}
-	var gameHexes = [];
+	let gameHexes = [];
 
 	return (
 		<div id='game'>

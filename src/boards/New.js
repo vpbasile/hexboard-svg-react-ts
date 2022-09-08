@@ -1,6 +1,6 @@
-import GameBoard from './GameBoard';
+import GameBoard from '../components/HexBoardSVG';
 // import logo from './logo.svg';
-import ErrorBoundary from './ErrorBoundary';
+import ErrorBoundary from '../components/ErrorBoundary';
 import { cube_ring } from '../hexFunctions';
 
 export default function TriviaBoard(props) {
@@ -52,7 +52,7 @@ export default function TriviaBoard(props) {
 	const centerHexagon = { "q": 0, "r": 0, "cssClasses": "gameboard-center bg-gray" }
 	let hexData = [centerHexagon]
 
-	var hexRoster = hexData.map(hex => {
+	let hexRoster = hexData.map(hex => {
 		// Give all the hexes a cssClasses if they don't already have one
 		if (hex.cssClasses === undefined) { hex.cssClasses = "gameboard-space bg-gray" }
 		return hex;

@@ -1,13 +1,17 @@
-import React from 'react';
+import { hexProps, orientation, orientationName } from './hexDefinitions';
+import { hexOrientations } from '../components/hexFunctions';
 
 // function degtoRad(degrees) { return degrees * Math.PI / 180 }
 
-export default function Hexagon(props) {
+export default function Hexagon(props:hexProps) {
 	const sqrt3 = Math.sqrt(3)
 	const gameGlobals = props.gameGlobals
 	// Cache global variables
 	const hexRadius = gameGlobals.hexRadius;
-	const orientation = props.orientation
+	const orientationName:orientationName = props.orientationName;
+	// console.log(	`orientationName: ${orientationName}`)
+	const orientation: orientation = hexOrientations[orientationName]
+	// !!! This is hard-coded.  Need to fix the data structre to an associative array before I can do this
 	// console.log(`orientation: ${JSON.stringify(orientation)}`)
 	const cornerAngles = orientation.cornerAngles
 	const gridOrigin = gameGlobals.gridOrigin;
@@ -18,15 +22,17 @@ export default function Hexagon(props) {
 	// Math
 	const separationMultiplier = props.gameGlobals.separationMultiplier
 	const hexText = props.hexText
+	const hexTextSize = props.hexTextSize;
 
-	function hex_to_pixel(q, r, orientation) {
-		var x
-		var y
+	function hex_to_pixel(q: number, r: number, orientation: orientation) {
+		let x: number
+		let y: number
 		if (orientation.name === "flat-top") {
 			x = hexRadius * (3. / 2 * q)
 			y = hexRadius * (sqrt3 / 2 * q + sqrt3 * r)
 		}
-		else if (orientation.name === "pointy-top") {
+		// else if (orientation.name === "pointy-top") {
+		else {
 			x = hexRadius * (sqrt3 * q + sqrt3 / 2 * r)
 			y = hexRadius * (3. / 2 * r)
 		}
@@ -35,9 +41,9 @@ export default function Hexagon(props) {
 	const center = hex_to_pixel(q, r, orientation)
 
 	// Find the X and Y of each corner
-	var polygonString = ""
+	let polygonString = ""
 	cornerAngles.map(angle => {
-		var theta = angle * Math.PI / 180
+		let theta = angle * Math.PI / 180
 		const x = Math.floor(center.x + hexRadius * Math.cos(theta))
 		const y = Math.floor(center.y + hexRadius * Math.sin(theta))
 		// console.log(`corner: ${angle} ${x},${y}`)
@@ -48,7 +54,7 @@ export default function Hexagon(props) {
 
 
 	// <> Event Handlers
-	const handleClick = (e) => {
+	const handleClick = () => {
 		console.log(`${hexText} hex ${props.id} clicked. q: ${q}, r: ${r}`)
 	}
 
@@ -63,7 +69,7 @@ export default function Hexagon(props) {
 				y={center.y}
 				textAnchor="middle"
 				alignmentBaseline="middle"
-				fontSize={props.hexTextSize}
+				fontSize={`${hexTextSize}px`}
 			>
 				{hexText}
 			</text>)
@@ -77,7 +83,7 @@ export default function Hexagon(props) {
 			<polygon
 				style={{}}
 				className={`hex ${cssClasses}`}
-				id={props.id}
+				id={`${props.id}`}
 				points={polygonString}
 			/>
 			{textForHex}
@@ -86,7 +92,7 @@ export default function Hexagon(props) {
 }
 
 	// 	// If there is a letter, then draw it and make the hex clickable
-	// 	var currentLetter = this.letter
+	// 	let currentLetter = this.letter
 	// 	// If currentlter, then make it clickable
 	// 	if (currentLetter == 'enter') {
 	// 		gameBoard.fill(`white`)
@@ -100,7 +106,7 @@ export default function Hexagon(props) {
 
 	// 	}
 	// 	if (currentLetter != undefined) {
-	// 		var displayLetter = gameBoard.text(currentLetter)
+	// 		let displayLetter = gameBoard.text(currentLetter)
 	// 		displayLetter
 	// 			// .attr('class', `${this.classes}`)
 	// 			.fill(`white`)
@@ -123,7 +129,7 @@ export default function Hexagon(props) {
 	// }
 
 	// isNeighbor(comparisonHex) {
-	// 	var foundNeighbor = false
+	// 	let foundNeighbor = false
 	// 	directionVectors.forEach(element => {
 	// 		if (this.q + element.q == comparisonHex.q && this.r + element.r == comparisonHex.r) { foundNeighbor = true }
 	// 	})
@@ -131,7 +137,7 @@ export default function Hexagon(props) {
 	// }
 
 	// assignLetter() {
-	// 	var thisLetter = results.pop()
+	// 	let thisLetter = results.pop()
 	// 	this.letter = thisLetter;
 	// 	debug(`Assigning ${thisLetter} to hex ${this.id}`)
 	// 	this.setClasses("clickable")
