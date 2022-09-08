@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/svg-hexboard-react-ts/static/css/main.257501f4.css",
+    "main.js": "/svg-hexboard-react-ts/static/js/main.d6d491d4.js",
+    "index.html": "/svg-hexboard-react-ts/index.html",
+    "main.257501f4.css.map": "/svg-hexboard-react-ts/static/css/main.257501f4.css.map",
+    "main.d6d491d4.js.map": "/svg-hexboard-react-ts/static/js/main.d6d491d4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.257501f4.css",
+    "static/js/main.d6d491d4.js"
+  ]
+}
