@@ -1,0 +1,8 @@
+.gameboard-space {
+	stroke-width: 1;
+}
+
+.gameboard-space:hover {
+	stroke: white;
+	stroke-width: 5px;
+}

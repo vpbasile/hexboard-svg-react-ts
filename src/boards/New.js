@@ -63,7 +63,7 @@ export default function TriviaBoard(props) {
 	return (
 		<div className="App">
 			<header className="App-header">
-				<h1>Trivia Board</h1>
+				<h2>Trivia Board</h2>
 				<ErrorBoundary>
 					<GameBoard
 						hexRoster={hexRoster}

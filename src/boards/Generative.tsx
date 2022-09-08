@@ -4,11 +4,16 @@ import { useState } from "react";
 
 import { hexagon, vector } from "../components/hexDefinitions";
 import { alreadyThere, hexOrientations, randomMove } from "../components/hexFunctions";
+import RosterDisplay from "../components/RosterDisplay";
+
+import '../css/gameboard.css'
 
 export default function GenerativeBoard(props: any) {
 
-	const [numberOfSpaces, SETnumberOfSpaces] = useState(30);
-	const [sizeOfSpaces, SETsizeOfSpaces] = useState(30);
+	const [sizeOfSpaces, SETsizeOfSpaces] = useState(20);
+	const [numberOfSpaces, SETnumberOfSpaces] = useState(500);
+	const [tempNumber, SETtempNumber] = useState(numberOfSpaces)
+	const [hexRoster, SEThexRoster] = useState(newRoster())
 
 	const canvasGlobals = props.canvasGlobals;
 	const canvasHeight = canvasGlobals.canvasHeight;
@@ -32,67 +37,84 @@ export default function GenerativeBoard(props: any) {
 		// Style
 	}
 
-	const hexList: hexagon[] = [];
+	// Randomize color assignment so that 1/3 hexes are green
+	function mapColor(): string {
+		const rando = randomInt(25)
+		if (rando === 1) return "bg-green"
+		// if (rando === 2) return "bg-red"
+		else return "bg-blue"
 
-	const cssClasses = ["bg-green", "bg-red", "bg-blue", "bg-purple", "bg-orange"]
-	let cssClassIndex = 0;
-	function getNextCssClass() {
-		let cssClass = cssClasses[cssClassIndex];
-		cssClassIndex = (cssClassIndex + 1) % cssClasses.length;
-		return cssClass;
 	}
+
+	function randomInt(int: number): number {
+		return Math.floor(int * Math.random())
+	}
+
 	function colorHexes(hexes: hexagon[]) {
-		hexes.forEach(hex => { hex.cssClasses = `gameboard-space ${getNextCssClass()}` })
+		hexes.forEach(hex => { if (hex.cssClasses === undefined) hex.cssClasses = `gameboard-space ${mapColor()}` })
 	}
 
-	let q = 0;
-	let r = 0;
-	for (let i = 0; i < numberOfSpaces; i++) {
-		let found = false;
-		let nextMove: vector = randomMove()
-		// Prevent overlap
-		while (!found) {
-			q += nextMove.q;
-			r += nextMove.r;
-			found = !alreadyThere({ q, r }, hexList)
+	function newRoster(): hexagon[] {
+		let tempHexList: hexagon[] = []
+		let q = 0;
+		let r = 0;
+		tempHexList.push({q:0,r:0,cssClasses:"bg-white"})
+		for (let i = 0; i < numberOfSpaces; i++) {
+			let found = false;
+			let nextMove: vector = randomMove()
+			// Prevent overlap
+			while (!found) {
+				q += nextMove.q;
+				r += nextMove.r;
+				found = !alreadyThere({ q, r }, tempHexList)
+			}
+			tempHexList.push({ q, r })
 		}
-		console.log(`q:${q},r:${r}`)
-		hexList.push({ q, r })
+		// Give the hexes some color
+		colorHexes(tempHexList);
+		return tempHexList;
 	}
 
-	// Give the hexes some color
-	colorHexes(hexList);
 
 	// Interface for changing things
-	const numberPicker =
-		<div>
-			<label htmlFor="pickSpace">Number of cells: </label>
-			<input type="number" defaultValue={numberOfSpaces} onChange={(e) => SETnumberOfSpaces(+e.target.value)} />
-		</div>
 
-	const sizePicker = 
-	<div>
-		<label htmlFor="pickSize">Size in px: </label>
-		<input type="number" defaultValue={sizeOfSpaces} onChange={(e) => SETsizeOfSpaces(+e.target.value)} />
+	const editForm = <div className="row">
+		<div id="reRender" className="bg-blue col-6 p-2">
+			<label htmlFor="pickSpace">Number of cells: </label>
+			<input type="number" defaultValue={numberOfSpaces} onChange={(e) => SETtempNumber(+e.target.value)} />
+			<button className={`btn bg-blue`} onClick={() => {
+				SETnumberOfSpaces(tempNumber);
+				SEThexRoster(newRoster());
+			}
+			}>Re-shuffle</button >
+		</div>
+		<div id="cosmeticChange" className="bg-green col-6 p-2">
+			<label htmlFor="pickSize">Size in px: </label>
+			<input type="number" defaultValue={sizeOfSpaces} onChange={(e) => SETsizeOfSpaces(+e.target.value)} />
+		</div>
 	</div>
 
 	return (
-		<div id='generativeBoard'>
-			<h1>Generative board</h1>
+		<div className="row" id="generativeBoard">
+			<h2>Generative board</h2>
 			<h2>Orientation: flat-top</h2>
-			{numberPicker}
-			{sizePicker}
-			<ErrorBoundary>
-				<GameBoard
-					hexRoster={hexList}
-					canvasGlobals={canvasGlobals}
-					gameGlobals={gameGlobals}
-					rotation={"90deg"}
-					textSize={gameGlobals.textSize}
-					whichOrientation={"flat-top"}
-				//   logo={logo}
-				/>
-			</ErrorBoundary>
+			<div id='generativeBoard' className="col-10">
+				{editForm}
+				<ErrorBoundary>
+					<GameBoard
+						hexRoster={hexRoster}
+						canvasGlobals={canvasGlobals}
+						gameGlobals={gameGlobals}
+						rotation={"90deg"}
+						textSize={gameGlobals.textSize}
+						whichOrientation={"flat-top"}
+					//   logo={logo}
+					/>
+				</ErrorBoundary>
+			</div>
+			<div id="rosterDisplay" className="col-2">
+				<RosterDisplay hexRoster={hexRoster} />
+			</div>
 		</div>
 	);
 }

@@ -28,7 +28,7 @@ export default function Game(props) {
 
 	return (
 		<div id='game'>
-			<h1>Game</h1>
+			<h2>Game</h2>
 
 			<ErrorBoundary>
 				<GameBoard

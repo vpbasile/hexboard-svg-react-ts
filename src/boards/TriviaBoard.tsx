@@ -91,7 +91,7 @@ export default function TriviaBoard(props: { canvasGlobals: canvasGlobals; }) {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Trivia Board</h1>
+        <h2>Trivia Board</h2>
 			<h2>Orientation: flat-top</h2>
         <ErrorBoundary>
           <GameBoard

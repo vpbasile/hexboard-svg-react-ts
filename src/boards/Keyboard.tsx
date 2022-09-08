@@ -60,7 +60,7 @@ export default function Keyboard(props: { canvasGlobals: canvasGlobals; }) {
 
 	return (
 		<div id='keyboard'>
-			<h1>Keyboard</h1>
+			<h2>Keyboard</h2>
 			<h2>Orientation: pointy-top</h2>
 			<ErrorBoundary>
 				<GameBoard

@@ -22,7 +22,7 @@ function App() {
 
   // <> Global Constants for Utility
   const canvasWidth = window.innerWidth
-  const canvasHeight = window.innerHeight
+  const canvasHeight = 2*window.innerHeight
   const canvasGlobals:canvasGlobals = {
     canvasWidth: canvasWidth,
     canvasHeight: canvasHeight,
@@ -41,10 +41,10 @@ function App() {
   ]
   const [game, setGame] = useState('')
   const navBar = options.map(option => {
-    let css=`bg-green`
+    let css=`bg-orange`
     return (
       <button key = { buttonID++ } onClick = {()=>setGame(option.key) } 
-      className = {`btn p-3 m-2 ${css}`}> { option.text }</button >
+      className = {`btn m-2 ${css}`}> { option.text }</button >
   )
 })
 
@@ -64,27 +64,21 @@ switch (game) {
   default: chosenGameBoard = <Generative
     canvasGlobals={canvasGlobals}
   />
-  // <div><h1>Select a game</h1>No game selected</div>; break;
 }
-
-// const chosenGameBoard = <Keyboard
-// canvasGlobals={canvasGlobals}
-// />
 
 return (
   <ErrorBoundary>
     <div className="App container bg-black">
+      <h1>Hexboard Maker</h1>
       <nav className='row'>
         <div id="nav-bar" className='col-12'>
           {navBar}
         </div>
       </nav>
-      <div id="game-container" className='col-12'>
         <ErrorBoundary>
           {chosenGameBoard}
         </ErrorBoundary>
       </div>
-    </div>
   </ErrorBoundary>
 )
 }

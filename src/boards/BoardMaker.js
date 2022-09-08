@@ -53,11 +53,11 @@ export default function BoardMaker(props) {
 		}
 	}
 
-	let tempHexRoster = tempHexData.map(hex => {
-		// Give all the hexes a cssClasses if they don't already have one
-		if (hex.cssClasses === undefined) { hex.cssClasses = "gameboard-space bg-gray" }
-		return hex;
-	})
+	// let tempHexRoster = tempHexData.map(hex => {
+	// 	// Give all the hexes a cssClasses if they don't already have one
+	// 	if (hex.cssClasses === undefined) { hex.cssClasses = "gameboard-space bg-gray" }
+	// 	return hex;
+	// })
 
 	// console.log(`hexRoster: ${JSON.stringify(hexRoster)}`)
 
@@ -67,7 +67,7 @@ export default function BoardMaker(props) {
 	return (
 		<div className="App">
 			<header className="App-header">
-				<h1>Gameboard Maker</h1>
+				<h2>Gameboard Maker</h2>
 				<ErrorBoundary>
 					{/* Form for setting gameGlobals */}
 					<div className='border bg-green p-2 m-2'>
