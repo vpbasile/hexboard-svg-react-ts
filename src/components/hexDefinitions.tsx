@@ -20,7 +20,6 @@ export interface gameBoardProps {
 	gameGlobals: gameGlobals;
 	canvasGlobals: canvasGlobals;
 	hexRoster: hexagon[];
-	rotation: string;
 	textSize?: number;
 	whichOrientation: orientationName;
 }

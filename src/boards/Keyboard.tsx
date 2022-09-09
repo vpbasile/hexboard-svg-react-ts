@@ -67,7 +67,6 @@ export default function Keyboard(props: { canvasGlobals: canvasGlobals; }) {
 					hexRoster={keyboardHexes}
 					canvasGlobals={canvasGlobals}
 					gameGlobals={gameGlobals}
-					rotation={"90deg"}
 					textSize={gameGlobals.textSize}
 					whichOrientation={"pointy-top"}
 				//   logo={logo}

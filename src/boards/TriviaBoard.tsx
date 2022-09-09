@@ -98,7 +98,6 @@ export default function TriviaBoard(props: { canvasGlobals: canvasGlobals; }) {
             hexRoster={triviaHexes}
             canvasGlobals={canvasGlobals}
             gameGlobals={gameGlobals}
-            rotation={"90deg"}
             whichOrientation={"flat-top"}
 
           //   logo={logo}

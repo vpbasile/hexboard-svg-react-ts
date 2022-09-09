@@ -11,8 +11,6 @@ export default function Hexagon(props:hexProps) {
 	const orientationName:orientationName = props.orientationName;
 	// console.log(	`orientationName: ${orientationName}`)
 	const orientation: orientation = hexOrientations[orientationName]
-	// !!! This is hard-coded.  Need to fix the data structre to an associative array before I can do this
-	// console.log(`orientation: ${JSON.stringify(orientation)}`)
 	const cornerAngles = orientation.cornerAngles
 	const gridOrigin = gameGlobals.gridOrigin;
 	// Coordinates
@@ -144,5 +142,3 @@ export default function Hexagon(props:hexProps) {
 	// 	debug(`Hex ${this.id} has classes ${this.classes}`)
 	// }
 // } // End of class Hex
-
-// <> Hex-altering Functions

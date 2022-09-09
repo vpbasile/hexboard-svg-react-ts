@@ -12,6 +12,7 @@ import TriviaBoard from './boards/TriviaBoard';
 import Keyboard from './boards/Keyboard';
 // import BoardMaker from './boards/BoardMaker';
 import Generative from './boards/Generative';
+import SavedBoard from './boards/SavedBoard';
 import { canvasGlobals } from './components/hexDefinitions';
 // import consistentButton from './boards/NeatButtons';
 // import { Button } from 'bootstrap-react';
@@ -35,6 +36,7 @@ function App() {
   // <> Global constants for choosing a game
   const options = [
     { key: 'generative', text:'Generative', value:'generative'},
+    {key: 'saved', text: 'Saved Map', value:'saved'},
     { key: 'trivia', text: 'Trivia', value: 'trivia' },
     // { key: 'maker', text: 'Gameboard Maker', value: 'maker' },
     { key: 'keyboard', text: 'Keyboard', value: 'keyboard' },
@@ -58,6 +60,9 @@ switch (game) {
   case 'trivia': chosenGameBoard = <TriviaBoard
     canvasGlobals={canvasGlobals}
   />; break;
+  case 'saved': chosenGameBoard = <SavedBoard
+    canvasGlobals={canvasGlobals}
+    />; break;
   case 'keyboard': chosenGameBoard = <Keyboard
     canvasGlobals={canvasGlobals}
   />; break;

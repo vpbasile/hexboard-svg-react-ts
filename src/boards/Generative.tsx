@@ -2,18 +2,19 @@ import ErrorBoundary from "../components/ErrorBoundary";
 import GameBoard from "../components/HexBoardSVG";
 import { useState } from "react";
 
-import { hexagon, vector } from "../components/hexDefinitions";
+import { canvasGlobals, hexagon, vector } from "../components/hexDefinitions";
 import { alreadyThere, hexOrientations, randomMove } from "../components/hexFunctions";
 import RosterDisplay from "../components/RosterDisplay";
 
 import '../css/gameboard.css'
 
-export default function GenerativeBoard(props: any) {
+export default function GenerativeBoard(props: { canvasGlobals: canvasGlobals; }) {
 
 	const [sizeOfSpaces, SETsizeOfSpaces] = useState(20);
 	const [numberOfSpaces, SETnumberOfSpaces] = useState(500);
 	const [tempNumber, SETtempNumber] = useState(numberOfSpaces)
 	const [hexRoster, SEThexRoster] = useState(newRoster())
+	const [exportDimensions, SETexportDimension] = useState({xmin:0,xmax:0,ymin:0,ymax:0})
 
 	const canvasGlobals = props.canvasGlobals;
 	const canvasHeight = canvasGlobals.canvasHeight;
@@ -58,7 +59,7 @@ export default function GenerativeBoard(props: any) {
 		let tempHexList: hexagon[] = []
 		let q = 0;
 		let r = 0;
-		tempHexList.push({q:0,r:0,cssClasses:"gameboard-space bg-white"})
+		tempHexList.push({ q: 0, r: 0, cssClasses: "gameboard-space bg-white" })
 		for (let i = 0; i < numberOfSpaces; i++) {
 			let found = false;
 			let nextMove: vector = randomMove()
@@ -75,6 +76,31 @@ export default function GenerativeBoard(props: any) {
 		return tempHexList;
 	}
 
+	const saveRoster = () => {
+		let exp_canvasGlobals:canvasGlobals = {
+			canvasWidth: exportDimensions.xmax - exportDimensions.xmin,
+			canvasHeight: exportDimensions.ymax - exportDimensions.ymin,
+			canvasCenter: {x:0,y:0}
+		}
+
+		let exportObject = {
+			canvasGlobals: exp_canvasGlobals,
+			gameGlobals: gameGlobals,
+			textSize: gameGlobals.textSize,
+			whichOrientation: "flat-top",
+			hexRoster: hexRoster
+		}
+		const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
+			JSON.stringify(exportObject)
+		)}`;
+		const link = document.createElement("a");
+		link.href = jsonString;
+		link.download = "data.json";
+
+		link.click();
+	};
+
+
 
 	// Interface for changing things
 
@@ -87,6 +113,7 @@ export default function GenerativeBoard(props: any) {
 				SEThexRoster(newRoster());
 			}
 			}>Re-shuffle</button >
+			<button className={`btn bg-cyan`} onClick={() => saveRoster()} >Save Roster</button>
 		</div>
 		<div id="cosmeticChange" className="bg-green col-6 p-2">
 			<label htmlFor="pickSize">Size in px: </label>
@@ -105,7 +132,6 @@ export default function GenerativeBoard(props: any) {
 						hexRoster={hexRoster}
 						canvasGlobals={canvasGlobals}
 						gameGlobals={gameGlobals}
-						rotation={"90deg"}
 						textSize={gameGlobals.textSize}
 						whichOrientation={"flat-top"}
 					//   logo={logo}
