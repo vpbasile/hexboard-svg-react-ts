@@ -3,12 +3,13 @@ import ArraySelect from "../components/ArraySelect";
 import GameBoard from "../components/HexBoardSVG";
 import { canvasGlobals, gameGlobals, hexagon } from "../components/hexDefinitions";
 import { hexOrientations } from "../components/hexFunctions";
+import SaveRosterButton from "../forms/saveRoster";
 
 export default function CreateBoard(props: { canvasGlobals: canvasGlobals }) {
 	const [sizeOfSpaces, SETsizeOfSpaces] = useState(20);
 	const [qTemp, SETqTemp] = useState(0);
 	const [rTemp, SETrTemp] = useState(0);
-	const cssClassChoices = [`bg-white`,'bg-green','bg-blue','bg-purple','bg-red']
+	const cssClassChoices = [`bg-white`, 'bg-green', 'bg-blue', 'bg-purple', 'bg-red']
 	const [classTemp, SETclassTemp] = useState(cssClassChoices[0])
 	const blankRoster: hexagon[] = []
 	const [hexRoster, SEThexRoster] = useState(blankRoster)
@@ -36,7 +37,7 @@ export default function CreateBoard(props: { canvasGlobals: canvasGlobals }) {
 
 	function addHex() {
 		let tempRoster = Array.from(hexRoster)
-		tempRoster.push({q:qTemp,r:rTemp,cssClasses:classTemp})
+		tempRoster.push({ q: qTemp, r: rTemp, cssClasses: classTemp })
 		SEThexRoster(tempRoster);
 	}
 
@@ -46,10 +47,14 @@ export default function CreateBoard(props: { canvasGlobals: canvasGlobals }) {
 		<label htmlFor="rField">r:</label>
 		<input name="rField" defaultValue={rTemp} onChange={(e) => SETrTemp(+e.target.value)} />
 		<ArraySelect
-		choicesArray={cssClassChoices}
-		onChange={SETclassTemp}
+			choicesArray={cssClassChoices}
+			onChange={SETclassTemp}
 		/>
 		<button onClick={() => addHex()}>Add</button>
+		<SaveRosterButton
+			hexRoster={hexRoster}
+			gameGlobals={gameGlobals}
+		/>
 	</div>
 
 	return (<div className="row" id="generativeBoard">
