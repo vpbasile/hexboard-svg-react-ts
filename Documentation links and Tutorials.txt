@@ -1,7 +1,1 @@
-https://redux.js.org/introduction/getting-started
-
-
-// Things to add
-https://github.com/kolodny/immutability-helper
-Bootsrap-react
-
+How I learned hex grid math - https://www.redblobgames.com/grids/hexagons/
