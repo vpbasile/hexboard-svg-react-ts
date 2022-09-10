@@ -67,7 +67,7 @@ export default function BoardMaker(props) {
 	return (
 		<div className="App">
 			<header className="App-header">
-				<h2>Gameboard Maker</h2>
+				<h3>Gameboard Maker</h3>
 				<ErrorBoundary>
 					{/* Form for setting gameGlobals */}
 					<div className='border bg-green p-2 m-2'>

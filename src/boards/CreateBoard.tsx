@@ -58,8 +58,7 @@ export default function CreateBoard(props: { canvasGlobals: canvasGlobals }) {
 	</div>
 
 	return (<div className="row" id="generativeBoard">
-		<h2>Generative board</h2>
-		<h2>Orientation: flat-top</h2>
+		<h3>Orientation: flat-top</h3>
 		<div id='generativeBoard' className="col-10">
 			{form}
 			<GameBoard

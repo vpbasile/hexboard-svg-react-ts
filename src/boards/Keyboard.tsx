@@ -60,8 +60,7 @@ export default function Keyboard(props: { canvasGlobals: canvasGlobals; }) {
 
 	return (
 		<div id='keyboard'>
-			<h2>Keyboard</h2>
-			<h2>Orientation: pointy-top</h2>
+			<h3>Orientation: pointy-top</h3>
 			<ErrorBoundary>
 				<GameBoard
 					hexRoster={keyboardHexes}

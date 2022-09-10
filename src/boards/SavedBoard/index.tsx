@@ -10,8 +10,7 @@ export default function SavedBoard(props: { canvasGlobals: canvasGlobals; }) {
 
 	return (
 		<div className="row" id="generativeBoard">
-			<h2>Generative board</h2>
-			<h2>Orientation: flat-top</h2>
+			<h3>Orientation: flat-top</h3>
 			<div id='displayBoard' className="col-12">
 				<ErrorBoundary>
 					<GameBoard

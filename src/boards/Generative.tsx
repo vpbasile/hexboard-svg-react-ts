@@ -101,8 +101,7 @@ export default function GenerativeBoard(props: { canvasGlobals: canvasGlobals; }
 
 	return (
 		<div className="row" id="generativeBoard">
-			<h2>Generative board</h2>
-			<h2>Orientation: flat-top</h2>
+			<h3>Orientation: flat-top</h3>
 			<div id='generativeBoard' className="col-10">
 				{editForm}
 				<ErrorBoundary>
