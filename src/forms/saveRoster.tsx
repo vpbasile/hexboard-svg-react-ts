@@ -1,24 +1,16 @@
-import { gameGlobals, canvasGlobals, hexagon } from "../components/hexDefinitions";
+import * as hexDefinitions from "../components/hexDefinitions";
 
 export default function SaveRosterButton(props: {
-	hexRoster: hexagon[],
-	gameGlobals:gameGlobals
+	hexRoster: hexDefinitions.hexagon[],
+	gameGlobals:hexDefinitions.gameGlobals
 }) {
 	const hexRoster = props.hexRoster;
 	const gameGlobals = props.gameGlobals;
 
-	const saveRoster = (hexRoster: hexagon[]) => {
-		let exp_canvasGlobals: canvasGlobals = {
-			canvasWidth: 1000,
-			canvasHeight: 1000,
-			canvasCenter: { x: 0, y: 0 }
-		}
+	const saveRoster = (hexRoster: hexDefinitions.hexagon[]) => {
 
-		let exportObject = {
-			canvasGlobals: exp_canvasGlobals,
+		let exportObject:{gameGlobals:hexDefinitions.gameGlobals, hexRoster:hexDefinitions.hexagon[]} = {
 			gameGlobals: gameGlobals,
-			textSize: gameGlobals.textSize,
-			whichOrientation: "flat-top",
 			hexRoster: hexRoster
 		}
 		const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(

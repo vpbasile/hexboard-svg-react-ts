@@ -2,15 +2,11 @@ import GameBoard from '../components/HexBoardSVG';
 // import logo from './logo.svg';
 import ErrorBoundary from '../components/ErrorBoundary';
 import { cube_ring } from '../components/hexFunctions';
-import { canvasGlobals, hexagon } from '../components/hexDefinitions';
+import { gameGlobals, hexagon } from '../components/hexDefinitions';
 // <> Enhancement: Store all of the q,r directiom vector pairs in an array
 // <> Pull in some functions from the GameBoard component
 
-export default function TriviaBoard(props: { canvasGlobals: canvasGlobals; }) {
-  const canvasGlobals = props.canvasGlobals;
-  const canvasHeight = canvasGlobals.canvasHeight;
-  const canvasWidth = canvasGlobals.canvasWidth;
-  const canvasCenter = canvasGlobals.canvasCenter;
+export default function TriviaBoard(props: gameGlobals ) {
 
   // Trivia-specific constants
   const cssClasses = ["bg-green", "bg-red", "bg-blue", "bg-yellow", "bg-purple", "bg-orange"]
@@ -22,24 +18,6 @@ export default function TriviaBoard(props: { canvasGlobals: canvasGlobals; }) {
   }
 
   let triviaHexes = [];
-
-  // <> Gameboard Parameters
-  const gameGlobals = {
-    // Utility
-    canvasBackgroundColor: '#000',
-    canvasCenter: canvasCenter,
-    verbose: false,
-    canvasHeight: canvasHeight,
-    canvasWidth: canvasWidth,
-    // Hexagons
-    gridOrigin: canvasCenter,
-    hexRadius: 30,
-    separationMultiplier: 1.1,
-    textSize: 50,
-    orientationName: "flat-top",
-    // Style
-    getNextCssClass: getNextCssClass,
-  }
 
   // <> Utility
   // <> Helper and Math Functions
@@ -53,7 +31,7 @@ export default function TriviaBoard(props: { canvasGlobals: canvasGlobals; }) {
   }
 
   function colorHexes(hexes:hexagon[]) {
-    hexes.forEach(hex => { hex.cssClasses = `gameboard-space ${gameGlobals.getNextCssClass()}` })
+    hexes.forEach(hex => { hex.cssClasses = `gameboard-space ${getNextCssClass()}` })
   }
 
   // Create a center hexagon
@@ -95,8 +73,7 @@ export default function TriviaBoard(props: { canvasGlobals: canvasGlobals; }) {
         <ErrorBoundary>
           <GameBoard
             hexRoster={triviaHexes}
-            canvasGlobals={canvasGlobals}
-            gameGlobals={gameGlobals}
+            gameGlobals={props}
             whichOrientation={"flat-top"}
 
           //   logo={logo}

@@ -1,31 +1,11 @@
 import ErrorBoundary from '../components/ErrorBoundary';
 import GameBoard from '../components/HexBoardSVG';
-import { canvasGlobals, hexagon } from '../components/hexDefinitions';
+import { gameGlobals, hexagon } from '../components/hexDefinitions';
 
 
-export default function Keyboard(props: { canvasGlobals: canvasGlobals; }) {
-	const canvasGlobals = props.canvasGlobals;
-	const canvasHeight = canvasGlobals.canvasHeight;
-	const canvasWidth = canvasGlobals.canvasWidth;
-	const canvasCenter = canvasGlobals.canvasCenter;
+export default function Keyboard(props: gameGlobals ) {
 
 	// <> Gameboard Parameters
-	const keyboardUnit = canvasWidth / 30;
-	const gameGlobals = {
-		// Utility
-		canvasBackgroundColor: '#000',
-		canvasCenter: canvasCenter,
-		verbose: false,
-		canvasHeight: canvasHeight,
-		canvasWidth: canvasWidth,
-		// Hexagons
-		gridOrigin: { 'x': keyboardUnit, 'y': keyboardUnit },
-		hexRadius: keyboardUnit,
-		separationMultiplier: 1.1,
-		textSize: keyboardUnit / 1.25,
-		orientationName: "pointy-top",
-		// Style
-	}
 
 	const hexList: hexagon[] = [];
 
@@ -64,9 +44,8 @@ export default function Keyboard(props: { canvasGlobals: canvasGlobals; }) {
 			<ErrorBoundary>
 				<GameBoard
 					hexRoster={keyboardHexes}
-					canvasGlobals={canvasGlobals}
-					gameGlobals={gameGlobals}
-					textSize={gameGlobals.textSize}
+					gameGlobals={props}
+					textSize={props.textSize}
 					whichOrientation={"pointy-top"}
 				//   logo={logo}
 				/>

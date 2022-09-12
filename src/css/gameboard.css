@@ -1,3 +1,7 @@
+.gameboard-canvas {
+	border: 5px solid white;
+}
+
 .gameboard-space {
 	stroke-width: 1;
 }

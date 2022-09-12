@@ -9,16 +9,14 @@ export default function GameBoard(props: gameBoardProps) {
 	let gameGlobals = props.gameGlobals;
 
 	// Add some things to the gameGlobals
-	const canvasGlobals = props.canvasGlobals;
-	// console.log(`HexData: ${JSON.stringify(props.hexRoster)}`);
 	let hexData = props.hexRoster;
-	const gridOrigin = canvasGlobals.canvasCenter;
+	const gridOrigin = gameGlobals.canvasCenter;
 
 	// Initialize variables
 	// const textSpacingHeight = props.textSize * 1.2
 
 	// <> Render Functions
-	console.log(`Canvas size: ${canvasGlobals.canvasWidth}, ${canvasGlobals.canvasHeight}`)
+	console.log(`Canvas size: ${gameGlobals.canvasWidth}, ${gameGlobals.canvasHeight}`)
 	console.log(`Grid origin: ${gridOrigin.x}, ${gridOrigin.y}`)
 
 	// <> Do some last minute things to the data, like assigning unique ids if they are missing
@@ -27,7 +25,6 @@ export default function GameBoard(props: gameBoardProps) {
 		const thisHexKey = hexKey++;
 		return <Hexagon
 			gameGlobals={gameGlobals}
-			canvasGlobals={canvasGlobals}
 			key={thisHexKey}
 			id={thisHexKey}
 			q={hex.q}
@@ -44,7 +41,7 @@ export default function GameBoard(props: gameBoardProps) {
 				<div className="gameboard-container">
 					<div className="gameboard-canvas">
 						<svg
-							viewBox={`0 0 ${canvasGlobals.canvasWidth} ${canvasGlobals.canvasHeight}`}
+							viewBox={`0 0 ${gameGlobals.canvasWidth} ${gameGlobals.canvasHeight}`}
 							style={{ rotate: "0deg", fill: "white", opacity: "0.8" }}
 							xmlns="<http://www.w3.org/2000/svg>">
 							{hexes}

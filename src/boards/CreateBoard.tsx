@@ -1,39 +1,16 @@
 import { useState } from "react";
 import ArraySelect from "../components/ArraySelect";
 import GameBoard from "../components/HexBoardSVG";
-import { canvasGlobals, gameGlobals, hexagon } from "../components/hexDefinitions";
-import { hexOrientations } from "../components/hexFunctions";
+import { gameGlobals, hexagon } from "../components/hexDefinitions";
 import SaveRosterButton from "../forms/saveRoster";
 
-export default function CreateBoard(props: { canvasGlobals: canvasGlobals }) {
-	const [sizeOfSpaces, SETsizeOfSpaces] = useState(20);
+export default function CreateBoard(props: gameGlobals) {
 	const [qTemp, SETqTemp] = useState(0);
 	const [rTemp, SETrTemp] = useState(0);
 	const cssClassChoices = [`bg-white`, 'bg-green', 'bg-blue', 'bg-purple', 'bg-red']
 	const [classTemp, SETclassTemp] = useState(cssClassChoices[0])
 	const blankRoster: hexagon[] = []
 	const [hexRoster, SEThexRoster] = useState(blankRoster)
-
-	const canvasGlobals = props.canvasGlobals;
-	const canvasHeight = canvasGlobals.canvasHeight;
-	const canvasWidth = canvasGlobals.canvasWidth;
-	const canvasCenter = canvasGlobals.canvasCenter;
-
-	// <> Gameboard Parameters
-	const gameGlobals = {
-		// Utility
-		canvasBackgroundColor: '#000',
-		canvasCenter: canvasCenter,
-		verbose: false,
-		canvasHeight: canvasHeight,
-		canvasWidth: canvasWidth,
-		// Hexagons
-		orientation: hexOrientations["flat-top"],
-		gridOrigin: { 'x': canvasWidth / 2, 'y': canvasHeight / 2 },
-		hexRadius: sizeOfSpaces,
-		separationMultiplier: 1.1,
-		textSize: sizeOfSpaces / 1.25
-	}
 
 	function addHex() {
 		let tempRoster = Array.from(hexRoster)
@@ -53,7 +30,7 @@ export default function CreateBoard(props: { canvasGlobals: canvasGlobals }) {
 		<button onClick={() => addHex()}>Add</button>
 		<SaveRosterButton
 			hexRoster={hexRoster}
-			gameGlobals={gameGlobals}
+			gameGlobals={props}
 		/>
 	</div>
 
@@ -63,9 +40,8 @@ export default function CreateBoard(props: { canvasGlobals: canvasGlobals }) {
 			{form}
 			<GameBoard
 				hexRoster={hexRoster}
-				canvasGlobals={props.canvasGlobals}
-				gameGlobals={gameGlobals}
-				textSize={gameGlobals.textSize}
+				gameGlobals={props}
+				textSize={props.textSize}
 				whichOrientation={"flat-top"}
 			/>
 		</div>
