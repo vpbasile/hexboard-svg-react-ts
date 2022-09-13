@@ -39,8 +39,7 @@ export default function Keyboard(props: gameGlobals ) {
 	})
 
 	return (
-		<div id='keyboard'>
-			<h3>Orientation: pointy-top</h3>
+		<div id='keyboard' className='col-8'>
 			<ErrorBoundary>
 				<GameBoard
 					hexRoster={keyboardHexes}

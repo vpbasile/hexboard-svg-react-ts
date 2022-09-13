@@ -6,7 +6,7 @@ import { gameGlobals, hexagon } from '../components/hexDefinitions';
 // <> Enhancement: Store all of the q,r directiom vector pairs in an array
 // <> Pull in some functions from the GameBoard component
 
-export default function TriviaBoard(props: gameGlobals ) {
+export default function TriviaBoard(props: gameGlobals) {
 
   // Trivia-specific constants
   const cssClasses = ["bg-green", "bg-red", "bg-blue", "bg-yellow", "bg-purple", "bg-orange"]
@@ -24,34 +24,34 @@ export default function TriviaBoard(props: gameGlobals ) {
 
 
   // <> Gameboard building
-  function blackHexes(hexes:hexagon[]) {
+  function blackHexes(hexes: hexagon[]) {
     hexes.forEach(hex => {
       hex.cssClasses = "gameboard-space bg-black"
     })
   }
 
-  function colorHexes(hexes:hexagon[]) {
+  function colorHexes(hexes: hexagon[]) {
     hexes.forEach(hex => { hex.cssClasses = `gameboard-space ${getNextCssClass()}` })
   }
 
   // Create a center hexagon
-  const centerHexagon = { "key":0, "q": 0, "r": 0, "cssClasses": "gameboard-center bg-gray" }
-  let hexData:hexagon[] = [centerHexagon]
+  const centerHexagon = { "key": 0, "q": 0, "r": 0, "cssClasses": "gameboard-center bg-gray" }
+  let hexData: hexagon[] = [centerHexagon]
 
   // First ring
-  let ring1:hexagon[] = cube_ring({ "q": 0, "r": 0 }, 1);
+  let ring1: hexagon[] = cube_ring({ "q": 0, "r": 0 }, 1);
   blackHexes(ring1);
 
   //Second ring
-  let ring2:hexagon[] = cube_ring({ "q": 0, "r": 0 }, 2)
+  let ring2: hexagon[] = cube_ring({ "q": 0, "r": 0 }, 2)
   colorHexes(ring2);
 
   // Third ring
-  let ring3:hexagon[] = cube_ring({ "q": 0, "r": 0 }, 3)
+  let ring3: hexagon[] = cube_ring({ "q": 0, "r": 0 }, 3)
   blackHexes(ring3);
 
   // Fourth ring
-  let ring4:hexagon[] = cube_ring({ "q": 0, "r": 0 }, 4)
+  let ring4: hexagon[] = cube_ring({ "q": 0, "r": 0 }, 4)
   colorHexes(ring4);
 
   // Gather the different rings together
@@ -67,19 +67,16 @@ export default function TriviaBoard(props: gameGlobals ) {
   })
 
   return (
-    <div className="App">
-      <header className="App-header">
-			<h3>Orientation: flat-top</h3>
-        <ErrorBoundary>
-          <GameBoard
-            hexRoster={triviaHexes}
-            gameGlobals={props}
-            whichOrientation={"flat-top"}
+    <div className="col-8">
+      <ErrorBoundary>
+        <GameBoard
+          hexRoster={triviaHexes}
+          gameGlobals={props}
+          whichOrientation={"flat-top"}
 
-          //   logo={logo}
-          />
-        </ErrorBoundary>
-      </header>
+        //   logo={logo}
+        />
+      </ErrorBoundary>
     </div>
   );
 }

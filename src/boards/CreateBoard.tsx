@@ -18,11 +18,11 @@ export default function CreateBoard(props: gameGlobals) {
 		SEThexRoster(tempRoster);
 	}
 
-	let form = <div>
-		<label htmlFor="qField">q:</label>
-		<input name="qField" defaultValue={qTemp} onChange={(e) => SETqTemp(+e.target.value)} />
-		<label htmlFor="rField">r:</label>
-		<input name="rField" defaultValue={rTemp} onChange={(e) => SETrTemp(+e.target.value)} />
+	let form = <div className="form-group">
+		<label className="col-1" htmlFor="qField">q:</label>
+		<input className="col-1" name="qField" defaultValue={qTemp} onChange={(e) => SETqTemp(+e.target.value)} />
+		<label className="col-1" htmlFor="rField">r:</label>
+		<input className="col-1" name="rField" defaultValue={rTemp} onChange={(e) => SETrTemp(+e.target.value)} />
 		<ArraySelect
 			choicesArray={cssClassChoices}
 			onChange={SETclassTemp}
@@ -34,17 +34,14 @@ export default function CreateBoard(props: gameGlobals) {
 		/>
 	</div>
 
-	return (<div className="row" id="generativeBoard">
-		<h3>Orientation: flat-top</h3>
-		<div id='generativeBoard' className="col-10">
-			{form}
-			<GameBoard
-				hexRoster={hexRoster}
-				gameGlobals={props}
-				textSize={props.textSize}
-				whichOrientation={"flat-top"}
-			/>
-		</div>
+	return (<div id='createBoard' className="col-10">
+		{form}
+		<GameBoard
+			hexRoster={hexRoster}
+			gameGlobals={props}
+			textSize={props.textSize}
+			whichOrientation={"flat-top"}
+		/>
 	</div>
 	)
 }

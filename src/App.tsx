@@ -26,23 +26,22 @@ function App() {
   const [hexRadius, SEThexRadius] = useState(20);
   const [separationMultiplier, SETseparationMultiplier] = useState(1.1)
 
-  const canvasSettingsRow =
-    <div className="row border bg-gray p-3" id="canvasSettings">
-      <div className="col-4" id="canvasDimensionDiv">
-        <label htmlFor='pickCanvasWidth'>Canvas Width:</label>
-        <input type='number' className='form-control' defaultValue={canvasWidth} onChange={(e) => SETcanvasWidth(+e.target.value)} />
-        <label htmlFor='pickCanvasHeight'>Canvas Height:</label>
-        <input type='number' className='form-control' defaultValue={canvasHeight} onChange={(e) => SETcanvasHeight(+e.target.value)} />
-      </div>
-      <div className="col-4" id="pickSizeDiv">
-        <label htmlFor="pickSize">Hex radius in px: </label>
-        <input type="number" className='form-control' defaultValue={hexRadius} onChange={(e) => SEThexRadius(+e.target.value)} />
-      </div>
-      <div className="col-4" id="pickSeparationDiv">
-        <label htmlFor='pickSeparation'>Separation multiplier: {separationMultiplier}</label>
-        <input type='range' min='1' max='2' step='0.1' className='form-range' defaultValue={separationMultiplier} onChange={(e) => SETseparationMultiplier(+e.target.value)} />
-      </div>
+  const canvasSettingsCol = <div className="col-2 border bg-gray p-3">
+    <div className="" id="canvasDimensionDiv">
+      <label htmlFor='pickCanvasWidth'>Canvas Width:</label>
+      <input type='number' className='form-control' defaultValue={canvasWidth} onChange={(e) => SETcanvasWidth(+e.target.value)} />
+      <label htmlFor='pickCanvasHeight'>Canvas Height:</label>
+      <input type='number' className='form-control' defaultValue={canvasHeight} onChange={(e) => SETcanvasHeight(+e.target.value)} />
     </div>
+    <div className="" id="pickSizeDiv">
+      <label htmlFor="pickSize">Hex radius in px: </label>
+      <input type="number" className='form-control' defaultValue={hexRadius} onChange={(e) => SEThexRadius(+e.target.value)} />
+    </div>
+    <div className="" id="pickSeparationDiv">
+      <label htmlFor='pickSeparation'>Separation multiplier: {separationMultiplier}</label>
+      <input type='range' min='1' max='2' step='0.1' className='form-range' defaultValue={separationMultiplier} onChange={(e) => SETseparationMultiplier(+e.target.value)} />
+    </div>
+  </div>
 
   // <> Global constants for choosing a game
   const options = [
@@ -134,9 +133,13 @@ function App() {
         <PageHeaderRow pageTitle='Hexboard Maker'>
           <nav id="nav-bar" className='col-12'>{navBar}</nav>
         </PageHeaderRow>
-        <ErrorBoundary>{canvasSettingsRow}</ErrorBoundary>
         <PageContentRow title={chosenGameBoard.title}>
-          <ErrorBoundary>{chosenGameBoard.GameBoard}</ErrorBoundary>
+          <ErrorBoundary>
+            {canvasSettingsCol}
+          </ErrorBoundary>
+          <ErrorBoundary>
+            {chosenGameBoard.GameBoard}
+          </ErrorBoundary>
         </PageContentRow>
       </div>
     </ErrorBoundary>

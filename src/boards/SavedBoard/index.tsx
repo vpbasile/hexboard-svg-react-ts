@@ -25,9 +25,8 @@ export default function SavedBoard(props: gameGlobals) {
 	}
 
 	return (
-		<div className="row" id="generativeBoard">
-			<h3>Orientation: flat-top</h3>
-			<div id='displayBoard' className="col-12">
+		<div className="col-10" id="savedBoard">
+			<div id='displayBoard' className="">
 				<ErrorBoundary>
 					<GameBoard
 						hexRoster={hexRoster}
@@ -37,7 +36,7 @@ export default function SavedBoard(props: gameGlobals) {
 					/>
 				</ErrorBoundary>
 			</div>
-			<div id="rosterDisplay" className="col-2">
+			<div id="rosterDisplay" className="">
 				{/* <RosterDisplay hexRoster={hexRoster} /> */}
 			</div>
 		</div>
