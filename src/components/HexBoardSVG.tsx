@@ -3,20 +3,24 @@
 import Hexagon from './Hexagon';
 import ErrorBoundary from './ErrorBoundary';
 import './hexDefinitions'
-import { gameBoardProps, hexagon } from './hexDefinitions';
+import { coordinateXY, gameBoardProps, hexagon } from './hexDefinitions';
 
 export default function GameBoard(props: gameBoardProps) {
 	let gameGlobals = props.gameGlobals;
 
 	// Add some things to the gameGlobals
 	let hexData = props.hexRoster;
-	const gridOrigin = gameGlobals.canvasCenter;
-
+	// Find the min and max values for q and r.  Convert those to rectangular coordinates.  
+	// Maybe this optimization is unnecessary - maybe I should just determine canvas size before saving for each board.
+	
+	const canvasWidth = gameGlobals.canvasWidth;
+	const canvasHeight = gameGlobals.canvasHeight;
+	const gridOrigin:coordinateXY = { x: canvasWidth, y: canvasHeight };
 	// Initialize variables
 	// const textSpacingHeight = props.textSize * 1.2
 
 	// <> Render Functions
-	console.log(`Canvas size: ${gameGlobals.canvasWidth}, ${gameGlobals.canvasHeight}`)
+	console.log(`Canvas size: ${canvasWidth}, ${canvasHeight}`)
 	console.log(`Grid origin: ${gridOrigin.x}, ${gridOrigin.y}`)
 
 	// <> Do some last minute things to the data, like assigning unique ids if they are missing

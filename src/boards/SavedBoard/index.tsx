@@ -10,10 +10,6 @@ export default function SavedBoard(props: gameGlobals) {
 	const gameGlobals:gameGlobals = {
 		canvasWidth: props.canvasWidth,
 		canvasHeight: props.canvasHeight,
-		canvasCenter: {
-			x: props.canvasCenter.x,
-			y: props.canvasCenter.y
-		},
 		// Hexagons
 		orientation: props.orientation,
 		gridOrigin: props.gridOrigin,

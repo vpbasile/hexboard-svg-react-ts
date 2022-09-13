@@ -49,7 +49,6 @@ function App() {
       key: 'saved', title: 'Saved Map', value: 'saved', GameBoard: <SavedBoard
         canvasWidth={canvasWidth}
         canvasHeight={canvasHeight}
-        canvasCenter={{ 'x': canvasWidth / 2, 'y': canvasHeight / 2 }}
         orientation={hexOrientations["flat-top"]}
         gridOrigin={{ 'x': canvasWidth / 2, 'y': canvasHeight / 2 }}
         hexRadius={hexRadius}
@@ -62,7 +61,6 @@ function App() {
       key: 'generative', title: 'Generative Map', value: 'generative', GameBoard: <Generative
         canvasWidth={canvasWidth}
         canvasHeight={canvasHeight}
-        canvasCenter={{ 'x': canvasWidth / 2, 'y': canvasHeight / 2 }}
         orientation={hexOrientations["flat-top"]}
         gridOrigin={{ 'x': canvasWidth / 2, 'y': canvasHeight / 2 }}
         hexRadius={hexRadius}
@@ -75,7 +73,6 @@ function App() {
       key: 'create', title: 'Create Board', value: 'create', GameBoard: <CreateBoard
         canvasWidth={canvasWidth}
         canvasHeight={canvasHeight}
-        canvasCenter={{ 'x': canvasWidth / 2, 'y': canvasHeight / 2 }}
         orientation={hexOrientations["flat-top"]}
         gridOrigin={{ 'x': canvasWidth / 2, 'y': canvasHeight / 2 }}
         hexRadius={hexRadius}
@@ -88,7 +85,6 @@ function App() {
       key: 'trivia', title: 'Trivia Board', value: 'trivia', GameBoard: <TriviaBoard
         canvasWidth={canvasWidth}
         canvasHeight={canvasHeight}
-        canvasCenter={{ 'x': canvasWidth / 2, 'y': canvasHeight / 2 }}
         orientation={hexOrientations["flat-top"]}
         gridOrigin={{ 'x': canvasWidth / 2, 'y': canvasHeight / 2 }}
         hexRadius={hexRadius}
@@ -99,11 +95,10 @@ function App() {
     },
     {
       key: 'keyboard', title: 'Keyboard', value: 'keyboard', GameBoard: <Keyboard
-        canvasWidth={canvasWidth}
-        canvasHeight={canvasHeight}
-        canvasCenter={{ 'x': canvasWidth / 2, 'y': canvasHeight / 2 }}
+        canvasWidth={600}
+        canvasHeight={200}
         orientation={hexOrientations["pointy-top"]}
-        gridOrigin={{ 'x': canvasWidth / 2, 'y': canvasHeight / 2 }}
+        gridOrigin={{ 'x': 100, 'y': 100 }}
         hexRadius={hexRadius}
         separationMultiplier={separationMultiplier}
         textSize={hexRadius / 1.25}
