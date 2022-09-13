@@ -39,7 +39,7 @@ export default function Keyboard(props: gameGlobals ) {
 	})
 
 	return (
-		<div id='keyboard' className='col-8'>
+		<div id='keyboard' className='col-10'>
 			<ErrorBoundary>
 				<GameBoard
 					hexRoster={keyboardHexes}

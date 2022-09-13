@@ -67,7 +67,7 @@ export default function TriviaBoard(props: gameGlobals) {
   })
 
   return (
-    <div className="col-8">
+    <div className="col-10">
       <ErrorBoundary>
         <GameBoard
           hexRoster={triviaHexes}
