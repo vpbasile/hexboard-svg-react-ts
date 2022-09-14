@@ -1,12 +1,23 @@
 import GameBoard from '../components/HexBoardSVG';
 // import logo from './logo.svg';
 import ErrorBoundary from '../components/ErrorBoundary';
-import { cube_ring } from '../components/hexFunctions';
+import { useState } from "react";
+import { cube_ring, hexOrientations } from '../components/hexFunctions';
 import { gameGlobals, hexagon } from '../components/hexDefinitions';
+import CanvasControl from '../components/CanvasControl';
 // <> Enhancement: Store all of the q,r directiom vector pairs in an array
 // <> Pull in some functions from the GameBoard component
 
-export default function TriviaBoard(props: gameGlobals) {
+export default function TriviaBoard(props: any) {
+  // <> States that control canvas parameters
+  const [canvasWidth, SETcanvasWidth] = useState(window.innerWidth)
+  const [canvasHeight, SETcanvasHeight] = useState(2 * window.innerHeight)
+  const [hexRadius, SEThexRadius] = useState(20);
+  const [separationMultiplier, SETseparationMultiplier] = useState(1.1)
+  const [gridOrigin, SETgridOrigin] = useState({ x: canvasWidth / 2, y: canvasHeight / 2 });
+  const [defaultOrientation, SETdefaultOrientation] = useState(hexOrientations["flat-top"])
+
+  // States unique to this board
 
   // Trivia-specific constants
   const cssClasses = ["bg-green", "bg-red", "bg-blue", "bg-yellow", "bg-purple", "bg-orange"]
@@ -15,6 +26,19 @@ export default function TriviaBoard(props: gameGlobals) {
     let cssClass = cssClasses[cssClassIndex];
     cssClassIndex = (cssClassIndex + 1) % cssClasses.length;
     return cssClass;
+  }
+
+  const gameGlobals: gameGlobals = {
+    canvasWidth: canvasWidth,
+    canvasHeight: canvasHeight,
+    // Hexagons
+    orientation: defaultOrientation,
+    gridOrigin: gridOrigin,
+    hexRadius: hexRadius,
+    separationMultiplier: separationMultiplier,
+    textSize: 12,
+    // Style
+    canvasBackgroundColor: '#000',
   }
 
   let triviaHexes = [];
@@ -70,13 +94,23 @@ export default function TriviaBoard(props: gameGlobals) {
 
     <div className="row" id="triviaBoardContainer">
       <div id="sideBar" className="col-2">
-        {props.children}
+
+        <CanvasControl
+          canvasWidth={canvasWidth}
+          canvasHeight={canvasHeight}
+          hexRadius={hexRadius}
+          separationMultiplier={separationMultiplier}
+          gridOrigin={gridOrigin}
+          SETcanvasWidth={SETcanvasWidth}
+          SETcanvasHeight={SETcanvasHeight}
+          SEThexRadius={SEThexRadius}
+          SETseparationMultiplier={SETseparationMultiplier} />
       </div>
       <div id='displayBoard' className="col-10">
         <ErrorBoundary>
           <GameBoard
             hexRoster={triviaHexes}
-            gameGlobals={props}
+            gameGlobals={gameGlobals}
             whichOrientation={"flat-top"}
 
           //   logo={logo}

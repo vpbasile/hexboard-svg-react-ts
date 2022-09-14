@@ -1,5 +1,7 @@
+import { coordinateXY } from "./hexDefinitions";
+
 export default function CanvasControl(props: {
-	canvasWidth: number, canvasHeight: number, hexRadius: number, separationMultiplier: number,
+	canvasWidth: number, canvasHeight: number, hexRadius: number, separationMultiplier: number, gridOrigin: coordinateXY
 	SETcanvasWidth: any, SETcanvasHeight: any, SEThexRadius: any, SETseparationMultiplier: any
 
 }) {

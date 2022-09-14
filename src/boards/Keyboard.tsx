@@ -1,12 +1,36 @@
 import ErrorBoundary from '../components/ErrorBoundary';
 import GameBoard from '../components/HexBoardSVG';
+import { useState } from "react";
 import { gameGlobals, hexagon } from '../components/hexDefinitions';
+import { hexOrientations } from '../components/hexFunctions';
+import CanvasControl from '../components/CanvasControl';
 
 
-export default function Keyboard(props: gameGlobals) {
+export default function Keyboard(props: any) {
+	// <> States that control canvas parameters
+	const [canvasWidth, SETcanvasWidth] = useState(window.innerWidth)
+	const [canvasHeight, SETcanvasHeight] = useState(2 * window.innerHeight)
+	const [hexRadius, SEThexRadius] = useState(20);
+	const [separationMultiplier, SETseparationMultiplier] = useState(1.1)
+	const [gridOrigin, SETgridOrigin] = useState({ x: 100, y: 100 });
+	const orientation = hexOrientations["flat-top"]
+
+	// States unique to this board
 
 	// <> Gameboard Parameters
-
+	const gameGlobals: gameGlobals = {
+		canvasWidth: canvasWidth,
+		canvasHeight: canvasHeight,
+		// Hexagons
+		orientation: orientation,
+		gridOrigin: gridOrigin,
+		hexRadius: hexRadius,
+		separationMultiplier: separationMultiplier,
+		textSize: 12,
+		// Style
+		canvasBackgroundColor: '#000',
+	}
+	// <> Create the roster of hexes
 	const hexList: hexagon[] = [];
 
 	let keyboardCharList = [`qwertyuiop[]`, `asdfghjkl;'`, `zxcvbnm,./`]
@@ -41,14 +65,24 @@ export default function Keyboard(props: gameGlobals) {
 	return (
 		<div className="row" id="displayBoardContainer">
 			<div id="sideBar" className="col-2">
-				{props.children}
+				
+				<CanvasControl
+					canvasWidth={canvasWidth}
+					canvasHeight={canvasHeight}
+					hexRadius={hexRadius}
+					separationMultiplier={separationMultiplier}
+					gridOrigin={gridOrigin}
+					SETcanvasWidth={SETcanvasWidth}
+					SETcanvasHeight={SETcanvasHeight}
+					SEThexRadius={SEThexRadius}
+					SETseparationMultiplier={SETseparationMultiplier} />
 			</div>
 			<div id='displayBoard' className="col-10">
 
 				<ErrorBoundary>
 					<GameBoard
 						hexRoster={keyboardHexes}
-						gameGlobals={props}
+						gameGlobals={gameGlobals}
 						textSize={props.textSize}
 						whichOrientation={"pointy-top"}
 					//   logo={logo}

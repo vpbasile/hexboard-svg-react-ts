@@ -1,16 +1,39 @@
-import { useState } from "react";
 import ArraySelect from "../components/ArraySelect";
 import GameBoard from "../components/HexBoardSVG";
+import { useState } from "react";
 import { gameGlobals, hexagon } from "../components/hexDefinitions";
 import SaveRosterButton from "../forms/saveRoster";
+import { hexOrientations } from "../components/hexFunctions";
 
-export default function CreateBoard(props: gameGlobals) {
+export default function CreateBoard(props: any) {
+	// <> States that control canvas parameters
+	const [canvasWidth, SETcanvasWidth] = useState(window.innerWidth)
+	const [canvasHeight, SETcanvasHeight] = useState(2 * window.innerHeight)
+	const [hexRadius, SEThexRadius] = useState(20);
+	const [separationMultiplier, SETseparationMultiplier] = useState(1.1)
+	const [gridOrigin, SETgridOrigin] = useState({ x: canvasWidth / 2, y: canvasHeight / 2 });
+	const [defaultOrientation, SETdefaultOrientation] = useState(hexOrientations["flat-top"])
+
+	// States unique to this board
 	const [qTemp, SETqTemp] = useState(0);
 	const [rTemp, SETrTemp] = useState(0);
 	const cssClassChoices = [`bg-white`, 'bg-green', 'bg-blue', 'bg-purple', 'bg-red']
 	const [classTemp, SETclassTemp] = useState(cssClassChoices[0])
 	const blankRoster: hexagon[] = []
 	const [hexRoster, SEThexRoster] = useState(blankRoster)
+
+	const gameGlobals: gameGlobals = {
+		canvasWidth: canvasWidth,
+		canvasHeight: canvasHeight,
+		// Hexagons
+		orientation: defaultOrientation,
+		gridOrigin: gridOrigin,
+		hexRadius: hexRadius,
+		separationMultiplier: separationMultiplier,
+		textSize: 12,
+		// Style
+		canvasBackgroundColor: '#000',
+	}
 
 	function addHex() {
 		let tempRoster = Array.from(hexRoster)
@@ -51,8 +74,8 @@ export default function CreateBoard(props: gameGlobals) {
 			<div id='createBoard' className="col-10">
 				<GameBoard
 					hexRoster={hexRoster}
-					gameGlobals={props}
-					textSize={props.textSize}
+					gameGlobals={gameGlobals}
+					textSize={12}
 					whichOrientation={"flat-top"}
 				/>
 			</div>
