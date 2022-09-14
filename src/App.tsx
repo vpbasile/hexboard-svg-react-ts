@@ -171,16 +171,21 @@ function App() {
   })
 
   return (
-      <div className="App container w-100 bg-black text-light p-4">
-        <PageHeaderRow pageTitle='Hexboard Maker'>
+    <div className="App container w-100 bg-black text-light p-4">
+      <div className="row" id="header">
+        <div className="col-12">
+          <h1>Hexboard Maker</h1>
           <nav id="nav-bar" className='col-12'>{navBar}</nav>
-        </PageHeaderRow>
-        <PageContentRow title={chosenGameBoard.title}>
-          <ErrorBoundary>
-            {chosenGameBoard.GameBoard}
-          </ErrorBoundary>
-        </PageContentRow>
+        </div>
       </div>
+      <div className="row" id="page-content-row">
+        <ErrorBoundary>
+          <h2 className="bg-gray border">{chosenGameBoard.title}</h2>
+        </ErrorBoundary>
+
+        {chosenGameBoard.GameBoard}
+      </div>
+    </div>
   )
 }
 
