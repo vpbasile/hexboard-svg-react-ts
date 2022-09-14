@@ -67,16 +67,22 @@ export default function TriviaBoard(props: gameGlobals) {
   })
 
   return (
-    <div className="col-10">
-      <ErrorBoundary>
-        <GameBoard
-          hexRoster={triviaHexes}
-          gameGlobals={props}
-          whichOrientation={"flat-top"}
 
-        //   logo={logo}
-        />
-      </ErrorBoundary>
+    <div className="row" id="triviaBoardContainer">
+      <div id="sideBar" className="col-2">
+        {props.children}
+      </div>
+      <div id='displayBoard' className="col-10">
+        <ErrorBoundary>
+          <GameBoard
+            hexRoster={triviaHexes}
+            gameGlobals={props}
+            whichOrientation={"flat-top"}
+
+          //   logo={logo}
+          />
+        </ErrorBoundary>
+      </div>
     </div>
   );
 }

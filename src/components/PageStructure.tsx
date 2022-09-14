@@ -12,7 +12,7 @@ export function PageHeaderRow(props:{pageTitle:string,children:any}) {
 export function PageContentRow(props: {title?:string,children:any}){
 	return (
 		<div className="row" id="page-content-row">
-			{props.title && <h2>{props.title}</h2>}
+			{props.title && <h2 className="bg-gray border">{props.title}</h2>}
 			{props.children}
 		</div>
 	)

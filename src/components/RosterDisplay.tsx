@@ -12,6 +12,7 @@ export default function RosterDisplay(props: {hexRoster:hexagon[]}){
 			</thead>
 			<tbody>
 				{hexRoster.map((hex:hexagon)=>{
+					if (tableKeyNumber>30) {return null};
 					return (<tr key={`tableRow-${tableKeyNumber}`} className={hex.cssClasses}>
 						<td>{tableKeyNumber++}</td><td>{hex.q}</td><td>{hex.r}</td><td>{hex.cssClasses}</td><td>{hex.hexText}</td>
 					</tr>)

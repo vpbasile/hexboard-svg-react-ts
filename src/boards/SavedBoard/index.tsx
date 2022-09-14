@@ -21,8 +21,11 @@ export default function SavedBoard(props: gameGlobals) {
 	}
 
 	return (
-		<div className="col-10" id="savedBoard">
-			<div id='displayBoard' className="">
+		<div className="row" id="savedBoardContainer">
+			<div id="sideBar" className="col-2">
+				{props.children}
+			</div>
+			<div id='displayBoard' className="col-10">
 				<ErrorBoundary>
 					<GameBoard
 						hexRoster={hexRoster}

@@ -54,8 +54,9 @@ export default function GenerativeBoard(props: gameGlobals) {
 
 	// Interface for changing things
 
-	const editForm = <div className="col-3">
-		<div id="reRender" className="bg-blue p-2">
+	const editForm =
+		<div id="reRender" className="bg-blue p-3">
+			<h3>Generation Parameters</h3>
 			<label htmlFor="pickSpace">Number of cells: </label>
 			<input type="number" className="form-control" defaultValue={numberOfSpaces} onChange={(e) => SETtempNumber(+e.target.value)} />
 			<button className={`btn bg-blue`} onClick={() => {
@@ -68,11 +69,14 @@ export default function GenerativeBoard(props: gameGlobals) {
 				gameGlobals={props}
 			/>
 		</div>
-	</div>
 
 	return (
-		<div className="col-10" id="generativeBoard">
-			<div id='generativeBoard' className="col-12">
+		<div className="row" id="generativeContainer">
+			<div id="sidebar" className="col-2">
+				{editForm}
+				{props.children}
+			</div>
+			<div id='generativeBoard' className="col-10">
 				<ErrorBoundary>
 					<GameBoard
 						hexRoster={hexRoster}
@@ -86,7 +90,8 @@ export default function GenerativeBoard(props: gameGlobals) {
 			<div id="rosterDisplay" className="col-2">
 				<RosterDisplay hexRoster={hexRoster} />
 			</div>
-			{editForm}
+			<div className="col-2" id="sidebar">
+			</div>
 		</div>
 	);
 }

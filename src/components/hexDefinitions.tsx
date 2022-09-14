@@ -16,8 +16,8 @@ export interface gameGlobals {
 	separationMultiplier: number,
 	textSize: number,
 	canvasBackgroundColor: string,
-	// Hexagons
-	// Style
+	// Children
+	children?:any
 }
 
 export interface hexProps {

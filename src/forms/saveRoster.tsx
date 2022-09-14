@@ -23,5 +23,5 @@ export default function SaveRosterButton(props: {
 		link.click();
 	};
 
-	return <button className={`btn bg-cyan`} onClick={() => saveRoster(hexRoster)} >Save Roster</button>
+	return <button className={`btn form-control m-1 bg-cyan`} onClick={() => saveRoster(hexRoster)} >Save Roster</button>
 }

@@ -3,7 +3,7 @@ import GameBoard from '../components/HexBoardSVG';
 import { gameGlobals, hexagon } from '../components/hexDefinitions';
 
 
-export default function Keyboard(props: gameGlobals ) {
+export default function Keyboard(props: gameGlobals) {
 
 	// <> Gameboard Parameters
 
@@ -39,16 +39,23 @@ export default function Keyboard(props: gameGlobals ) {
 	})
 
 	return (
-		<div id='keyboard' className='col-10'>
-			<ErrorBoundary>
-				<GameBoard
-					hexRoster={keyboardHexes}
-					gameGlobals={props}
-					textSize={props.textSize}
-					whichOrientation={"pointy-top"}
-				//   logo={logo}
-				/>
-			</ErrorBoundary>
+		<div className="row" id="displayBoardContainer">
+			<div id="sideBar" className="col-2">
+				{props.children}
+			</div>
+			<div id='displayBoard' className="col-10">
+
+				<ErrorBoundary>
+					<GameBoard
+						hexRoster={keyboardHexes}
+						gameGlobals={props}
+						textSize={props.textSize}
+						whichOrientation={"pointy-top"}
+					//   logo={logo}
+					/>
+				</ErrorBoundary>
+			</div>
 		</div>
+
 	);
 }
