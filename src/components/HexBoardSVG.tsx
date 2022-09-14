@@ -43,7 +43,7 @@ export default function GameBoard(props: gameBoardProps) {
 		<ErrorBoundary boundaryName={"GameBoard"}>
 			<div className="gameboard">
 				<div className="gameboard-container">
-					<div className="gameboard-canvas">
+					<div className="gameboard-canvas bg-gradient">
 						<svg
 							viewBox={`0 0 ${gameGlobals.canvasWidth} ${gameGlobals.canvasHeight}`}
 							style={{ rotate: "0deg", fill: "white", opacity: "0.8" }}

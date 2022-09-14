@@ -64,7 +64,19 @@ export default function Keyboard(props: any) {
 
 	return (
 		<div className="row" id="displayBoardContainer">
-			<div id="sideBar" className="col-2">
+			<div id='displayBoard' className="col-md-10">
+
+				<ErrorBoundary>
+					<GameBoard
+						hexRoster={keyboardHexes}
+						gameGlobals={gameGlobals}
+						textSize={props.textSize}
+						whichOrientation={"pointy-top"}
+					//   logo={logo}
+					/>
+				</ErrorBoundary>
+			</div>
+			<div id="sideBar" className="col-md-2">
 				
 				<CanvasControl
 					canvasWidth={canvasWidth}
@@ -76,18 +88,6 @@ export default function Keyboard(props: any) {
 					SETcanvasHeight={SETcanvasHeight}
 					SEThexRadius={SEThexRadius}
 					SETseparationMultiplier={SETseparationMultiplier} />
-			</div>
-			<div id='displayBoard' className="col-10">
-
-				<ErrorBoundary>
-					<GameBoard
-						hexRoster={keyboardHexes}
-						gameGlobals={gameGlobals}
-						textSize={props.textSize}
-						whichOrientation={"pointy-top"}
-					//   logo={logo}
-					/>
-				</ErrorBoundary>
 			</div>
 		</div>
 

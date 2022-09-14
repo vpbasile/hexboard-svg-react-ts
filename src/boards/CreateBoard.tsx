@@ -64,20 +64,20 @@ export default function CreateBoard(props: any) {
 
 	return (
 		<div className="row" id="generativeContainer">
-			<div id="sidebar" className="col-2">
-				<SaveRosterButton
-					hexRoster={hexRoster}
-					gameGlobals={gameGlobals}
-				/>
-				{form}
-			</div>
-			<div id='createBoard' className="col-10">
+			<div id='createBoard' className="col-md-10">
 				<GameBoard
 					hexRoster={hexRoster}
 					gameGlobals={gameGlobals}
 					textSize={12}
 					whichOrientation={"flat-top"}
 				/>
+			</div>
+			<div id="sidebar" className="col-md-2">
+				<SaveRosterButton
+					hexRoster={hexRoster}
+					gameGlobals={gameGlobals}
+				/>
+				{form}
 			</div>
 		</div>
 	)

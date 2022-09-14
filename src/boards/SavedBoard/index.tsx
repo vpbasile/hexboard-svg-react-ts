@@ -14,7 +14,7 @@ export default function SavedBoard(props: any) {
 	const [canvasHeight, SETcanvasHeight] = useState(2 * window.innerHeight)
 	const [hexRadius, SEThexRadius] = useState(20);
 	const [separationMultiplier, SETseparationMultiplier] = useState(1.1)
-	const [gridOrigin, SETgridOrigin] = useState({ x: canvasWidth/2, y: canvasHeight/2 });
+	const [gridOrigin, SETgridOrigin] = useState({ x: canvasWidth / 2, y: canvasHeight / 2 });
 	const [defaultOrientation, SETdefaultOrientation] = useState(hexOrientations["flat-top"])
 
 	const hexRoster = fileData.hexRoster;
@@ -35,19 +35,7 @@ export default function SavedBoard(props: any) {
 
 	return (
 		<div className="row" id="savedBoardContainer">
-			<div id="sideBar" className="col-2">
-				<CanvasControl
-					canvasWidth={canvasWidth}
-					canvasHeight={canvasHeight}
-					hexRadius={hexRadius}
-					separationMultiplier={separationMultiplier}
-					gridOrigin={gridOrigin}
-					SETcanvasWidth={SETcanvasWidth}
-					SETcanvasHeight={SETcanvasHeight}
-					SEThexRadius={SEThexRadius}
-					SETseparationMultiplier={SETseparationMultiplier} />
-			</div>
-			<div id='displayBoard' className="col-10">
+			<div id='displayBoard' className="col-md-10">
 				<ErrorBoundary>
 					<GameBoard
 						hexRoster={hexRoster}
@@ -60,6 +48,19 @@ export default function SavedBoard(props: any) {
 			{/* <div id="rosterDisplay" className="">
 				<RosterDisplay hexRoster={hexRoster} />
 			</div> */}
+			<div id="sideBar" className="col-md-2">
+				<CanvasControl
+					canvasWidth={canvasWidth}
+					canvasHeight={canvasHeight}
+					hexRadius={hexRadius}
+					separationMultiplier={separationMultiplier}
+					gridOrigin={gridOrigin}
+					SETcanvasWidth={SETcanvasWidth}
+					SETcanvasHeight={SETcanvasHeight}
+					SEThexRadius={SEThexRadius}
+					SETseparationMultiplier={SETseparationMultiplier} />
+			</div>
 		</div>
+
 	);
 }

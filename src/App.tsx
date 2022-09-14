@@ -43,7 +43,7 @@ function App() {
   })
 
   return (
-    <div className="App container w-100 bg-black text-light p-4">
+    <div className="App container-fluid bg-black text-light p-4">
       <div className="row" id="header">
         <div className="col-12">
           <h1>Hexboard Maker</h1>
@@ -53,9 +53,8 @@ function App() {
       <div className="row" id="page-content-row">
         <ErrorBoundary>
           <h2 className="bg-gray border">{chosenGameBoard.title}</h2>
+          {chosenGameBoard.GameBoard}
         </ErrorBoundary>
-
-        {chosenGameBoard.GameBoard}
       </div>
     </div>
   )

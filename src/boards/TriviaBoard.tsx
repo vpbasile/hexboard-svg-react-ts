@@ -92,7 +92,18 @@ export default function TriviaBoard(props: any) {
   return (
 
     <div className="row" id="triviaBoardContainer">
-      <div id="sideBar" className="col-2">
+      <div id='displayBoard' className="col-md-10">
+        <ErrorBoundary>
+          <GameBoard
+            hexRoster={triviaHexes}
+            gameGlobals={gameGlobals}
+            whichOrientation={"flat-top"}
+
+          //   logo={logo}
+          />
+        </ErrorBoundary>
+      </div>
+      <div id="sideBar" className="col-md-2">
 
         <CanvasControl
           canvasWidth={canvasWidth}
@@ -104,17 +115,6 @@ export default function TriviaBoard(props: any) {
           SETcanvasHeight={SETcanvasHeight}
           SEThexRadius={SEThexRadius}
           SETseparationMultiplier={SETseparationMultiplier} />
-      </div>
-      <div id='displayBoard' className="col-10">
-        <ErrorBoundary>
-          <GameBoard
-            hexRoster={triviaHexes}
-            gameGlobals={gameGlobals}
-            whichOrientation={"flat-top"}
-
-          //   logo={logo}
-          />
-        </ErrorBoundary>
       </div>
     </div>
   );

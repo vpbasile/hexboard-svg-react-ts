@@ -89,7 +89,18 @@ export default function GenerativeBoard(props: any) {
 
 	return (
 		<div className="row" id="generativeContainer">
-			<div id="sidebar" className="col-2">
+			<div id='generativeBoard' className="col-md-10">
+				<ErrorBoundary>
+					<GameBoard
+						hexRoster={hexRoster}
+						gameGlobals={gameGlobals}
+						// textSize={props.textSize}
+						whichOrientation={"flat-top"}
+					//   logo={logo}
+					/>
+				</ErrorBoundary>
+			</div>
+			<div id="sidebar" className="col-md-2">
 				<SaveRosterButton
 					hexRoster={hexRoster}
 					gameGlobals={gameGlobals}
@@ -107,19 +118,6 @@ export default function GenerativeBoard(props: any) {
 					SETseparationMultiplier={SETseparationMultiplier} />
 
 				{/* <RosterDisplay hexRoster={hexRoster} /> */}
-			</div>
-			<div id='generativeBoard' className="col-10">
-				<ErrorBoundary>
-					<GameBoard
-						hexRoster={hexRoster}
-						gameGlobals={gameGlobals}
-						// textSize={props.textSize}
-						whichOrientation={"flat-top"}
-					//   logo={logo}
-					/>
-				</ErrorBoundary>
-			</div>
-			<div className="col-2" id="sidebar">
 			</div>
 		</div>
 	);
