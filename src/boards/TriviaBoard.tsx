@@ -1,5 +1,4 @@
 import GameBoard from '../components/HexBoardSVG';
-// import logo from './logo.svg';
 import ErrorBoundary from '../components/ErrorBoundary';
 import { useState } from "react";
 import { cube_ring, hexOrientations } from '../components/hexFunctions';

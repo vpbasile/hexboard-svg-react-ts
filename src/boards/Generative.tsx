@@ -105,6 +105,8 @@ export default function GenerativeBoard(props: any) {
 					SETcanvasHeight={SETcanvasHeight}
 					SEThexRadius={SEThexRadius}
 					SETseparationMultiplier={SETseparationMultiplier} />
+
+				{/* <RosterDisplay hexRoster={hexRoster} /> */}
 			</div>
 			<div id='generativeBoard' className="col-10">
 				<ErrorBoundary>
@@ -116,9 +118,6 @@ export default function GenerativeBoard(props: any) {
 					//   logo={logo}
 					/>
 				</ErrorBoundary>
-			</div>
-			<div id="rosterDisplay" className="col-2">
-				<RosterDisplay hexRoster={hexRoster} />
 			</div>
 			<div className="col-2" id="sidebar">
 			</div>
