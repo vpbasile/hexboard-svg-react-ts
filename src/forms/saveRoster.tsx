@@ -2,14 +2,14 @@ import * as hexDefinitions from "../components/hexDefinitions";
 
 export default function SaveRosterButton(props: {
 	hexRoster: hexDefinitions.hexagon[],
-	gameGlobals:hexDefinitions.gameGlobals
+	gameGlobals: hexDefinitions.gameGlobals
 }) {
 	const hexRoster = props.hexRoster;
 	const gameGlobals = props.gameGlobals;
 
 	const saveRoster = (hexRoster: hexDefinitions.hexagon[]) => {
 
-		let exportObject:{gameGlobals:hexDefinitions.gameGlobals, hexRoster:hexDefinitions.hexagon[]} = {
+		let exportObject: { gameGlobals: hexDefinitions.gameGlobals, hexRoster: hexDefinitions.hexagon[] } = {
 			gameGlobals: gameGlobals,
 			hexRoster: hexRoster
 		}
@@ -23,5 +23,7 @@ export default function SaveRosterButton(props: {
 		link.click();
 	};
 
-	return <button className={`btn form-control m-1 bg-cyan`} onClick={() => saveRoster(hexRoster)} >Save Roster</button>
+	return (<div className="bg-green p-3 border">
+		<button className={`btn form-control m-1 bg-green`} onClick={() => saveRoster(hexRoster)} >Save Roster</button>
+	</div>)
 }

@@ -6,6 +6,7 @@ import GameBoard from "../../components/HexBoardSVG";
 import fileData from './map1.json';
 import { hexOrientations } from '../../components/hexFunctions';
 import CanvasControl from '../../components/CanvasControl';
+import SaveRosterButton from '../../forms/saveRoster';
 
 export default function SavedBoard(props: any) {
 	// <> States that control canvas parameters
@@ -56,9 +57,9 @@ export default function SavedBoard(props: any) {
 					/>
 				</ErrorBoundary>
 			</div>
-			<div id="rosterDisplay" className="">
-				{/* <RosterDisplay hexRoster={hexRoster} /> */}
-			</div>
+			{/* <div id="rosterDisplay" className="">
+				<RosterDisplay hexRoster={hexRoster} />
+			</div> */}
 		</div>
 	);
 }

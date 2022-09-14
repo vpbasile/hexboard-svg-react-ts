@@ -1,5 +1,4 @@
 // Top-level App for selecting a specific Gameboard to display
-import React from 'react';
 import { useState } from 'react';
 
 //style

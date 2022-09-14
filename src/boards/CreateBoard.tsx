@@ -59,16 +59,16 @@ export default function CreateBoard(props: any) {
 		</div>
 		<div id="buttons">
 			<button className="btn form-control bg-orange" onClick={() => addHex()}>Add</button>
-			<SaveRosterButton
-				hexRoster={hexRoster}
-				gameGlobals={props}
-			/>
 		</div>
 	</div>
 
 	return (
 		<div className="row" id="generativeContainer">
 			<div id="sidebar" className="col-2">
+				<SaveRosterButton
+					hexRoster={hexRoster}
+					gameGlobals={gameGlobals}
+				/>
 				{form}
 			</div>
 			<div id='createBoard' className="col-10">

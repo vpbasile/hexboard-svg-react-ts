@@ -16,10 +16,10 @@ export default function GenerativeBoard(props: any) {
 	const [canvasHeight, SETcanvasHeight] = useState(2 * window.innerHeight)
 	const [hexRadius, SEThexRadius] = useState(20);
 	const [separationMultiplier, SETseparationMultiplier] = useState(1.1)
-	const [gridOrigin, SETgridOrigin] = useState({ x: canvasWidth/2, y: canvasHeight/2 });
+	const [gridOrigin, SETgridOrigin] = useState({ x: canvasWidth / 2, y: canvasHeight / 2 });
 	const [defaultOrientation, SETdefaultOrientation] = useState(hexOrientations["flat-top"])
 
-	const [numberOfSpaces, SETnumberOfSpaces] = useState(500);
+	const [numberOfSpaces, SETnumberOfSpaces] = useState(50);
 	const [tempNumber, SETtempNumber] = useState(numberOfSpaces)
 	const [hexRoster, SEThexRoster] = useState(newRoster())
 
@@ -76,24 +76,24 @@ export default function GenerativeBoard(props: any) {
 	// Interface for changing things
 
 	const editForm =
-		<div id="reRender" className="bg-blue p-3">
+		<div id="reRender" className="bg-blue p-3 border">
 			<h3>Generation Parameters</h3>
 			<label htmlFor="pickSpace">Number of cells: </label>
-			<input type="number" className="form-control" defaultValue={numberOfSpaces} onChange={(e) => SETtempNumber(+e.target.value)} />
-			<button className={`btn bg-blue`} onClick={() => {
+			<input type="number" className="form-control" defaultValue={tempNumber} onChange={(e) => { SETtempNumber(+e.target.value); SETnumberOfSpaces(tempNumber); SEThexRoster(newRoster()); }} />
+			{/* <button className={`btn bg-blue`} onClick={() => {
 				SETnumberOfSpaces(tempNumber);
 				SEThexRoster(newRoster());
 			}
-			}>Re-shuffle</button >
-			<SaveRosterButton
-				hexRoster={hexRoster}
-				gameGlobals={gameGlobals}
-			/>
+			}>Re-shuffle</button > */}
 		</div>
 
 	return (
 		<div className="row" id="generativeContainer">
 			<div id="sidebar" className="col-2">
+				<SaveRosterButton
+					hexRoster={hexRoster}
+					gameGlobals={gameGlobals}
+				/>
 				{editForm}
 				<CanvasControl
 					canvasWidth={canvasWidth}
