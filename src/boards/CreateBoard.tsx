@@ -1,4 +1,4 @@
-import ArraySelect from "../components/ArraySelect";
+import ArraySelect from "../forms/ArraySelect";
 import GameBoard from "../components/HexBoardSVG";
 import { useState } from "react";
 import { gameGlobals, hexagon } from "../components/hexDefinitions";

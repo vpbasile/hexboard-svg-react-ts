@@ -5,7 +5,7 @@ import ErrorBoundary from "../../components/ErrorBoundary";
 import GameBoard from "../../components/HexBoardSVG";
 import fileData from './map1.json';
 import { hexOrientations } from '../../components/hexFunctions';
-import CanvasControl from '../../components/CanvasControl';
+import CanvasControl from '../../forms/CanvasControl';
 import SaveRosterButton from '../../forms/saveRoster';
 
 export default function SavedBoard(props: any) {

@@ -1,5 +1,5 @@
-import { coordinateXY } from "./hexDefinitions";
-import ValueField from "./ValueField";
+import { coordinateXY } from "../components/hexDefinitions";
+import ValueField from "../components/ValueField";
 // import { useState } from 'react';
 
 export default function CanvasControl(props: {

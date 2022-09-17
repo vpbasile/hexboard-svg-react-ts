@@ -3,7 +3,7 @@ import ErrorBoundary from '../components/ErrorBoundary';
 import { useState } from "react";
 import { cube_ring, hexOrientations } from '../components/hexFunctions';
 import { gameGlobals, hexagon } from '../components/hexDefinitions';
-import CanvasControl from '../components/CanvasControl';
+import CanvasControl from '../forms/CanvasControl';
 // <> Enhancement: Store all of the q,r directiom vector pairs in an array
 // <> Pull in some functions from the GameBoard component
 

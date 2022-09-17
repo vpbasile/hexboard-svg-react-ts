@@ -11,7 +11,6 @@ import ErrorBoundary from './components/ErrorBoundary';
 // <> Import GameBoards
 import TriviaBoard from './boards/TriviaBoard';
 import Keyboard from './boards/Keyboard';
-// import BoardMaker from './boards/BoardMaker';
 import Generative from './boards/Generative';
 import SavedBoard from './boards/SavedBoard';
 import CreateBoard from './boards/CreateBoard';

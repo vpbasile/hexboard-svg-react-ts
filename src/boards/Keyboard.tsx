@@ -3,7 +3,7 @@ import GameBoard from '../components/HexBoardSVG';
 import { useState } from "react";
 import { gameGlobals, hexagon } from '../components/hexDefinitions';
 import { hexOrientations } from '../components/hexFunctions';
-import CanvasControl from '../components/CanvasControl';
+import CanvasControl from '../forms/CanvasControl';
 
 
 export default function Keyboard(props: any) {

@@ -8,7 +8,7 @@ import RosterDisplay from "../components/RosterDisplay";
 import SaveRosterButton from "../forms/saveRoster";
 
 import '../css/gameboard.css'
-import CanvasControl from "../components/CanvasControl";
+import CanvasControl from "../forms/CanvasControl";
 
 export default function GenerativeBoard(props: any) {
 	// <> States that control canvas parameters
