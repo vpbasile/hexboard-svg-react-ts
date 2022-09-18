@@ -20,6 +20,11 @@
 
 }
 
+.just-grid {
+	fill: none;
+    stroke: var(--purple-light);
+}
+
 /* Category color schemes */
 .blackandwhite {
  background-color: black;

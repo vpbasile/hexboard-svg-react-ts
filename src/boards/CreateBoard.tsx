@@ -3,7 +3,8 @@ import GameBoard from "../components/HexBoardSVG";
 import { useState } from "react";
 import { gameGlobals, hexagon } from "../components/hexDefinitions";
 import SaveRosterButton from "../forms/saveRoster";
-import { hexOrientations } from "../components/hexFunctions";
+import { cube_ring, hexOrientations } from "../components/hexFunctions";
+import CanvasControl from "../forms/CanvasControl";
 
 export default function CreateBoard(props: any) {
 	// <> States that control canvas parameters
@@ -17,10 +18,20 @@ export default function CreateBoard(props: any) {
 	// States unique to this board
 	const [qTemp, SETqTemp] = useState(0);
 	const [rTemp, SETrTemp] = useState(0);
-	const cssClassChoices = [`bg-white`, 'bg-green', 'bg-blue', 'bg-purple', 'bg-red']
+	const cssClassChoices = [`just-grid`, `bg-white`, 'bg-green', 'bg-blue', 'bg-purple', 'bg-red']
 	const [classTemp, SETclassTemp] = useState(cssClassChoices[0])
-	const blankRoster: hexagon[] = []
-	const [hexRoster, SEThexRoster] = useState(blankRoster)
+	// const blankRoster: hexagon[] = []
+	const centerHex: hexagon = { q: 0, r: 0, cssClasses: cssClassChoices[0] }
+	let tempRoster: hexagon[] = [centerHex]
+	const boardSize: number = 7
+	for (let i = 1; i < boardSize; i++) {
+		const thisRing = cube_ring(centerHex, i)
+		// console.log(`Ring ${i} is ${JSON.stringify(thisRing)}`)
+		tempRoster = tempRoster.concat(thisRing);
+		// console.log(JSON.stringify(tempRoster))
+	}
+	tempRoster = tempRoster.map((eachHex)=>{ eachHex.cssClasses = cssClassChoices[0]; return eachHex; })
+	const [hexRoster, SEThexRoster] = useState<hexagon[]>(tempRoster)
 
 	const gameGlobals: gameGlobals = {
 		canvasWidth: canvasWidth,
@@ -78,6 +89,16 @@ export default function CreateBoard(props: any) {
 					gameGlobals={gameGlobals}
 				/>
 				{form}
+				<CanvasControl
+					canvasWidth={canvasWidth}
+					canvasHeight={canvasHeight}
+					hexRadius={hexRadius}
+					separationMultiplier={separationMultiplier}
+					gridOrigin={gridOrigin}
+					SETcanvasWidth={SETcanvasWidth}
+					SETcanvasHeight={SETcanvasHeight}
+					SEThexRadius={SEThexRadius}
+					SETseparationMultiplier={SETseparationMultiplier} />
 			</div>
 		</div>
 	)
