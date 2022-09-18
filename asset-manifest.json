@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/hexboard-svg-react-ts/static/css/main.01156a39.css",
-    "main.js": "/hexboard-svg-react-ts/static/js/main.37f1090a.js",
+    "main.css": "/hexboard-svg-react-ts/static/css/main.b08cd6d5.css",
+    "main.js": "/hexboard-svg-react-ts/static/js/main.4f9de5cb.js",
     "index.html": "/hexboard-svg-react-ts/index.html",
-    "main.01156a39.css.map": "/hexboard-svg-react-ts/static/css/main.01156a39.css.map",
-    "main.37f1090a.js.map": "/hexboard-svg-react-ts/static/js/main.37f1090a.js.map"
+    "main.b08cd6d5.css.map": "/hexboard-svg-react-ts/static/css/main.b08cd6d5.css.map",
+    "main.4f9de5cb.js.map": "/hexboard-svg-react-ts/static/js/main.4f9de5cb.js.map"
   },
   "entrypoints": [
-    "static/css/main.01156a39.css",
-    "static/js/main.37f1090a.js"
+    "static/css/main.b08cd6d5.css",
+    "static/js/main.4f9de5cb.js"
   ]
 }
