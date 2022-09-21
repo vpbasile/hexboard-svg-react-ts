@@ -20,17 +20,6 @@ export interface gameGlobals {
 	children?:any
 }
 
-export interface hexProps {
-	gameGlobals: gameGlobals;
-	id: number;
-	q: number;
-	r: number;
-	cssClasses?: string;
-	orientationName: orientationName;
-	hexText?: string;
-	hexTextSize?: number;
-}
-
 export interface gameBoardProps {
 	gameGlobals: gameGlobals;
 	hexRoster: hexagon[];

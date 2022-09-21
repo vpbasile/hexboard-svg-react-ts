@@ -1,7 +1,18 @@
-import { hexProps, orientation, orientationName } from './hexDefinitions';
+import { gameGlobals, orientation, orientationName } from './hexDefinitions';
 import { hexOrientations } from '../components/hexFunctions';
 
 // function degtoRad(degrees) { return degrees * Math.PI / 180 }
+
+export interface hexProps {
+	gameGlobals: gameGlobals;
+	id: number;
+	q: number;
+	r: number;
+	cssClasses?: string;
+	orientationName: orientationName;
+	hexText?: string;
+	hexTextSize?: number;
+}
 
 export default function Hexagon(props:hexProps) {
 	const sqrt3 = Math.sqrt(3)
