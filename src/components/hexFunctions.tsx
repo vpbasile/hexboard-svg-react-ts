@@ -6,7 +6,7 @@ let hexOrientations = {
 }
 
 // Store all of the q,r directiom vector pairs in an array
-const directionVectors:vector[] = [
+export const directionVectors:vector[] = [
 	{ "q": +1, "r": 0 },
 	{ "q": +1, "r": -1 }, 
 	{ "q": 0, "r": -1 }, 

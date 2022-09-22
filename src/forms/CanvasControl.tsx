@@ -3,7 +3,7 @@ import ValueField from "../components/ValueField";
 // import { useState } from 'react';
 
 export default function CanvasControl(props: {
-	canvasWidth: number, canvasHeight: number, hexRadius: number, separationMultiplier: number, gridOrigin: coordinateXY
+	canvasWidth: number, canvasHeight: number, hexRadius: number, separationMultiplier: number, hexGridOrigin: coordinateXY
 	SETcanvasWidth: any, SETcanvasHeight: any, SEThexRadius: any, SETseparationMultiplier: any,
 	// setGridOrigin: any
 
@@ -11,9 +11,9 @@ export default function CanvasControl(props: {
 	const canvasWidth = props.canvasWidth; const canvasHeight = props.canvasHeight;
 	const hexRadius = props.hexRadius;
 	const separationMultiplier = props.separationMultiplier;
-	// const gridOrigin = props.gridOrigin;
-	// const [gridOriginTempX,SETgridOriginTempX] = useState(gridOrigin.x)
-	// const [gridOriginTempY,SETgridOriginTempY] = useState(gridOrigin.y)
+	// const hexGridOrigin = props.hexGridOrigin;
+	// const [gridOriginTempX,SETgridOriginTempX] = useState(hexGridOrigin.x)
+	// const [gridOriginTempY,SETgridOriginTempY] = useState(hexGridOrigin.y)
 	const SETcanvasWidth = props.SETcanvasWidth;
 	const SETcanvasHeight = props.SETcanvasHeight;
 	const SEThexRadius = props.SEThexRadius;

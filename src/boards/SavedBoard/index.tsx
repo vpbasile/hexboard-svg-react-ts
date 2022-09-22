@@ -14,7 +14,7 @@ export default function SavedBoard(props: any) {
 	const [canvasHeight, SETcanvasHeight] = useState(2 * window.innerHeight)
 	const [hexRadius, SEThexRadius] = useState(20);
 	const [separationMultiplier, SETseparationMultiplier] = useState(1.1)
-	const [gridOrigin, SETgridOrigin] = useState({ x: canvasWidth / 2, y: canvasHeight / 2 });
+	const [hexGridOrigin, SETgridOrigin] = useState({ x: canvasWidth / 2, y: canvasHeight / 2 });
 	const [defaultOrientation, SETdefaultOrientation] = useState(hexOrientations["flat-top"])
 
 	const hexRoster = fileData.hexRoster;
@@ -25,7 +25,7 @@ export default function SavedBoard(props: any) {
 		canvasHeight: canvasHeight,
 		// Hexagons
 		orientation: defaultOrientation,
-		gridOrigin: gridOrigin,
+		hexGridOrigin: hexGridOrigin,
 		hexRadius: hexRadius,
 		separationMultiplier: separationMultiplier,
 		textSize: 12,
@@ -40,7 +40,7 @@ export default function SavedBoard(props: any) {
 					<GameBoard
 						hexRoster={hexRoster}
 						gameGlobals={gameGlobals}
-						whichOrientation={"flat-top"}
+						orientation={hexOrientations["flat-top"]}
 					//   logo={logo}
 					/>
 				</ErrorBoundary>
@@ -54,7 +54,7 @@ export default function SavedBoard(props: any) {
 					canvasHeight={canvasHeight}
 					hexRadius={hexRadius}
 					separationMultiplier={separationMultiplier}
-					gridOrigin={gridOrigin}
+					hexGridOrigin={hexGridOrigin}
 					SETcanvasWidth={SETcanvasWidth}
 					SETcanvasHeight={SETcanvasHeight}
 					SEThexRadius={SEThexRadius}

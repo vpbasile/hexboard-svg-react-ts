@@ -4,18 +4,9 @@ import { useState } from "react";
 import { cube_ring, hexOrientations } from '../components/hexFunctions';
 import { gameGlobals, hexagon } from '../components/hexDefinitions';
 import CanvasControl from '../forms/CanvasControl';
-// <> Enhancement: Store all of the q,r directiom vector pairs in an array
-// <> Pull in some functions from the GameBoard component
+const orientation = hexOrientations["pointy-top"];
 
 export default function TriviaBoard(props: any) {
-  // <> States that control canvas parameters
-  const [canvasWidth, SETcanvasWidth] = useState(window.innerWidth)
-  const [canvasHeight, SETcanvasHeight] = useState(2 * window.innerHeight)
-  const [hexRadius, SEThexRadius] = useState(20);
-  const [separationMultiplier, SETseparationMultiplier] = useState(1.1)
-  const [gridOrigin, SETgridOrigin] = useState({ x: canvasWidth / 2, y: canvasHeight / 2 });
-  const [defaultOrientation, SETdefaultOrientation] = useState(hexOrientations["flat-top"])
-
   // States unique to this board
 
   // Trivia-specific constants
@@ -27,18 +18,13 @@ export default function TriviaBoard(props: any) {
     return cssClass;
   }
 
-  const gameGlobals: gameGlobals = {
-    canvasWidth: canvasWidth,
-    canvasHeight: canvasHeight,
-    // Hexagons
-    orientation: defaultOrientation,
-    gridOrigin: gridOrigin,
-    hexRadius: hexRadius,
-    separationMultiplier: separationMultiplier,
-    textSize: 12,
-    // Style
-    canvasBackgroundColor: '#000',
-  }
+  // <> States that control canvas parameters
+  const [canvasWidth, SETcanvasWidth] = useState(800)
+  const [canvasHeight, SETcanvasHeight] = useState(800)
+  const [hexRadius, SEThexRadius] = useState(20);
+  const [separationMultiplier, SETseparationMultiplier] = useState(1.1)
+  const [hexGridOrigin, SETgridOrigin] = useState({ x: canvasWidth / 2, y: canvasHeight / 2 });
+  const [defaultOrientation, SETdefaultOrientation] = useState(orientation)
 
   let triviaHexes = [];
 
@@ -89,6 +75,19 @@ export default function TriviaBoard(props: any) {
     return hex;
   })
 
+  const gameGlobals: gameGlobals = {
+    canvasWidth: canvasWidth,
+    canvasHeight: canvasHeight,
+    // Hexagons
+    orientation: defaultOrientation,
+    hexGridOrigin: hexGridOrigin,
+    hexRadius: hexRadius,
+    separationMultiplier: separationMultiplier,
+    textSize: 12,
+    // Style
+    canvasBackgroundColor: '#000',
+  }
+
   return (
 
     <div className="row" id="triviaBoardContainer">
@@ -97,7 +96,7 @@ export default function TriviaBoard(props: any) {
           <GameBoard
             hexRoster={triviaHexes}
             gameGlobals={gameGlobals}
-            whichOrientation={"flat-top"}
+            orientation={orientation}
 
           //   logo={logo}
           />
@@ -110,7 +109,7 @@ export default function TriviaBoard(props: any) {
           canvasHeight={canvasHeight}
           hexRadius={hexRadius}
           separationMultiplier={separationMultiplier}
-          gridOrigin={gridOrigin}
+          hexGridOrigin={hexGridOrigin}
           SETcanvasWidth={SETcanvasWidth}
           SETcanvasHeight={SETcanvasHeight}
           SEThexRadius={SEThexRadius}

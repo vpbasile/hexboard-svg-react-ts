@@ -16,25 +16,12 @@ export default function GenerativeBoard(props: any) {
 	const [canvasHeight, SETcanvasHeight] = useState(2 * window.innerHeight)
 	const [hexRadius, SEThexRadius] = useState(20);
 	const [separationMultiplier, SETseparationMultiplier] = useState(1.1)
-	const [gridOrigin, SETgridOrigin] = useState({ x: canvasWidth / 2, y: canvasHeight / 2 });
+	const [hexGridOrigin, SETgridOrigin] = useState({ x: canvasWidth / 2, y: canvasHeight / 2 });
 	const [defaultOrientation, SETdefaultOrientation] = useState(hexOrientations["flat-top"])
 
 	const [numberOfSpaces, SETnumberOfSpaces] = useState(50);
 	const [tempNumber, SETtempNumber] = useState(numberOfSpaces)
 	const [hexRoster, SEThexRoster] = useState(newRoster())
-
-	const gameGlobals: gameGlobals = {
-		canvasWidth: canvasWidth,
-		canvasHeight: canvasHeight,
-		// Hexagons
-		orientation: defaultOrientation,
-		gridOrigin: gridOrigin,
-		hexRadius: hexRadius,
-		separationMultiplier: separationMultiplier,
-		textSize: 12,
-		// Style
-		canvasBackgroundColor: '#000',
-	}
 
 	// Randomize color assignment so that 1/3 hexes are green
 	function mapColor(): string {
@@ -87,6 +74,19 @@ export default function GenerativeBoard(props: any) {
 			}>Re-shuffle</button > */}
 		</div>
 
+	const gameGlobals: gameGlobals = {
+		canvasWidth: canvasWidth,
+		canvasHeight: canvasHeight,
+		// Hexagons
+		orientation: defaultOrientation,
+		hexGridOrigin: hexGridOrigin,
+		hexRadius: hexRadius,
+		separationMultiplier: separationMultiplier,
+		textSize: 12,
+		// Style
+		canvasBackgroundColor: '#000',
+	}
+
 	return (
 		<div className="row" id="generativeContainer">
 			<div id='generativeBoard' className="col-md-10">
@@ -95,7 +95,7 @@ export default function GenerativeBoard(props: any) {
 						hexRoster={hexRoster}
 						gameGlobals={gameGlobals}
 						// textSize={props.textSize}
-						whichOrientation={"flat-top"}
+						orientation={hexOrientations["flat-top"]}
 					//   logo={logo}
 					/>
 				</ErrorBoundary>
@@ -111,7 +111,7 @@ export default function GenerativeBoard(props: any) {
 					canvasHeight={canvasHeight}
 					hexRadius={hexRadius}
 					separationMultiplier={separationMultiplier}
-					gridOrigin={gridOrigin}
+					hexGridOrigin={hexGridOrigin}
 					SETcanvasWidth={SETcanvasWidth}
 					SETcanvasHeight={SETcanvasHeight}
 					SEThexRadius={SEThexRadius}

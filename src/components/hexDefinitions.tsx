@@ -11,18 +11,11 @@ export interface gameGlobals {
 	canvasHeight: number,
 	// Hexagon propeties
 	orientation: orientation,
-	gridOrigin: { 'x': number, 'y': number },
+	hexGridOrigin: { 'x': number, 'y': number },
 	hexRadius: number,
 	separationMultiplier: number,
 	textSize: number,
 	canvasBackgroundColor: string,
 	// Children
 	children?:any
-}
-
-export interface gameBoardProps {
-	gameGlobals: gameGlobals;
-	hexRoster: hexagon[];
-	textSize?: number;
-	whichOrientation: orientationName;
 }

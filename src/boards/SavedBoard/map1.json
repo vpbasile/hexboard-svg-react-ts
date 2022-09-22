@@ -27,7 +27,7 @@
 				300
 			]
 		},
-		"gridOrigin": {
+		"hexGridOrigin": {
 			"x": 768,
 			"y": 703
 		},

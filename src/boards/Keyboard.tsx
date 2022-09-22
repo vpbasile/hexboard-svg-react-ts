@@ -12,24 +12,11 @@ export default function Keyboard(props: any) {
 	const [canvasHeight, SETcanvasHeight] = useState(2 * window.innerHeight)
 	const [hexRadius, SEThexRadius] = useState(20);
 	const [separationMultiplier, SETseparationMultiplier] = useState(1.1)
-	const [gridOrigin, SETgridOrigin] = useState({ x: 100, y: 100 });
-	const orientation = hexOrientations["flat-top"]
+	const [hexGridOrigin, SETgridOrigin] = useState({ x: 100, y: 100 });
+	const orientation = hexOrientations["pointy-top"]
 
 	// States unique to this board
 
-	// <> Gameboard Parameters
-	const gameGlobals: gameGlobals = {
-		canvasWidth: canvasWidth,
-		canvasHeight: canvasHeight,
-		// Hexagons
-		orientation: orientation,
-		gridOrigin: gridOrigin,
-		hexRadius: hexRadius,
-		separationMultiplier: separationMultiplier,
-		textSize: 12,
-		// Style
-		canvasBackgroundColor: '#000',
-	}
 	// <> Create the roster of hexes
 	const hexList: hexagon[] = [];
 
@@ -62,6 +49,20 @@ export default function Keyboard(props: any) {
 		return hex;
 	})
 
+		// <> Gameboard Parameters
+		const gameGlobals: gameGlobals = {
+			canvasWidth: canvasWidth,
+			canvasHeight: canvasHeight,
+			// Hexagons
+			orientation: orientation,
+			hexGridOrigin: hexGridOrigin,
+			hexRadius: hexRadius,
+			separationMultiplier: separationMultiplier,
+			textSize: 12,
+			// Style
+			canvasBackgroundColor: '#000',
+		}
+
 	return (
 		<div className="row" id="displayBoardContainer">
 			<div id='displayBoard' className="col-md-10">
@@ -71,7 +72,7 @@ export default function Keyboard(props: any) {
 						hexRoster={keyboardHexes}
 						gameGlobals={gameGlobals}
 						textSize={props.textSize}
-						whichOrientation={"pointy-top"}
+						orientation={orientation}
 					//   logo={logo}
 					/>
 				</ErrorBoundary>
@@ -83,7 +84,7 @@ export default function Keyboard(props: any) {
 					canvasHeight={canvasHeight}
 					hexRadius={hexRadius}
 					separationMultiplier={separationMultiplier}
-					gridOrigin={gridOrigin}
+					hexGridOrigin={hexGridOrigin}
 					SETcanvasWidth={SETcanvasWidth}
 					SETcanvasHeight={SETcanvasHeight}
 					SEThexRadius={SEThexRadius}

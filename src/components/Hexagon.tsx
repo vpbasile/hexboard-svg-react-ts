@@ -1,5 +1,5 @@
-import { gameGlobals, orientation, orientationName } from './hexDefinitions';
-import { hexOrientations } from '../components/hexFunctions';
+import { gameGlobals, orientation } from './hexDefinitions';
+import { hex_to_pixel,calcTheta } from './hexMath';
 
 // function degtoRad(degrees) { return degrees * Math.PI / 180 }
 
@@ -9,50 +9,32 @@ export interface hexProps {
 	q: number;
 	r: number;
 	cssClasses?: string;
-	orientationName: orientationName;
+	orientation: orientation;
 	hexText?: string;
 	hexTextSize?: number;
 }
 
 export default function Hexagon(props:hexProps) {
-	const sqrt3 = Math.sqrt(3)
 	const gameGlobals = props.gameGlobals
 	// Cache global variables
 	const hexRadius = gameGlobals.hexRadius;
-	const orientationName:orientationName = props.orientationName;
 	// console.log(	`orientationName: ${orientationName}`)
-	const orientation: orientation = hexOrientations[orientationName]
+	const orientation = props.orientation;
 	const cornerAngles = orientation.cornerAngles
-	const gridOrigin = gameGlobals.gridOrigin;
 	// Coordinates
 	const q = props.q;
 	const r = props.r;
 	// const s = -q - r;
 	// Math
-	const separationMultiplier = props.gameGlobals.separationMultiplier
 	const hexText = props.hexText
 	const hexTextSize = props.hexTextSize;
 
-	function hex_to_pixel(q: number, r: number, orientation: orientation) {
-		let x: number
-		let y: number
-		if (orientation.name === "flat-top") {
-			x = hexRadius * (3. / 2 * q)
-			y = hexRadius * (sqrt3 / 2 * q + sqrt3 * r)
-		}
-		// else if (orientation.name === "pointy-top") {
-		else {
-			x = hexRadius * (sqrt3 * q + sqrt3 / 2 * r)
-			y = hexRadius * (3. / 2 * r)
-		}
-		return { "x": x * separationMultiplier + gridOrigin.x, "y": y * separationMultiplier + gridOrigin.y }
-	}
-	const center = hex_to_pixel(q, r, orientation)
+	const center = hex_to_pixel(q, r, gameGlobals)
 
 	// Find the X and Y of each corner
 	let polygonString = ""
 	cornerAngles.map(angle => {
-		let theta = angle * Math.PI / 180
+		const theta = calcTheta(angle)
 		const x = Math.floor(center.x + hexRadius * Math.cos(theta))
 		const y = Math.floor(center.y + hexRadius * Math.sin(theta))
 		// console.log(`corner: ${angle} ${x},${y}`)
@@ -105,7 +87,7 @@ export default function Hexagon(props:hexProps) {
 	// 	// If currentlter, then make it clickable
 	// 	if (currentLetter == 'enter') {
 	// 		gameBoard.fill(`white`)
-	// 			.move(gridOrigin.x + this.center.x, gridOrigin.y + this.center.y - hexSize.y / 5)
+	// 			.move(hexGridOrigin.x + this.center.x, hexGridOrigin.y + this.center.y - hexSize.y / 5)
 	// 			.font({
 	// 				family: 'monospace'
 	// 				, weight: 'bold'
@@ -119,7 +101,7 @@ export default function Hexagon(props:hexProps) {
 	// 		displayLetter
 	// 			// .attr('class', `${this.classes}`)
 	// 			.fill(`white`)
-	// 			.move(gridOrigin.x + this.center.x, gridOrigin.y + this.center.y - hexSize.y / 5)
+	// 			.move(hexGridOrigin.x + this.center.x, hexGridOrigin.y + this.center.y - hexSize.y / 5)
 	// 			.font({
 	// 				family: 'monospace'
 	// 				, weight: 'bold'
