@@ -10,16 +10,14 @@ import aspectRatio from '../components/rectMath';
 
 export default function Keyboard(props: any) {
 	// <> States that control canvas parameters
-	const [hexRadius, SEThexRadius] = useState(20);
+	const [hexRadius, SEThexRadius] = useState(200);
 	const [separationMultiplier, SETseparationMultiplier] = useState(1.1)
 	const orientation = hexOrientations["pointy-top"]
-
-	// States unique to this board
 
 	// <> Create the roster of hexes
 	const hexList: hexagon[] = [];
 
-	let keyboardCharList = [`qwertyuiop[]`, `asdfghjkl;'`, `zxcvbnm,./`]
+	let keyboardCharList = [`qwertyuiop[]`, `asdfghjkl;'`, `zxcvbnm,./`,"\s"]
 	keyboardCharList.forEach((row, rowIndex) => {
 		Array.from(row).forEach((key, keyIndex) => {
 			let thisOne: hexagon = { q: keyIndex, r: rowIndex, hexText: key }
@@ -52,14 +50,16 @@ export default function Keyboard(props: any) {
 	const gameGlobals: gameGlobals = {
 		orientation: orientation,
 		hexRadius: hexRadius,
+		textSize: hexRadius/2,
 		separationMultiplier: separationMultiplier,
-		textSize: 12,
 		drawBackBoard: false,
 	}
 
-	const [canvasHeight, SETcanvasHeight] = useState(150)
-	const [canvasWidth, SETcanvasWidth] = useState(canvasHeight * aspectRatio())
-	const [hexGridOrigin, SEThexGridOrigin] = useState({ x: hexRadius * separationMultiplier, y: hexRadius * separationMultiplier / 3 });
+	const multiplier = aspectRatio();
+	const [canvasWidth, SETcanvasWidth] = useState(2*hexRadius*12*separationMultiplier)
+	const [canvasHeight, SETcanvasHeight] = useState(canvasWidth/multiplier)
+	const originY = hexRadius * separationMultiplier;
+	const [hexGridOrigin, SEThexGridOrigin] = useState({ x:originY * multiplier, y: originY});
 	const canvasGlobals = {
 		canvasWidth: canvasWidth,
 		canvasHeight: canvasHeight,

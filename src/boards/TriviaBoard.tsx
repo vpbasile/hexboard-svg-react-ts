@@ -19,7 +19,7 @@ export default function TriviaBoard(props: any) {
   }
 
   // <> States that control canvas parameters
-  const [hexRadius, SEThexRadius] = useState(20);
+  const [hexRadius, SEThexRadius] = useState(200);
   const [separationMultiplier, SETseparationMultiplier] = useState(1.1)
 
   // <><><> Step 1: Create the hex roster

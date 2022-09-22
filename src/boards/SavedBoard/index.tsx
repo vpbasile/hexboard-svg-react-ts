@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { canvasGlobals, gameGlobals } from "../../components/hexDefinitions";
 import ErrorBoundary from "../../components/ErrorBoundary";
 import GameBoard from "../../components/HexBoardSVG";
-import fileData from './map1.json';
+import fileData from './data.json';
 import { hexOrientations } from '../../components/hexMath';
 import CanvasControl from '../../forms/CanvasControl';
 import SaveRosterButton from '../../forms/saveRoster';
@@ -13,7 +13,7 @@ export default function SavedBoard(props: any) {
 	// <> States that control canvas parameters
 	const [canvasWidth, SETcanvasWidth] = useState(window.innerWidth)
 	const [canvasHeight, SETcanvasHeight] = useState(2 * window.innerHeight)
-	const [hexRadius, SEThexRadius] = useState(20);
+	const [hexRadius, SEThexRadius] = useState(200);
 	const [separationMultiplier, SETseparationMultiplier] = useState(1.1)
 	const [hexGridOrigin, SEThexGridOrigin] = useState({ x: canvasWidth / 2, y: canvasHeight / 2 });
 	const [defaultOrientation, SETdefaultOrientation] = useState(hexOrientations["flat-top"])

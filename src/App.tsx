@@ -43,17 +43,17 @@ function App() {
 
   return (
     <div className="App container-fluid bg-black text-light p-4">
-      <div className="row" id="header">
-        <div className="col-12">
-          <h1>Hexboard Maker</h1>
-          <nav id="nav-bar" className='col-12'>{navBar}</nav>
-        </div>
-      </div>
       <div className="row" id="page-content-row">
         <ErrorBoundary>
-          <h2 className="bg-gray border">{chosenGameBoard.title}</h2>
           {chosenGameBoard.GameBoard}
+          <h2 className="bg-gray border">{chosenGameBoard.title}</h2>
         </ErrorBoundary>
+      </div>
+      <div className="row" id="header">
+        <div className="col-12">
+          <nav id="nav-bar" className='col-12'>{navBar}</nav>
+          <h1>Hexboard Maker</h1>
+        </div>
       </div>
     </div>
   )

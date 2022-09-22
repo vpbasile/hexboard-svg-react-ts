@@ -14,7 +14,7 @@ import aspectRatio from "../components/rectMath";
 
 export default function GenerativeBoard(props: any) {
 	// <> States that control canvas parameters
-	const [hexRadius, SEThexRadius] = useState(20);
+	const [hexRadius, SEThexRadius] = useState(200);
 	const [separationMultiplier, SETseparationMultiplier] = useState(1.1)
 	const [defaultOrientation, SETdefaultOrientation] = useState(hexOrientations["flat-top"])
 

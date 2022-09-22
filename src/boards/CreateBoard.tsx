@@ -10,7 +10,7 @@ import aspectRatio from "../components/rectMath";
 
 export default function CreateBoard(props: any) {
 	// <> States that control canvas parameters
-	const [hexRadius, SEThexRadius] = useState(20);
+	const [hexRadius, SEThexRadius] = useState(200);
 	const [separationMultiplier, SETseparationMultiplier] = useState(1.1)
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [defaultOrientation, SETdefaultOrientation] = useState(hexOrientations["flat-top"])

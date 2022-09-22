@@ -3,10 +3,18 @@
 }
 
 .gameboard-space {
-	stroke-width: 1;
+	stroke-width: 10;
 }
 
 .gameboard-space:hover {
 	stroke: white;
-	stroke-width: 5px;
+	stroke-width: 15px;
+}
+
+.bg-black {
+	color: white;
+	border-color: white;
+	stroke:white;
+	background-color: black;
+	fill:black;
 }
