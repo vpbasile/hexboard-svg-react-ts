@@ -1,0 +1,1 @@
+export default function aspectRatio():number{return window.innerWidth/window.innerHeight}

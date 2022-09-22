@@ -1,12 +1,13 @@
 import { useState } from 'react';
 
-import { gameGlobals } from "../../components/hexDefinitions";
+import { canvasGlobals, gameGlobals } from "../../components/hexDefinitions";
 import ErrorBoundary from "../../components/ErrorBoundary";
 import GameBoard from "../../components/HexBoardSVG";
 import fileData from './map1.json';
-import { hexOrientations } from '../../components/hexFunctions';
+import { hexOrientations } from '../../components/hexMath';
 import CanvasControl from '../../forms/CanvasControl';
 import SaveRosterButton from '../../forms/saveRoster';
+import BoardControl from '../../forms/BoardControl';
 
 export default function SavedBoard(props: any) {
 	// <> States that control canvas parameters
@@ -14,22 +15,25 @@ export default function SavedBoard(props: any) {
 	const [canvasHeight, SETcanvasHeight] = useState(2 * window.innerHeight)
 	const [hexRadius, SEThexRadius] = useState(20);
 	const [separationMultiplier, SETseparationMultiplier] = useState(1.1)
-	const [hexGridOrigin, SETgridOrigin] = useState({ x: canvasWidth / 2, y: canvasHeight / 2 });
+	const [hexGridOrigin, SEThexGridOrigin] = useState({ x: canvasWidth / 2, y: canvasHeight / 2 });
 	const [defaultOrientation, SETdefaultOrientation] = useState(hexOrientations["flat-top"])
 
 	const hexRoster = fileData.hexRoster;
 	// const canvasGlobals = fileData.canvasGlobals;
 
 	const gameGlobals: gameGlobals = {
-		canvasWidth: canvasWidth,
-		canvasHeight: canvasHeight,
 		// Hexagons
 		orientation: defaultOrientation,
-		hexGridOrigin: hexGridOrigin,
 		hexRadius: hexRadius,
 		separationMultiplier: separationMultiplier,
 		textSize: 12,
-		// Style
+		drawBackBoard: true,
+	}
+
+	const canvasGlobals: canvasGlobals = {
+		canvasWidth: canvasWidth,
+		canvasHeight: canvasHeight,
+		hexGridOrigin: hexGridOrigin,
 		canvasBackgroundColor: '#000',
 	}
 
@@ -40,7 +44,7 @@ export default function SavedBoard(props: any) {
 					<GameBoard
 						hexRoster={hexRoster}
 						gameGlobals={gameGlobals}
-						orientation={hexOrientations["flat-top"]}
+						canvasGlobals={canvasGlobals}
 					//   logo={logo}
 					/>
 				</ErrorBoundary>
@@ -48,17 +52,16 @@ export default function SavedBoard(props: any) {
 			{/* <div id="rosterDisplay" className="">
 				<RosterDisplay hexRoster={hexRoster} />
 			</div> */}
-			<div id="sideBar" className="col-md-2">
+			<div id="sideBar" className="col-md-2"><BoardControl
+				hexRadius={hexRadius}
+				separationMultiplier={separationMultiplier}
+				SEThexRadius={SEThexRadius}
+				SETseparationMultiplier={SETseparationMultiplier} />
 				<CanvasControl
-					canvasWidth={canvasWidth}
-					canvasHeight={canvasHeight}
-					hexRadius={hexRadius}
-					separationMultiplier={separationMultiplier}
-					hexGridOrigin={hexGridOrigin}
-					SETcanvasWidth={SETcanvasWidth}
-					SETcanvasHeight={SETcanvasHeight}
-					SEThexRadius={SEThexRadius}
-					SETseparationMultiplier={SETseparationMultiplier} />
+					canvasWidth={canvasWidth} SETcanvasWidth={SETcanvasWidth}
+					canvasHeight={canvasHeight} SETcanvasHeight={SETcanvasHeight}
+					hexGridOrigin={hexGridOrigin} SEThexGridOrigin={SEThexGridOrigin}
+				/>
 			</div>
 		</div>
 

@@ -1,21 +1,23 @@
-export interface orientation { name: string; cornerAngles: number[]; }
+export type orientation = { name: string; cornerAngles: number[]; }
 export type orientationName = 'flat-top' | 'pointy-top'
 
-export interface hexagon { q: number, r: number, cssClasses?: string, hexText?: string }
-export interface vector { q: number, r: number }
-export interface coordinateXY { x: number; y:number; }
+export type hexagon = { q: number, r: number, cssClasses?: string, hexText?: string }
+export type vector = { q: number, r: number }
+export type coordinateXY = { x: number; y: number; }
 
-export interface gameGlobals {
-	// Canvas Globals
-	canvasWidth: number,
-	canvasHeight: number,
+export type gameGlobals = {
 	// Hexagon propeties
 	orientation: orientation,
-	hexGridOrigin: { 'x': number, 'y': number },
 	hexRadius: number,
 	separationMultiplier: number,
 	textSize: number,
-	canvasBackgroundColor: string,
+	drawBackBoard:boolean,
 	// Children
-	children?:any
+	children?: any
 }
+
+export type canvasGlobals = { 
+	canvasWidth: number, canvasHeight: number,
+	hexGridOrigin: coordinateXY,
+	canvasBackgroundColor: string,
+};

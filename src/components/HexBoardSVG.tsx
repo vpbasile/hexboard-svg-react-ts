@@ -2,35 +2,56 @@
 
 import Hexagon from './Hexagon';
 import ErrorBoundary from './ErrorBoundary';
-import { coordinateXY, gameGlobals, hexagon, orientation } from './hexDefinitions';
-import { canvasDimensions } from './hexMath'
+import { canvasGlobals, coordinateXY, gameGlobals, hexagon, orientation } from './hexDefinitions';
+import { directionVectors, hex_to_pixel } from './hexMath';
 
 export interface gameBoardProps {
 	gameGlobals: gameGlobals;
+	canvasGlobals: canvasGlobals
 	hexRoster: hexagon[];
 	textSize?: number;
-	orientation: orientation;
 }
 
 export default function GameBoard(props: gameBoardProps) {
-	let gameGlobals = props.gameGlobals;
-	let hexData = props.hexRoster;
-	const orientation = props.orientation;
-	const textSize = props.textSize;
-	const calculatedDimensions = canvasDimensions(hexData, gameGlobals)
-	const canvasWidth = gameGlobals.canvasWidth;
-	const canvasHeight = gameGlobals.canvasHeight;
-	const hexGridOrigin: coordinateXY = { x: canvasWidth, y: canvasHeight };
 	// Initialize variables
-	// const textSpacingHeight = props.textSize * 1.2
+	const gameGlobals = props.gameGlobals;
+	const hexRoster = props.hexRoster;
+	const canvasGlobals = props.canvasGlobals;
+	const canvasWidth = canvasGlobals.canvasWidth;
+	const canvasHeight = canvasGlobals.canvasHeight;
+	const hexGridOrigin = canvasGlobals.hexGridOrigin;
 
-	// <> Render Functions
 	console.log(`Canvas size: ${canvasWidth}, ${canvasHeight}`)
 	console.log(`Grid origin: ${hexGridOrigin.x}, ${hexGridOrigin.y}`)
 
-	// <> Do some last minute things to the data, like assigning unique ids if they are missing
+	// <> Render Functions
+	function backBoard(hexRoster: hexagon[], gameGlobals: gameGlobals): any {
+		// <> Find the min and max values for q and r.  Convert those to rectangular coordinates.  
+		let maxRadius = 0
+		hexRoster.forEach(hex => {
+			const q = hex.q;
+			const r = hex.r;
+			const s = -q - r;
+			if (Math.abs(q) > maxRadius) { maxRadius = q }
+			if (Math.abs(r) > maxRadius) { maxRadius = r }
+			if (Math.abs(s) > maxRadius) { maxRadius = s }
+		});
+		maxRadius++;
+		let cornerPoints: coordinateXY[] = directionVectors.map((vector) => {
+			return hex_to_pixel(vector.q * maxRadius, vector.r * maxRadius, gameGlobals)
+		})
+		let returnString: string = ""
+		cornerPoints.forEach((point) => {
+			if (returnString !== "") { returnString += " " }
+			returnString += `${point.x},${point.y}`
+		})
+		return returnString;
+
+	}
+
+	// <> Do some last minute things to the roster, like assigning unique ids if they are missing
 	let hexKey = 0;
-	const hexes = hexData.map((hex: hexagon) => {
+	const hexes = hexRoster.map((hex: hexagon) => {
 		const thisHexKey = hexKey++;
 		return <Hexagon
 			gameGlobals={gameGlobals}
@@ -39,9 +60,7 @@ export default function GameBoard(props: gameBoardProps) {
 			q={hex.q}
 			r={hex.r}
 			cssClasses={hex.cssClasses}
-			orientation={orientation}
 			hexText={hex.hexText}
-			hexTextSize={textSize}
 		/>
 	})
 	return (
@@ -51,15 +70,15 @@ export default function GameBoard(props: gameBoardProps) {
 					<p className='caption'></p>
 					<div className="gameboard-canvas bg-gradient">
 						<svg
-							viewBox={`0 0 ${canvasWidth} ${canvasHeight}`}
+							viewBox={`${-hexGridOrigin.x} ${-hexGridOrigin.y} ${canvasWidth} ${canvasHeight}`}
 							style={{ rotate: "0deg", fill: "white", opacity: "0.8" }}
 							xmlns="<http://www.w3.org/2000/svg>">
-							<polygon
+							{gameGlobals.drawBackBoard && <polygon
 								style={{}}
 								className={`just-grid`}
 								id={`backboard`}
-								points={calculatedDimensions}
-							/>
+								points={backBoard(hexRoster, gameGlobals)}
+							/>}
 							{hexes}
 						</svg>
 					</div>

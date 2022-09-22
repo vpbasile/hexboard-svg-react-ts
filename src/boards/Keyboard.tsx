@@ -2,17 +2,16 @@ import ErrorBoundary from '../components/ErrorBoundary';
 import GameBoard from '../components/HexBoardSVG';
 import { useState } from "react";
 import { gameGlobals, hexagon } from '../components/hexDefinitions';
-import { hexOrientations } from '../components/hexFunctions';
+import { hexOrientations } from '../components/hexMath';
 import CanvasControl from '../forms/CanvasControl';
+import BoardControl from '../forms/BoardControl';
+import aspectRatio from '../components/rectMath';
 
 
 export default function Keyboard(props: any) {
 	// <> States that control canvas parameters
-	const [canvasWidth, SETcanvasWidth] = useState(window.innerWidth)
-	const [canvasHeight, SETcanvasHeight] = useState(2 * window.innerHeight)
 	const [hexRadius, SEThexRadius] = useState(20);
 	const [separationMultiplier, SETseparationMultiplier] = useState(1.1)
-	const [hexGridOrigin, SETgridOrigin] = useState({ x: 100, y: 100 });
 	const orientation = hexOrientations["pointy-top"]
 
 	// States unique to this board
@@ -49,19 +48,24 @@ export default function Keyboard(props: any) {
 		return hex;
 	})
 
-		// <> Gameboard Parameters
-		const gameGlobals: gameGlobals = {
-			canvasWidth: canvasWidth,
-			canvasHeight: canvasHeight,
-			// Hexagons
-			orientation: orientation,
-			hexGridOrigin: hexGridOrigin,
-			hexRadius: hexRadius,
-			separationMultiplier: separationMultiplier,
-			textSize: 12,
-			// Style
-			canvasBackgroundColor: '#000',
-		}
+	// <> Gameboard Parameters
+	const gameGlobals: gameGlobals = {
+		orientation: orientation,
+		hexRadius: hexRadius,
+		separationMultiplier: separationMultiplier,
+		textSize: 12,
+		drawBackBoard: false,
+	}
+
+	const [canvasHeight, SETcanvasHeight] = useState(150)
+	const [canvasWidth, SETcanvasWidth] = useState(canvasHeight * aspectRatio())
+	const [hexGridOrigin, SEThexGridOrigin] = useState({ x: hexRadius * separationMultiplier, y: hexRadius * separationMultiplier / 3 });
+	const canvasGlobals = {
+		canvasWidth: canvasWidth,
+		canvasHeight: canvasHeight,
+		hexGridOrigin: hexGridOrigin,
+		canvasBackgroundColor: '#000',
+	}
 
 	return (
 		<div className="row" id="displayBoardContainer">
@@ -71,24 +75,21 @@ export default function Keyboard(props: any) {
 					<GameBoard
 						hexRoster={keyboardHexes}
 						gameGlobals={gameGlobals}
-						textSize={props.textSize}
-						orientation={orientation}
+						canvasGlobals={canvasGlobals}
 					//   logo={logo}
 					/>
 				</ErrorBoundary>
 			</div>
 			<div id="sideBar" className="col-md-2">
-				
+				<BoardControl
+					hexRadius={hexRadius} SEThexRadius={SEThexRadius}
+					separationMultiplier={separationMultiplier} SETseparationMultiplier={SETseparationMultiplier}
+				/>
 				<CanvasControl
-					canvasWidth={canvasWidth}
-					canvasHeight={canvasHeight}
-					hexRadius={hexRadius}
-					separationMultiplier={separationMultiplier}
-					hexGridOrigin={hexGridOrigin}
-					SETcanvasWidth={SETcanvasWidth}
-					SETcanvasHeight={SETcanvasHeight}
-					SEThexRadius={SEThexRadius}
-					SETseparationMultiplier={SETseparationMultiplier} />
+					canvasWidth={canvasWidth} SETcanvasWidth={SETcanvasWidth}
+					canvasHeight={canvasHeight} SETcanvasHeight={SETcanvasHeight}
+					hexGridOrigin={hexGridOrigin} SEThexGridOrigin={SEThexGridOrigin}
+				/>
 			</div>
 		</div>
 

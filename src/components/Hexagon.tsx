@@ -9,9 +9,7 @@ export interface hexProps {
 	q: number;
 	r: number;
 	cssClasses?: string;
-	orientation: orientation;
 	hexText?: string;
-	hexTextSize?: number;
 }
 
 export default function Hexagon(props:hexProps) {
@@ -19,7 +17,7 @@ export default function Hexagon(props:hexProps) {
 	// Cache global variables
 	const hexRadius = gameGlobals.hexRadius;
 	// console.log(	`orientationName: ${orientationName}`)
-	const orientation = props.orientation;
+	const orientation = gameGlobals.orientation;
 	const cornerAngles = orientation.cornerAngles
 	// Coordinates
 	const q = props.q;
@@ -27,7 +25,7 @@ export default function Hexagon(props:hexProps) {
 	// const s = -q - r;
 	// Math
 	const hexText = props.hexText
-	const hexTextSize = props.hexTextSize;
+	const hexTextSize = gameGlobals.textSize;
 
 	const center = hex_to_pixel(q, r, gameGlobals)
 

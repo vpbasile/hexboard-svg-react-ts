@@ -3,16 +3,16 @@ import GameBoard from "../components/HexBoardSVG";
 import { useState } from "react";
 import { gameGlobals, hexagon } from "../components/hexDefinitions";
 import SaveRosterButton from "../forms/saveRoster";
-import { cube_ring, hexOrientations } from "../components/hexFunctions";
+import { calcCenteredRectangle, cube_ring, hexOrientations } from "../components/hexMath";
 import CanvasControl from "../forms/CanvasControl";
+import BoardControl from "../forms/BoardControl";
+import aspectRatio from "../components/rectMath";
 
 export default function CreateBoard(props: any) {
 	// <> States that control canvas parameters
-	const [canvasWidth, SETcanvasWidth] = useState(window.innerWidth)
-	const [canvasHeight, SETcanvasHeight] = useState(2 * window.innerHeight)
 	const [hexRadius, SEThexRadius] = useState(20);
 	const [separationMultiplier, SETseparationMultiplier] = useState(1.1)
-	const [hexGridOrigin, SETgridOrigin] = useState({ x: canvasWidth / 2, y: canvasHeight / 2 });
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [defaultOrientation, SETdefaultOrientation] = useState(hexOrientations["flat-top"])
 
 	// States unique to this board
@@ -61,16 +61,24 @@ export default function CreateBoard(props: any) {
 	</div>
 
 	const gameGlobals: gameGlobals = {
-		canvasWidth: canvasWidth,
-		canvasHeight: canvasHeight,
-		// Hexagons
 		orientation: defaultOrientation,
-		hexGridOrigin: hexGridOrigin,
 		hexRadius: hexRadius,
 		separationMultiplier: separationMultiplier,
 		textSize: 12,
-		// Style
-		canvasBackgroundColor: '#000',
+		drawBackBoard: true,
+	}
+
+	// <><><> Calculate the size of the canvas based on the hex roster
+	const canvasDefaults = calcCenteredRectangle(hexRoster, gameGlobals)
+	const [canvasHeight, SETcanvasHeight] = useState(canvasDefaults.canvasHeight * separationMultiplier)
+	const [canvasWidth, SETcanvasWidth] = useState(canvasHeight * aspectRatio())
+	// Since this is a centered board, we can calculate the origin based on the height and width
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const [hexGridOrigin, SEThexGridOrigin] = useState({ x: canvasWidth / 2, y: canvasHeight / 2 });
+
+	const canvasGlobals = {
+		canvasWidth, canvasHeight, hexGridOrigin,
+		canvasBackgroundColor: '#000'
 	}
 
 	return (
@@ -79,8 +87,7 @@ export default function CreateBoard(props: any) {
 				<GameBoard
 					hexRoster={hexRoster}
 					gameGlobals={gameGlobals}
-					textSize={12}
-					orientation={hexOrientations["flat-top"]}
+					canvasGlobals={canvasGlobals}
 				/>
 			</div>
 			<div id="sidebar" className="col-md-2">
@@ -89,16 +96,16 @@ export default function CreateBoard(props: any) {
 					gameGlobals={gameGlobals}
 				/>
 				{form}
-				<CanvasControl
-					canvasWidth={canvasWidth}
-					canvasHeight={canvasHeight}
+				<BoardControl
 					hexRadius={hexRadius}
 					separationMultiplier={separationMultiplier}
-					hexGridOrigin={hexGridOrigin}
-					SETcanvasWidth={SETcanvasWidth}
-					SETcanvasHeight={SETcanvasHeight}
 					SEThexRadius={SEThexRadius}
 					SETseparationMultiplier={SETseparationMultiplier} />
+				<CanvasControl
+					canvasWidth={canvasWidth} SETcanvasWidth={SETcanvasWidth}
+					canvasHeight={canvasHeight} SETcanvasHeight={SETcanvasHeight}
+					hexGridOrigin={hexGridOrigin} SEThexGridOrigin={SEThexGridOrigin}
+				/>
 			</div>
 		</div>
 	)

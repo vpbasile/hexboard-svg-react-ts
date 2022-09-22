@@ -20,10 +20,10 @@ function App() {
   // <> Global constants for choosing a game
   const options = [
     { key: 'trivia', title: 'Trivia Board', value: 'trivia', GameBoard: <TriviaBoard /> },
-    { key: 'generative', title: 'Generative Map', value: 'generative', GameBoard: <Generative /> },
-    { key: 'saved', title: 'Saved Map', value: 'saved', GameBoard: <SavedBoard /> },
-    { key: 'create', title: 'Create Board', value: 'create', GameBoard: <CreateBoard /> },
     { key: 'keyboard', title: 'Keyboard', value: 'keyboard', GameBoard: <Keyboard /> },
+    { key: 'saved', title: 'Saved Map', value: 'saved', GameBoard: <SavedBoard /> },
+    { key: 'generative', title: 'Generative Map', value: 'generative', GameBoard: <Generative /> },
+    { key: 'create', title: 'Create Board', value: 'create', GameBoard: <CreateBoard /> },
   ]
   const [chosenGameBoard, setGame] = useState(options[0])
 

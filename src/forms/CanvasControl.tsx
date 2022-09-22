@@ -1,46 +1,30 @@
+
+import { Dispatch } from "react";
 import { coordinateXY } from "../components/hexDefinitions";
 import ValueField from "../components/ValueField";
 // import { useState } from 'react';
 
-export default function CanvasControl(props: {
-	canvasWidth: number, canvasHeight: number, hexRadius: number, separationMultiplier: number, hexGridOrigin: coordinateXY
-	SETcanvasWidth: any, SETcanvasHeight: any, SEThexRadius: any, SETseparationMultiplier: any,
-	// setGridOrigin: any
+type myProps = {
+	canvasWidth: number,
+	SETcanvasWidth: Dispatch<number>,
+	canvasHeight: number,
+	SETcanvasHeight: Dispatch<number>,
+	hexGridOrigin: coordinateXY
+	SEThexGridOrigin: Dispatch<coordinateXY>
+}
 
-}) {
+export default function CanvasControl(props: myProps) {
 	const canvasWidth = props.canvasWidth; const canvasHeight = props.canvasHeight;
-	const hexRadius = props.hexRadius;
-	const separationMultiplier = props.separationMultiplier;
 	// const hexGridOrigin = props.hexGridOrigin;
 	// const [gridOriginTempX,SETgridOriginTempX] = useState(hexGridOrigin.x)
 	// const [gridOriginTempY,SETgridOriginTempY] = useState(hexGridOrigin.y)
 	const SETcanvasWidth = props.SETcanvasWidth;
 	const SETcanvasHeight = props.SETcanvasHeight;
-	const SEThexRadius = props.SEThexRadius;
-	const SETseparationMultiplier = props.SETseparationMultiplier;
-	// const SETgridOrigin = props.setGridOrigin;
+	// const SEThexGridOrigin = props.SEThexGridOrigin;
 
 	return (<div id="canvasControlDiv" className="border bg-gray p-3">
 		<h3>Canvas Parameters</h3>
 		<div className="" id="canvasDimensionDiv">
-			<div className="" id="pickSizeDiv">
-				<ValueField
-					fieldName="pickHexRadius"
-					labelText="Hex Radius"
-					type="number"
-					defaultValue={hexRadius}
-					onChangeFunction={SEThexRadius} />
-			</div>
-			<div className="" id="pickSeparationDiv">
-				<label htmlFor='pickSeparation'>Separation multiplier: {separationMultiplier}</label>
-				<input type='range' min='1' max='2' step='0.1' className='form-range'
-					defaultValue={separationMultiplier} onChange={(e) => {
-						console.log(`separationMultiplier: ${separationMultiplier}`)
-						SETseparationMultiplier(+e.target.value)
-						setTimeout(() => console.log(`separationMultiplier: ${separationMultiplier}`), 1000)
-					}
-					} />
-			</div>
 			<ValueField
 				fieldName="pickCanvasWidth"
 				labelText="Canvas Width"
