@@ -6,6 +6,7 @@ import { hexOrientations } from '../components/hexMath';
 import CanvasControl from '../forms/CanvasControl';
 import BoardControl from '../forms/BoardControl';
 import aspectRatio from '../components/rectMath';
+import { clickMessage } from '../components/hexFunctions';
 
 
 export default function Keyboard(props: any) {
@@ -17,7 +18,7 @@ export default function Keyboard(props: any) {
 	// <> Create the roster of hexes
 	const hexList: hexagon[] = [];
 
-	let keyboardCharList = [`qwertyuiop[]`, `asdfghjkl;'`, `zxcvbnm,./`,"\s"]
+	let keyboardCharList = [`qwertyuiop[]`, `asdfghjkl;'`, `zxcvbnm,./`,"_"]
 	keyboardCharList.forEach((row, rowIndex) => {
 		Array.from(row).forEach((key, keyIndex) => {
 			let thisOne: hexagon = { q: keyIndex, r: rowIndex, hexText: key }
@@ -34,7 +35,7 @@ export default function Keyboard(props: any) {
 		return cssClass;
 	}
 	function colorHexes(hexes: hexagon[]) {
-		hexes.forEach(hex => { hex.cssClasses = `gameboard-space ${getNextCssClass()}` })
+		hexes.forEach(hex => { hex.cssClasses = `hover-space ${getNextCssClass()}` })
 	}
 
 	colorHexes(hexList);
@@ -42,7 +43,7 @@ export default function Keyboard(props: any) {
 
 	const keyboardHexes = hexList.map(hex => {
 		// Give all the hexes a cssClasses if they don't already have one
-		if (hex.cssClasses === undefined) { hex.cssClasses = "gameboard-space bg-gray" }
+		if (hex.cssClasses === undefined) { hex.cssClasses = "hover-space bg-gray" }
 		return hex;
 	})
 
@@ -53,6 +54,7 @@ export default function Keyboard(props: any) {
 		textSize: hexRadius/2,
 		separationMultiplier: separationMultiplier,
 		drawBackBoard: false,
+		onClick:clickMessage,
 	}
 
 	const multiplier = aspectRatio();

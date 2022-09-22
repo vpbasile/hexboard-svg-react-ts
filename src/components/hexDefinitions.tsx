@@ -11,13 +11,16 @@ export type gameGlobals = {
 	hexRadius: number,
 	separationMultiplier: number,
 	textSize: number,
-	drawBackBoard:boolean,
+	drawBackBoard: boolean,
+	onClick: hexClickFunction,
 	// Children
 	children?: any
 }
 
-export type canvasGlobals = { 
+export type canvasGlobals = {
 	canvasWidth: number, canvasHeight: number,
 	hexGridOrigin: coordinateXY,
 	canvasBackgroundColor: string,
 };
+
+export type hexClickFunction = (hex:hexagon,id: number, hexText?: string)=>{}

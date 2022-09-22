@@ -1,4 +1,5 @@
-import { gameGlobals, orientation } from './hexDefinitions';
+import { gameGlobals } from './hexDefinitions';
+import { clickMessage } from './hexFunctions';
 import { hex_to_pixel,calcTheta } from './hexMath';
 
 // function degtoRad(degrees) { return degrees * Math.PI / 180 }
@@ -10,13 +11,13 @@ export interface hexProps {
 	r: number;
 	cssClasses?: string;
 	hexText?: string;
+	clickMessage: any;
 }
 
 export default function Hexagon(props:hexProps) {
 	const gameGlobals = props.gameGlobals
 	// Cache global variables
 	const hexRadius = gameGlobals.hexRadius;
-	// console.log(	`orientationName: ${orientationName}`)
 	const orientation = gameGlobals.orientation;
 	const cornerAngles = orientation.cornerAngles
 	// Coordinates
@@ -41,12 +42,6 @@ export default function Hexagon(props:hexProps) {
 		return polygonString += `${x},${y}`
 	});
 
-
-	// <> Event Handlers
-	const handleClick = () => {
-		console.log(`${hexText} hex ${props.id} clicked. q: ${q}, r: ${r}`)
-	}
-
 	// CSS
 	const cssClasses = props.cssClasses;
 
@@ -68,7 +63,7 @@ export default function Hexagon(props:hexProps) {
 
 	// Make the SVG
 	return (
-		<g onClick={() => handleClick()}>
+		<g onClick={() => console.log(props.clickMessage)}>
 			<polygon
 				style={{}}
 				className={`hex ${cssClasses}`}

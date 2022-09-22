@@ -7,6 +7,7 @@ import { calcCenteredRectangle, cube_ring, hexOrientations } from "../components
 import CanvasControl from "../forms/CanvasControl";
 import BoardControl from "../forms/BoardControl";
 import aspectRatio from "../components/rectMath";
+import { clickMessage } from "../components/hexFunctions";
 
 export default function CreateBoard(props: any) {
 	// <> States that control canvas parameters
@@ -18,7 +19,16 @@ export default function CreateBoard(props: any) {
 	// States unique to this board
 	const [qTemp, SETqTemp] = useState(0);
 	const [rTemp, SETrTemp] = useState(0);
-	const cssClassChoices = [`just-grid`, `bg-white`, 'bg-green', 'bg-blue', 'bg-purple', 'bg-red']
+	const cssClassChoices = [
+		`just-grid`, 
+		`bg-white`, 
+		'bg-red',
+		'bg-orange',
+		'bg-yellow',
+		'bg-green', 
+		'bg-blue', 
+		'bg-purple', 
+	]
 	const [classTemp, SETclassTemp] = useState(cssClassChoices[0])
 	// const blankRoster: hexagon[] = []
 	const centerHex: hexagon = { q: 0, r: 0, cssClasses: cssClassChoices[0] }
@@ -30,7 +40,7 @@ export default function CreateBoard(props: any) {
 		tempRoster = tempRoster.concat(thisRing);
 		// console.log(JSON.stringify(tempRoster))
 	}
-	tempRoster = tempRoster.map((eachHex) => { eachHex.cssClasses = cssClassChoices[0]; return eachHex; })
+	tempRoster = tempRoster.map((eachHex) => { eachHex.cssClasses = cssClassChoices[0] + " hover-space"; return eachHex; })
 	const [hexRoster, SEThexRoster] = useState<hexagon[]>(tempRoster)
 
 	function addHex() {
@@ -65,7 +75,8 @@ export default function CreateBoard(props: any) {
 		hexRadius: hexRadius,
 		separationMultiplier: separationMultiplier,
 		textSize: 12,
-		drawBackBoard: true,
+		drawBackBoard: false,
+		onClick: clickMessage
 	}
 
 	// <><><> Calculate the size of the canvas based on the hex roster

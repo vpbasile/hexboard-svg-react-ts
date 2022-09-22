@@ -15,10 +15,17 @@ export function alreadyThere(hexSearch: hexagon, roster: hexagon[]): boolean {
 // <><> Color Funcions
 export function blackHexes(hexes: hexagon[]) {
 	hexes.forEach(hex => {
-		hex.cssClasses = "gameboard-space bg-black"
+		hex.cssClasses = "hover-space bg-black"
 	})
 }
 
 export function colorHexes(hexes: hexagon[], getNextCssClass: { (): string; }) {
-	hexes.forEach(hex => { hex.cssClasses = `gameboard-space ${getNextCssClass()}` })
+	hexes.forEach(hex => { hex.cssClasses = `hover-space ${getNextCssClass()}` })
+}
+
+// <><> Click Handlers
+
+export function clickMessage(hex: hexagon, id: number, hexText?: string):string {
+	if (hexText) { return (`${hexText} hex ${id} clicked. q: ${hex.q}, r: ${hex.r}`) }
+	else { return (`Hex ${id} clicked. q: ${hex.q}, r: ${hex.r}`) }
 }

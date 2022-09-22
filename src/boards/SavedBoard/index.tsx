@@ -6,8 +6,8 @@ import GameBoard from "../../components/HexBoardSVG";
 import fileData from './data.json';
 import { hexOrientations } from '../../components/hexMath';
 import CanvasControl from '../../forms/CanvasControl';
-import SaveRosterButton from '../../forms/saveRoster';
 import BoardControl from '../../forms/BoardControl';
+import { clickMessage } from '../../components/hexFunctions';
 
 export default function SavedBoard(props: any) {
 	// <> States that control canvas parameters
@@ -16,18 +16,24 @@ export default function SavedBoard(props: any) {
 	const [hexRadius, SEThexRadius] = useState(200);
 	const [separationMultiplier, SETseparationMultiplier] = useState(1.1)
 	const [hexGridOrigin, SEThexGridOrigin] = useState({ x: canvasWidth / 2, y: canvasHeight / 2 });
-	const [defaultOrientation, SETdefaultOrientation] = useState(hexOrientations["flat-top"])
+	const [orientation, SETorientation] = useState(hexOrientations["flat-top"])
+	function toggleOrientation(): void {
+		if (orientation===hexOrientations["flat-top"]){SETorientation(hexOrientations["pointy-top"])} else {
+			SETorientation(hexOrientations["flat-top"])
+		}
+	}
 
 	const hexRoster = fileData.hexRoster;
 	// const canvasGlobals = fileData.canvasGlobals;
 
 	const gameGlobals: gameGlobals = {
 		// Hexagons
-		orientation: defaultOrientation,
+		orientation: orientation,
 		hexRadius: hexRadius,
 		separationMultiplier: separationMultiplier,
 		textSize: 12,
 		drawBackBoard: true,
+		onClick:clickMessage
 	}
 
 	const canvasGlobals: canvasGlobals = {

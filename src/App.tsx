@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 //style
 import './css/bootstrap.css';
-import './css/trivia-color-dark.css';
+import './css/color-dark.css';
 
 // <> Import components
 import ErrorBoundary from './components/ErrorBoundary';

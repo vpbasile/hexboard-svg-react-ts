@@ -2,19 +2,19 @@
 	border: 5px solid white;
 }
 
-.gameboard-space {
+.hover-space {
 	stroke-width: 10;
 }
 
-.gameboard-space:hover {
+.hover-space:hover {
 	stroke: white;
 	stroke-width: 15px;
 }
 
 .bg-black {
-	color: white;
-	border-color: white;
-	stroke:white;
+	color: gray	;
+	border-color: gray;
+	stroke:gray;
 	background-color: black;
 	fill:black;
 }

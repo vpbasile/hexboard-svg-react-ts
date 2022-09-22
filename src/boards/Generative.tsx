@@ -3,7 +3,7 @@ import GameBoard from "../components/HexBoardSVG";
 import { useState } from "react";
 
 import { gameGlobals, hexagon, vector } from "../components/hexDefinitions";
-import { alreadyThere, randomMove } from "../components/hexFunctions";
+import { alreadyThere, clickMessage, randomMove } from "../components/hexFunctions";
 import SaveRosterButton from "../forms/saveRoster";
 
 import '../css/gameboard.css'
@@ -35,14 +35,14 @@ export default function GenerativeBoard(props: any) {
 	}
 
 	function colorHexes(hexes: hexagon[]) {
-		hexes.forEach(hex => { if (hex.cssClasses === undefined) hex.cssClasses = `gameboard-space ${mapColor()}` })
+		hexes.forEach(hex => { if (hex.cssClasses === undefined) hex.cssClasses = `hover-space ${mapColor()}` })
 	}
 
 	function newRoster(): hexagon[] {
 		let tempHexList: hexagon[] = []
 		let q = 0;
 		let r = 0;
-		tempHexList.push({ q: 0, r: 0, cssClasses: "gameboard-space bg-white" })
+		tempHexList.push({ q: 0, r: 0, cssClasses: "hover-space bg-white" })
 		for (let i = 0; i < numberOfSpaces; i++) {
 			let found = false;
 			let nextMove: vector = randomMove()
@@ -79,6 +79,7 @@ export default function GenerativeBoard(props: any) {
 		separationMultiplier: separationMultiplier,
 		textSize: 12,
 		drawBackBoard: false,
+		onClick: clickMessage,
 	}
 	// <><><> Calculate the size of the canvas based on the hex roster
 	const canvasDefaults = calcCenteredRectangle(hexRoster, gameGlobals)

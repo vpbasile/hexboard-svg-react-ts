@@ -2,12 +2,13 @@
 
 import Hexagon from './Hexagon';
 import ErrorBoundary from './ErrorBoundary';
-import { canvasGlobals, coordinateXY, gameGlobals, hexagon, orientation } from './hexDefinitions';
+import { canvasGlobals, coordinateXY, gameGlobals, hexagon } from './hexDefinitions';
 import { directionVectors, hex_to_pixel } from './hexMath';
+import { clickMessage } from './hexFunctions';
 
 export interface gameBoardProps {
 	gameGlobals: gameGlobals;
-	canvasGlobals: canvasGlobals
+	canvasGlobals: canvasGlobals;
 	hexRoster: hexagon[];
 	textSize?: number;
 }
@@ -21,8 +22,8 @@ export default function GameBoard(props: gameBoardProps) {
 	const canvasHeight = canvasGlobals.canvasHeight;
 	const hexGridOrigin = canvasGlobals.hexGridOrigin;
 
-	console.log(`Canvas size: ${canvasWidth}, ${canvasHeight}`)
-	console.log(`Grid origin: ${hexGridOrigin.x}, ${hexGridOrigin.y}`)
+	console.log(`Canvas size: ${Math.floor(canvasWidth)}, ${Math.floor(canvasHeight)}`)
+	console.log(`Grid origin: ${Math.floor(hexGridOrigin.x)}, ${Math.floor(hexGridOrigin.y)}`)
 
 	// <> Render Functions
 	function backBoard(hexRoster: hexagon[], gameGlobals: gameGlobals): any {
@@ -61,6 +62,7 @@ export default function GameBoard(props: gameBoardProps) {
 			r={hex.r}
 			cssClasses={hex.cssClasses}
 			hexText={hex.hexText}
+			clickMessage={clickMessage(hex,thisHexKey,hex.hexText)}
 		/>
 	})
 	return (

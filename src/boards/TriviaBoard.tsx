@@ -1,9 +1,9 @@
 import GameBoard from '../components/HexBoardSVG';
 import ErrorBoundary from '../components/ErrorBoundary';
 import { useState } from "react";
-import { blackHexes, colorHexes } from '../components/hexFunctions';
+import { blackHexes, clickMessage, colorHexes } from '../components/hexFunctions';
 import { hexOrientations, cube_ring, calcCenteredRectangle } from '../components/hexMath'
-import { gameGlobals, hexagon } from '../components/hexDefinitions';
+import { gameGlobals, hexagon, hexClickFunction } from '../components/hexDefinitions';
 import CanvasControl from '../forms/CanvasControl';
 import BoardControl from '../forms/BoardControl';
 import aspectRatio from '../components/rectMath';
@@ -51,7 +51,7 @@ export default function TriviaBoard(props: any) {
 
   // let triviaHexes = hexRoster.map(hex => {
   //   // Give all the hexes a cssClasses if they don't already have one
-  //   if (hex.cssClasses === undefined) { hex.cssClasses = "gameboard-space bg-gray" }
+  //   if (hex.cssClasses === undefined) { hex.cssClasses = "hover-space bg-gray" }
   //   return hex;
   // })
   // <> end of creating the hex roster
@@ -64,14 +64,15 @@ export default function TriviaBoard(props: any) {
     separationMultiplier: separationMultiplier,
     textSize: 12,
     drawBackBoard: true,
+    onClick: clickMessage,
   }
 
   // <><><> Calculate the size of the canvas based on the hex roster
   const canvasDefaults = calcCenteredRectangle(hexRoster, gameGlobals)
-  const [canvasHeight, SETcanvasHeight] = useState(canvasDefaults.canvasHeight*separationMultiplier)
-  const [canvasWidth, SETcanvasWidth] = useState(canvasHeight*aspectRatio())
+  const [canvasHeight, SETcanvasHeight] = useState(canvasDefaults.canvasHeight * separationMultiplier)
+  const [canvasWidth, SETcanvasWidth] = useState(canvasHeight * aspectRatio())
   // Since this is a centered board, we can calculate the origin based on the height and width
-  const [hexGridOrigin,SEThexGridOrigin] = useState({x:canvasWidth/2,y:canvasHeight/2})
+  const [hexGridOrigin, SEThexGridOrigin] = useState({ x: canvasWidth / 2, y: canvasHeight / 2 })
   const canvasGlobals = {
     canvasWidth: canvasWidth, canvasHeight: canvasHeight, hexGridOrigin: hexGridOrigin,
     canvasBackgroundColor: '#000',
@@ -97,10 +98,10 @@ export default function TriviaBoard(props: any) {
           SEThexRadius={SEThexRadius}
           SETseparationMultiplier={SETseparationMultiplier} />
         <CanvasControl
-					canvasWidth={canvasWidth} SETcanvasWidth={SETcanvasWidth}
-					canvasHeight={canvasHeight} SETcanvasHeight={SETcanvasHeight}
-					hexGridOrigin={hexGridOrigin} SEThexGridOrigin={SEThexGridOrigin}
-				/>
+          canvasWidth={canvasWidth} SETcanvasWidth={SETcanvasWidth}
+          canvasHeight={canvasHeight} SETcanvasHeight={SETcanvasHeight}
+          hexGridOrigin={hexGridOrigin} SEThexGridOrigin={SEThexGridOrigin}
+        />
       </div>
     </div>
   );
