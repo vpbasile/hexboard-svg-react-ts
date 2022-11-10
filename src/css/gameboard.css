@@ -9,6 +9,7 @@
 .hover-space:hover {
 	stroke: white;
 	stroke-width: 15px;
+	fill: rgba(255,255,255,0.15);
 }
 
 .bg-black {
