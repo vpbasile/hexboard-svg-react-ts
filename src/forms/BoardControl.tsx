@@ -1,5 +1,5 @@
-import { coordinateXY } from "../components/hexDefinitions";
-import ValueField from "../components/ValueField";
+// import { coordinateXY } from "../components/hexDefinitions";
+import ValueField from "./ValueField";
 // import { useState } from 'react';
 
 export default function BoardControl(props: {

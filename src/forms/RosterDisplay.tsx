@@ -1,4 +1,4 @@
-import { hexagon } from "./hexDefinitions";
+import { hexagon } from "../components/hexDefinitions";
 
 export default function RosterDisplay(props: {hexRoster:hexagon[]}){
 	const hexRoster = props.hexRoster

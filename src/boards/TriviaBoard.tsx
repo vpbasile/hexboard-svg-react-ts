@@ -3,10 +3,11 @@ import ErrorBoundary from '../components/ErrorBoundary';
 import { useState } from "react";
 import { blackHexes, clickMessage, colorHexes } from '../components/hexFunctions';
 import { hexOrientations, cube_ring, calcCenteredRectangle } from '../components/hexMath'
-import { gameGlobals, hexagon, hexClickFunction } from '../components/hexDefinitions';
+import { gameGlobals, hexagon } from '../components/hexDefinitions';
 import CanvasControl from '../forms/CanvasControl';
 import BoardControl from '../forms/BoardControl';
 import aspectRatio from '../components/rectMath';
+import { AppShell, Aside, Text } from '@mantine/core';
 
 export default function TriviaBoard(props: any) {
   // Constants, States, and Functions unique to this board
@@ -79,30 +80,31 @@ export default function TriviaBoard(props: any) {
   }
 
   return (
-
-    <div className="row" id="triviaBoardContainer">
-      <div id='displayBoard' className="col-md-10">
-        <ErrorBoundary>
-          <GameBoard
-            hexRoster={hexRoster}
-            gameGlobals={gameGlobals}
-            canvasGlobals={canvasGlobals}
-          //   logo={logo}
+    <AppShell
+      aside={
+        <Aside p="md" hiddenBreakpoint="sm" width={{ sm: 200, lg: 300 }}>
+          <Text>Application sidebar</Text>
+          <BoardControl
+            hexRadius={hexRadius}
+            separationMultiplier={separationMultiplier}
+            SEThexRadius={SEThexRadius}
+            SETseparationMultiplier={SETseparationMultiplier} />
+          <CanvasControl
+            canvasWidth={canvasWidth} SETcanvasWidth={SETcanvasWidth}
+            canvasHeight={canvasHeight} SETcanvasHeight={SETcanvasHeight}
+            hexGridOrigin={hexGridOrigin} SEThexGridOrigin={SEThexGridOrigin}
           />
-        </ErrorBoundary>
-      </div>
-      <div id="sideBar" className="col-md-2">
-        <BoardControl
-          hexRadius={hexRadius}
-          separationMultiplier={separationMultiplier}
-          SEThexRadius={SEThexRadius}
-          SETseparationMultiplier={SETseparationMultiplier} />
-        <CanvasControl
-          canvasWidth={canvasWidth} SETcanvasWidth={SETcanvasWidth}
-          canvasHeight={canvasHeight} SETcanvasHeight={SETcanvasHeight}
-          hexGridOrigin={hexGridOrigin} SEThexGridOrigin={SEThexGridOrigin}
+        </Aside>
+      }>
+      <ErrorBoundary>
+        <GameBoard
+          hexRoster={hexRoster}
+          gameGlobals={gameGlobals}
+          canvasGlobals={canvasGlobals}
+        //   logo={logo}
         />
-      </div>
-    </div>
-  );
+      </ErrorBoundary>
+
+    </AppShell>
+  )
 }

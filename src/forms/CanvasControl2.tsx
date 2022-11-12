@@ -1,5 +1,4 @@
 
-import { Stack } from "@mantine/core";
 import { Dispatch } from "react";
 import { coordinateXY } from "../components/hexDefinitions";
 import ValueField from "./ValueField";
@@ -25,7 +24,7 @@ export default function CanvasControl(props: myProps) {
 
 	return (<div id="canvasControlDiv" className="border bg-gray p-3">
 		<h3>Canvas Parameters</h3>
-		<Stack>
+		<div className="" id="canvasDimensionDiv">
 			<ValueField
 				fieldName="pickCanvasWidth"
 				labelText="Canvas Width"
@@ -38,7 +37,7 @@ export default function CanvasControl(props: myProps) {
 				type="number"
 				defaultValue={canvasHeight}
 				onChangeFunction={SETcanvasHeight} />
-		</Stack>
+		</div>
 		{/* <div className="" id="gridOriginDiv">
 			<ValueField
 			fieldName="pickGridOriginX"
