@@ -6,6 +6,9 @@ export const hexOrientations = {
 	"flat-top": { "name": "flat-top", "cornerAngles": [0, 60, 120, 180, 240, 300] }
 }
 
+// <> FIX - This should be a class property, not a function
+export function sCoordinate(hex:hexagon){ return -hex.q - hex.r }
+
 // Store all of the q,r directiom vector pairs in an array
 // 
 export const directionVectors: vector[] = [
