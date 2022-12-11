@@ -28,15 +28,20 @@ function App() {
 
   function mergeRoster(newHexes: hexagon[]): void { hexRoster = hexRoster.concat(newHexes); }
 
-  const mainBranch = defineLine({ q: 0, r: 0 }, directionVectors[0], 12, "bg-cyan");
+  const branchLength = 30
+
+  const mainBranch = defineLine({ q: 0, r: 0 }, directionVectors[0], branchLength, "bg-cyan");
   mergeRoster(mainBranch);
-  let branchPoint = mainBranch[2];
-  mergeRoster(defineLine(branchPoint, directionVectors[1], 2, "bg-blue"));
-  mergeRoster(defineLine(branchPoint, directionVectors[5], 2, "bg-blue"));
-  branchPoint = mainBranch[6];
-  mergeRoster(defineLine(branchPoint, directionVectors[2], 3, "bg-blue"));
-  mergeRoster(defineLine(branchPoint, directionVectors[4], 3, "bg-blue"));
-  branchPoint = mainBranch[7];
+  let tempSpot = Math.floor(branchLength/3);
+  let branchPoint = mainBranch[tempSpot];
+  mergeRoster(defineLine(branchPoint, directionVectors[2], tempSpot/3, "bg-blue"));
+  mergeRoster(defineLine(branchPoint, directionVectors[4], tempSpot/3, "bg-blue"));
+  tempSpot = Math.floor(branchLength/2);
+  branchPoint = mainBranch[tempSpot];
+  mergeRoster(defineLine(branchPoint, directionVectors[1], tempSpot/2, "bg-blue"));
+  mergeRoster(defineLine(branchPoint, directionVectors[5], tempSpot/2, "bg-blue"));
+  tempSpot = Math.floor(3*branchLength/4);
+  branchPoint = mainBranch[tempSpot];
   mergeRoster(defineLine(branchPoint, directionVectors[1], 3, "bg-blue"));
   mergeRoster(defineLine(branchPoint, directionVectors[5], 3, "bg-blue"));
 
@@ -59,7 +64,7 @@ function App() {
         <ErrorBoundary>
           <HexBoardSVG gameGlobals={{
             orientation: hexOrientations['flat-top'],
-            hexRadius: 20,
+            hexRadius: 5,
             separationMultiplier: 1,
             textSize: 0,
             drawBackBoard: false,
