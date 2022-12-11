@@ -1,9 +1,12 @@
 import { hexagon, vector } from "./hexDefinitions"
-import { directionVectors } from "./hexMath";
+import { randomBounded } from "./math";
+import { directionVectors } from "./math-hex";
 
 export const centerHexagon: hexagon = { "q": 0, "r": 0, "cssClasses": "gameboard-center bg-gray" }
 
-export function randomMove(): vector { return directionVectors[Math.floor(6 * Math.random())] }
+export function randomMove(): vector { return directionVectors[randomBounded(0,6)] }
+
+
 export function alreadyThere(hexSearch: hexagon, roster: hexagon[]): boolean {
 	if (roster.find((hexCompare: hexagon) => (hexSearch.q === hexCompare.q) && (hexSearch.r === hexCompare.r))) {
 		return true;

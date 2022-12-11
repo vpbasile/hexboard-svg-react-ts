@@ -1,10 +1,10 @@
 /* Define the precious font face */
-@font-face {
+/* @font-face {
   font-family: 'precious';
   src: url('../fonts/Precious.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
-}
+} */
 
 body {
   font-size:30px;
@@ -20,4 +20,7 @@ body {
 	margin-top: 60px;
 }
 
+#hexBoardSVG {
+  max-height:80vh;
+}
 

@@ -7,13 +7,14 @@ export const hexOrientations = {
 }
 
 // Store all of the q,r directiom vector pairs in an array
+// 
 export const directionVectors: vector[] = [
-	{ "q": +1, "r": 0 },
-	{ "q": +1, "r": -1 },
-	{ "q": 0, "r": -1 },
-	{ "q": -1, "r": 0 },
-	{ "q": -1, "r": +1 },
-	{ "q": 0, "r": +1 }
+	{ "q": 0, "r": -1 }, // 0 deg
+	{ "q": +1, "r": -1 }, // 60 deg
+	{ "q": +1, "r": 0 }, // 120 deg
+	{ "q": 0, "r": +1 }, // 180 deg
+	{ "q": -1, "r": +1 }, // 240
+	{ "q": -1, "r": 0 }, // 300 deg
 ]
 
 export function calcTheta(angle: number) { return angle * Math.PI / 180 }

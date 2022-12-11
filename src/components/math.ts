@@ -1,3 +1,11 @@
+export function randomBounded(min:number, max:number){
+	return min + Math.floor(max * Math.random());
+
+}
+
+// Window fit sqaure
+// export const smallerDimension = Math.min(window.innerWidth,window.innerHeight)
+
 /**
 	* The aspect ratio of the window.  window.innerWidth / window.innerHeight
 	*/

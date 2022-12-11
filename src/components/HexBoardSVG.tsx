@@ -3,7 +3,7 @@
 import Hexagon from './Hexagon';
 import ErrorBoundary from './ErrorBoundary';
 import { canvasGlobals, coordinateXY, gameGlobals, hexagon } from './hexDefinitions';
-import { directionVectors, hex_to_pixel } from './hexMath';
+import { directionVectors, hex_to_pixel } from './math-hex';
 import { clickMessage } from './hexFunctions';
 
 export interface gameBoardProps {
@@ -70,8 +70,9 @@ export default function GameBoard(props: gameBoardProps) {
 			<div className="gameboard">
 				<div className="gameboard-container">
 					<p className='caption'></p>
-					<div className="gameboard-canvas bg-gradient">
+					<div className="gameboard-canvas bg-">
 						<svg
+						id='hexBoardSVG'
 							viewBox={`${-hexGridOrigin.x} ${-hexGridOrigin.y} ${canvasWidth} ${canvasHeight}`}
 							style={{ rotate: "0deg", fill: "white", opacity: "0.8" }}
 							xmlns="<http://www.w3.org/2000/svg>">
