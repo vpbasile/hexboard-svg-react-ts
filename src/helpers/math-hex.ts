@@ -1,4 +1,5 @@
 import { canvasGlobals, coordinateXY, gameGlobals, hexagon, vector } from "./hexDefinitions"
+import { randomBounded } from "./math"
 const sqrt3 = Math.sqrt(3)
 
 export const hexOrientations = {
@@ -7,7 +8,13 @@ export const hexOrientations = {
 }
 
 // <> FIX - This should be a class property, not a function
-export function sCoordinate(hex:hexagon){ return -hex.q - hex.r }
+export function sCoordinate(hex: hexagon) { return -hex.q - hex.r }
+
+export function randomAdjacentDirection(direction: number): number {
+	const turn = randomBounded(0,1);
+	
+	return randomBounded(0,1);
+}
 
 // Store all of the q,r directiom vector pairs in an array
 // 
@@ -47,7 +54,7 @@ export function hex_to_pixel(q: number, r: number, gameGlobals: gameGlobals): co
 	const orientation = gameGlobals.orientation;
 	const hexRadius = gameGlobals.hexRadius;
 	const separationMultiplier = gameGlobals.separationMultiplier;
-	const hexGridOrigin = {x:0,y:0};
+	const hexGridOrigin = { x: 0, y: 0 };
 	if (orientation.name === "flat-top") {
 		x = hexRadius * (3. / 2 * q)
 		y = hexRadius * (sqrt3 / 2 * q + sqrt3 * r)
@@ -60,8 +67,8 @@ export function hex_to_pixel(q: number, r: number, gameGlobals: gameGlobals): co
 	return { "x": x * separationMultiplier + hexGridOrigin.x, "y": y * separationMultiplier + hexGridOrigin.y }
 }
 
-type range = {min:number, max:number}
-function rangeDistance(range:range):number { return range.max - range.min }
+type range = { min: number, max: number }
+function rangeDistance(range: range): number { return range.max - range.min }
 
 export function calcCenteredRectangle(hexRoster: hexagon[], gameGlobals: gameGlobals): canvasGlobals {
 	// <> Find the min and max values for q and r.  Convert those to rectangular coordinates.  
@@ -79,22 +86,22 @@ export function calcCenteredRectangle(hexRoster: hexagon[], gameGlobals: gameGlo
 		return hex_to_pixel(vector.q * maxRadius, vector.r * maxRadius, gameGlobals)
 	})
 	// Now that we know all the corners of the enclosing hexagon, we enclose that in a rectangle by finding the min and max for x and y
-	const initRange = {min:0,max:0};
-	let xRange:range = initRange;
-	let yRange:range = initRange;
+	const initRange = { min: 0, max: 0 };
+	let xRange: range = initRange;
+	let yRange: range = initRange;
 	cornerPoints.forEach((point) => {
-		if(point.x<xRange.min){xRange.min=point.x}
-		if(point.x>xRange.max){xRange.max=point.x}
-		if(point.y<yRange.min){yRange.min=point.y}
-		if(point.y>yRange.max){yRange.max=point.y}
+		if (point.x < xRange.min) { xRange.min = point.x }
+		if (point.x > xRange.max) { xRange.max = point.x }
+		if (point.y < yRange.min) { yRange.min = point.y }
+		if (point.y > yRange.max) { yRange.max = point.y }
 	})
 
 	const width = rangeDistance(xRange)
 	const height = rangeDistance(yRange)
 	return {
-		canvasWidth:width,
-		canvasHeight:height,
-		hexGridOrigin:{x:width/2,y:height/2}
-		, canvasBackgroundColor:""
+		canvasWidth: width,
+		canvasHeight: height,
+		hexGridOrigin: { x: width / 2, y: height / 2 }
+		, canvasBackgroundColor: ""
 	}
 }

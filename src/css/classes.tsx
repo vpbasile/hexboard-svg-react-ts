@@ -1,9 +1,14 @@
 export const cssClassList = [
 	"bg-white",
-	"bg-red",
-	"bg-yellow",
-	"bg-green",
-	"bg-cyan",
-	"bg-blue",
+	"bg-gray",
 	"bg-black",
+]
+
+export const colorList = [
+	"bg-red",
+	"bg-green",
+	"bg-yellow",
+	"bg-blue",
+	"bg-orange",
+	"bg-cyan",
 ]

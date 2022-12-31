@@ -1,10 +1,10 @@
 // https://dev.to/sanity-io/how-to-use-svgs-in-react-3gof
 
 import Hexagon from './Hexagon';
-import ErrorBoundary from './ErrorBoundary';
-import { canvasGlobals, coordinateXY, gameGlobals, hexagon } from './hexDefinitions';
-import { directionVectors, hex_to_pixel } from './math-hex';
-import { clickMessage } from './hexFunctions';
+import ErrorBoundary from '../helpers/ErrorBoundary';
+import { canvasGlobals, coordinateXY, gameGlobals, hexagon } from '../helpers/hexDefinitions';
+import { directionVectors, hex_to_pixel } from '../helpers/math-hex';
+import { clickMessage } from '../helpers/hexFunctions';
 
 export interface gameBoardProps {
 	gameGlobals: gameGlobals;
@@ -22,8 +22,8 @@ export default function GameBoard(props: gameBoardProps) {
 	const canvasHeight = canvasGlobals.canvasHeight;
 	const hexGridOrigin = canvasGlobals.hexGridOrigin;
 
-	console.log(`Canvas size: ${Math.floor(canvasWidth)}, ${Math.floor(canvasHeight)}`)
-	console.log(`Grid origin: ${Math.floor(hexGridOrigin.x)}, ${Math.floor(hexGridOrigin.y)}`)
+	// console.log(`Canvas size: ${Math.floor(canvasWidth)}, ${Math.floor(canvasHeight)}`)
+	// console.log(`Grid origin: ${Math.floor(hexGridOrigin.x)}, ${Math.floor(hexGridOrigin.y)}`)
 
 	// <> Render Functions
 	function backBoard(hexRoster: hexagon[], gameGlobals: gameGlobals): any {

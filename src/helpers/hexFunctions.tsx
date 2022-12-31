@@ -6,14 +6,12 @@ export const centerHexagon: hexagon = { "q": 0, "r": 0, "cssClasses": "gameboard
 
 export function randomMove(): vector { return directionVectors[randomBounded(0,6)] }
 
-
 export function alreadyThere(hexSearch: hexagon, roster: hexagon[]): boolean {
 	if (roster.find((hexCompare: hexagon) => (hexSearch.q === hexCompare.q) && (hexSearch.r === hexCompare.r))) {
 		return true;
 	}
 	else return false;
 }
-
 
 // <><> Color Funcions
 export function blackHexes(hexes: hexagon[]) {
