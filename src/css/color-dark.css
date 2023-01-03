@@ -50,6 +50,15 @@
  fill:var(--blue-dark);
 }
 
+.bg-ice {
+	/* color: var(--cyan-light); */
+	/* border-color: var(--cyan-light); */
+	/* stroke:var(--cyan-light); */
+	background-color: var(--cyan-dark);
+	fill:var(--cyan-dark);
+	opacity: 0.25;
+   }
+
 .bg-cyan {
  color: var(--cyan-light);
  border-color: var(--cyan-light);

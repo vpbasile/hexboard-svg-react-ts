@@ -21,16 +21,16 @@ export default function aspectRatio(): number { return window.innerWidth / windo
 export function rollover(value:number, limit:number) {
 	let tempValue = value;
 	while (tempValue < 0) {
-		console.log(`value was ${tempValue}`)
+		// console.log(`value was ${tempValue}`)
 		tempValue += limit
 		tempValue += 1;
-		console.log(`now it is ${tempValue}`)
+		// console.log(`now it is ${tempValue}`)
 	};
 	while (tempValue > limit) {
-		console.log(`value was ${tempValue}`)
+		// console.log(`value was ${tempValue}`)
 		tempValue -= limit
 		tempValue -= 1
-		console.log(`now it is ${tempValue}`)
+		// console.log(`now it is ${tempValue}`)
 	};
 	return (tempValue);
 }

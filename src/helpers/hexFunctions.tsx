@@ -1,6 +1,6 @@
 import { hexagon, vector } from "./hexDefinitions"
 import { randomBounded } from "./math";
-import { directionVectors } from "./math-hex";
+import { directionVectors, sCoordinate } from "./math-hex";
 
 export const centerHexagon: hexagon = { "q": 0, "r": 0, "cssClasses": "gameboard-center bg-gray" }
 
@@ -29,4 +29,13 @@ export function colorHexes(hexes: hexagon[], getNextCssClass: { (): string; }) {
 export function clickMessage(hex: hexagon, id: number, hexText?: string):string {
 	if (hexText) { return (`${hexText} hex ${id} clicked. q: ${hex.q}, r: ${hex.r}`) }
 	else { return (`Hex ${id} clicked. q: ${hex.q}, r: ${hex.r}`) }
+}
+
+export function reflectAcrossAxis(hex:hexagon, axis: string, cssClasses?:string): hexagon {
+	switch (axis) {
+		// Yes I know this looks silly, but I haven;t fixed the method for calculating s
+		case "q": return { q: hex.q, r: sCoordinate(hex), cssClasses };
+		case "r": return { q: sCoordinate(hex), r: hex.r, cssClasses };
+		default: return { q: hex.r, r: hex.q, cssClasses };
+	}
 }

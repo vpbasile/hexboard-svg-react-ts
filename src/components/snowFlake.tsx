@@ -1,6 +1,6 @@
 import { coordinateHex, hexagon } from "../helpers/hexDefinitions";
-import { randomBounded, rollover } from "../helpers/math";
-import { directionVectors } from "../helpers/math-hex";
+import { directionVectors, rolloverDirection, sCoordinate } from "../helpers/math-hex";
+import { reflectAcrossAxis } from "../helpers/hexFunctions"
 
 export type direction = number;
 // ZZZ Should contrain to  0 | 1 | 2 | 3 | 4 | 5;
@@ -14,13 +14,15 @@ export type snowflakeBranch = {
 export class BranchObject {
 	seed: coordinateHex;
 	direction: number;
+	parentDirection: null | number;
 	length: number;
 	roster: hexagon[];
-	constructor(data: snowflakeBranch, cssClasses?: string) {
+	constructor(data: snowflakeBranch, parentDirection: null | number, cssClasses?: string) {
 		this.seed = data.seed;
 		this.direction = rolloverDirection(data.direction);
 		this.length = data.length;
 		this.roster = this.defineRoster(cssClasses);
+		this.parentDirection = parentDirection;
 	}
 
 	defineRoster(cssClasses?: string) {
@@ -33,49 +35,33 @@ export class BranchObject {
 			if (cssClasses) { tempHex.cssClasses = cssClasses; }
 			lineRoster.push(tempHex);
 		}
+
+		// FIX HHH Reflect each of those hexes across the parent direction vector
 		return lineRoster;
 	}
 }
 
-export function rolloverDirection(value: number): direction { return (rollover(value, 5)) }
+export function hexplicate(roster: hexagon[]) {
+	let newRoster: hexagon[] = [...roster]
 
-// export function recurBranches(parentBranch: BranchObject, parentLevel: number) {
-// 	// !!! This is recursive, so we need a quit condition
-// 	let newRoster = [...parentBranch.roster];
-// 	const parentLength = newRoster.length;
-// 	if (parentLength > 2) {
-// 		// Choose a seed from the parent branch
-// 		let childSeed = newRoster[randomBounded(1, parentLength - 1)];
-// 		// Choose a direction
-// 		let childDirection: direction = rolloverDirection(parentBranch.direction);
-// 		// Choose a length
-// 		let childLength = randomBounded(1, parentLength - 1);
-// 		console.log(`${parentLevel}. Branching ${childLength} hexes in direction ${childDirection}`)
-// 		let childObject = new BranchObject({ seed: childSeed, direction: childDirection, length: childLength }, "bg-red");
-// 		const children = recurBranches(childObject, parentLevel + 1);
-// 		newRoster.concat(children);
-// 	}
-// 	console.log(JSON.stringify(`Level ${parentLevel} roster`))
-// 	console.log(`${JSON.stringify(newRoster)}`)
-// 	return newRoster;
-// }
+	// HHH Reflect across the mainbranch, which coincides with the r-axis
+	newRoster.forEach(hexagon => {
+		newRoster = newRoster.concat(reflectAcrossAxis(hexagon,"r","bg-ice"))
+	});
 
-// export function hexplicate(roster:hexagon[], colorFunction) {
-// 	let newRoster: hexagon[] = []
-// 	// HHH Reflect across the mainBranch
+	// HHH Reflect across the origin
+	newRoster.forEach((hex) => {
+		newRoster = newRoster.concat([{ q: -hex.q, r: -hex.r, cssClasses: "bg-ice" }])
+	})
 
-// 	// HHH Reflect across the origin
-// 	roster.forEach((hex) => {
-// 		newRoster.concat([{ q: -hex.q, r: -hex.r, cssClasses: colorFunction() }])
-// 	})
+	// HHH Rotate clones 60 degrees
+	newRoster.forEach((hex) => {
+		const twoHexes = [
+			{ q: sCoordinate(hex), r: hex.q, cssClasses: "bg-ice" },
+			{ q: hex.r, r: sCoordinate(hex), cssClasses: "bg-ice" }
+		]
+		newRoster = newRoster.concat(twoHexes)
+	})
+	return newRoster;
+}
 
-// 	// HHH Rotate clones 60 degrees
-// 	roster.forEach((hex) => {
-// 		const twoHexes = [
-// 			{ q: sCoordinate(hex), r: hex.q, cssClasses: colorFunction() },
-// 			{ q: hex.r, r: sCoordinate(hex), cssClasses: colorFunction() }
-// 		]
-// 		newRoster.concat(twoHexes)
-// 	})
-// 	return newRoster;
-// }

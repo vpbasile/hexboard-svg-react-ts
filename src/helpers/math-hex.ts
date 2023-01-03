@@ -1,5 +1,6 @@
+import { direction } from "../components/snowFlake"
 import { canvasGlobals, coordinateXY, gameGlobals, hexagon, vector } from "./hexDefinitions"
-import { randomBounded } from "./math"
+import { randomBounded, rollover } from "./math"
 const sqrt3 = Math.sqrt(3)
 
 export const hexOrientations = {
@@ -9,6 +10,8 @@ export const hexOrientations = {
 
 // <> FIX - This should be a class property, not a function
 export function sCoordinate(hex: hexagon) { return -hex.q - hex.r }
+
+export function rolloverDirection(value: number): direction { return (rollover(value, 5)) }
 
 export function randomAdjacentDirection(direction: number): number {
 	const turn = randomBounded(0,1);
