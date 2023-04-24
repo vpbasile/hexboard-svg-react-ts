@@ -59,6 +59,11 @@
 	opacity: 0.25;
    }
 
+.text-ice {
+	color:var(--cyan-dark) !important;
+	
+}
+
 .bg-cyan {
  color: var(--cyan-light);
  border-color: var(--cyan-light);
