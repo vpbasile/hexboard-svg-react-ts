@@ -61,6 +61,7 @@
 
 .text-ice {
 	color:var(--cyan-dark) !important;
+	stroke: rgba(100,255,255,0.6);
 	
 }
 
