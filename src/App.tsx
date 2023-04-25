@@ -17,21 +17,26 @@ export default function App() {
 
   const [seedIndex, setSeedIndex] = useState<number>(2);
   const [childLength, setChildLength] = useState<number>(2);
+  const [childDirection, setChildDirection] = useState<number>(1);
 
   // Build the hex Roster
   let hexRoster: hexagon[] = [centerHexagon]
   // FIX need to refactor this function so it can be used in this module and also hexFunctions
   function mergeRoster(newHexes: hexagon[]): void { hexRoster = hexRoster.concat(newHexes); }
   // Temporary override of growChildren function
+
   function growChildren(parent: BranchObject): void {
     const childSeed = parent.roster[seedIndex];
     // const childLength = 10;
-    const childDirection = 1;
-    const newBranch = new BranchObject(
-      { seed: { q: childSeed.q, r: childSeed.r }, direction: childDirection, length: childLength }, parent.direction, "bg-ice");
+    const childDirection = randomBounded(1, 2);
+    const oneBranch = new BranchObject(
+      { seed: { q: childSeed.q, r: childSeed.r }, direction: 1, length: childLength }, parent.direction, "bg-ice");
+    const twoBranch = new BranchObject(
+      { seed: { q: childSeed.q, r: childSeed.r }, direction: 2, length: childLength }, parent.direction, "bg-ice");
 
     // if (childLength > 2) { growChildren(newBranch) }
-    mergeRoster(newBranch.roster);
+    mergeRoster(oneBranch.roster);
+    mergeRoster(twoBranch.roster);
     // return aggregateRoster;
   }
 
@@ -65,18 +70,33 @@ export default function App() {
   // Define the canvs
   const canvasDimension = 1100
 
-  function calcSizes(seedIndex:number,parent:hexagon[]){
-    if(seedIndex>(parent.length)){seedIndex=parent.length-1}
-    if(seedIndex<1){seedIndex=1}
-    setSeedIndex(seedIndex);
-    setChildLength(randomBounded(1,seedIndex));
-  }
+  // function w_setChildLength(value:number,direction:number) {
+  //   // If direction is 1, then childLength should be a max of seedIndex-1
+  //   if (direction === 1) { setChildLength(randomBounded(1, seedIndex - 1)); }
+  // }
+
+
+
 
   return (
     <div className="App container-fluid bg-black text-light p-4">
       <div>
-        <input type='number' value={seedIndex} onChange={e => { calcSizes(+(e.target.value),mainBranch.roster); }} />
+        <input id='seedIndex' type='number' value={seedIndex} onChange={e => {
+          const newVal = +e.target.value;
+          const parentLength = 30;
+          if (newVal > (parentLength)) setSeedIndex(parentLength - 1);
+          if (seedIndex < 1) setSeedIndex(1);
+          else setSeedIndex(newVal);
+          setChildDirection(randomBounded(1, 2));
+          if (childDirection === 1) { setChildLength(randomBounded(1, seedIndex)) }
+          if (childDirection === 2) { setChildLength(randomBounded(1, Math.floor(seedIndex / 2))) }
+        }} />
         {/* Child length must be less than or equal to seedIndex */}
+        <input id='childLength' type='number' value={childLength} onChange={e => {
+          const value: number = +e.target.value;
+          if (value > 0 && value <= seedIndex) { setChildLength(value) }
+          else { setChildLength(1) }
+        }} />
 
       </div>
       <div className="row" id="page-content-row">
