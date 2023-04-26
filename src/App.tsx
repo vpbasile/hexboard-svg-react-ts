@@ -1,4 +1,6 @@
-//style
+// <> <> Hexboard generates a randomized snowflake on a hexagonal grid with coordinates (q,r)
+
+// <> Import stylesheets
 import './css/bootstrap.css';
 import './css/color-dark.css';
 import './css/shape-size.css';
@@ -14,16 +16,18 @@ import { centerHexagon, reflectAcrossAxis } from './helpers/hexFunctions';
 
 export default function App() {
 
+  // Define the canvas and snowflake properties
+  const canvasDimension = 2500;
+  const branchLength = 45;
+
   // Build the hex Roster
   let hexRoster: hexagon[] = [centerHexagon]
-  // FIX need to refactor this function so it can be used in this module and also hexFunctions
   function mergeRoster(newHexes: hexagon[]): void { hexRoster = hexRoster.concat(newHexes); }
-  // Temporary override of growChildren function
 
+  // Function for generating all of the randomized children of the mainBranch
   function growChildren(parent: BranchObject): void {
     for (let i = 1; i < parent.roster.length; i++) {
       const childSeed = parent.roster[i];
-      // const childLength = 10;
       const childDirection = randomBounded(1, 2);
       let childLength: number;
       if (childDirection === 2) { childLength = randomBounded(1, Math.floor(i / 2)) }
@@ -34,18 +38,17 @@ export default function App() {
     }
   }
 
-  // !!! Create snowflake roster
-  const mainBranch = new BranchObject({ seed: { q: 0, r: 0 }, direction: 0, length: 30 }, null, "bg-ice");
+  // Define the main branch and add it ot the roster
+  const mainBranch = new BranchObject({ seed: { q: 0, r: 0 }, direction: 0, length: branchLength }, null, "bg-ice");
   mergeRoster(mainBranch.roster);
 
+  // Generate the children
   growChildren(mainBranch)
+  // Take the mainBranch and its children and do all of the reflections for symmetrical branches that then have sifold symmetry
   const fullSnowflake = hexplicate(hexRoster);
-
   mergeRoster(fullSnowflake)
   fullSnowflake.forEach((hexagon) => { mergeRoster([reflectAcrossAxis(hexagon, "q", "bg-ice")]) })
 
-  // Define the canvs
-  const canvasDimension = 1500
 
   return (
     <div className="App container-fluid bg-black text-light p-4">
