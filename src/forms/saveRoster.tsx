@@ -1,4 +1,4 @@
-import { gameGlobals, hexagon } from "../components/hexDefinitions";
+import { gameGlobals, hexagon } from "../helpers/hexDefinitions";
 
 export default function SaveRosterButton(props: {
 	hexRoster: hexagon[],

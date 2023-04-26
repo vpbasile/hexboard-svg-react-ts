@@ -2,9 +2,9 @@
 
 import Hexagon from './Hexagon';
 import ErrorBoundary from './ErrorBoundary';
-import { canvasGlobals, coordinateXY, gameGlobals, hexagon } from './hexDefinitions';
-import { directionVectors, hex_to_pixel } from './hexMath';
-import { clickMessage } from './hexFunctions';
+import { canvasGlobals, coordinateXY, gameGlobals, hexagon } from '../helpers/hexDefinitions';
+import { directionVectors, hex_to_pixel } from '../helpers/hexMath';
+import { clickMessage } from '../helpers/hexFunctions';
 
 export interface gameBoardProps {
 	gameGlobals: gameGlobals;

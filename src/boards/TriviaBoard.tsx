@@ -1,12 +1,12 @@
 import GameBoard from '../components/HexBoardSVG';
 import ErrorBoundary from '../components/ErrorBoundary';
 import { useState } from "react";
-import { blackHexes, clickMessage, colorHexes } from '../components/hexFunctions';
-import { hexOrientations, cube_ring, calcCenteredRectangle } from '../components/hexMath'
-import { gameGlobals, hexagon, hexClickFunction } from '../components/hexDefinitions';
+import { gameGlobals, hexagon } from '../helpers/hexDefinitions';
+import { blackHexes, clickMessage, colorHexes } from '../helpers/hexFunctions';
+import { hexOrientations, cube_ring, calcCenteredRectangle } from '../helpers/hexMath'
 import CanvasControl from '../forms/CanvasControl';
 import BoardControl from '../forms/BoardControl';
-import aspectRatio from '../components/rectMath';
+import aspectRatio from '../helpers/rectMath';
 
 export default function TriviaBoard(props: any) {
   // Constants, States, and Functions unique to this board
@@ -49,13 +49,6 @@ export default function TriviaBoard(props: any) {
   hexRoster = hexRoster.concat(ring3);
   hexRoster = hexRoster.concat(ring4);
 
-  // let triviaHexes = hexRoster.map(hex => {
-  //   // Give all the hexes a cssClasses if they don't already have one
-  //   if (hex.cssClasses === undefined) { hex.cssClasses = "hover-space bg-gray" }
-  //   return hex;
-  // })
-  // <> end of creating the hex roster
-
   // <><><> The game globals needed for rendering
   const gameGlobals: gameGlobals = {
     // Hexagons
@@ -84,9 +77,9 @@ export default function TriviaBoard(props: any) {
       <div id='displayBoard' className="col-md-10">
         <ErrorBoundary>
           <GameBoard
-            hexRoster={hexRoster}
             gameGlobals={gameGlobals}
             canvasGlobals={canvasGlobals}
+            hexRoster={hexRoster}
           //   logo={logo}
           />
         </ErrorBoundary>

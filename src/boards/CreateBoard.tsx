@@ -1,13 +1,13 @@
 import ArraySelect from "../forms/ArraySelect";
 import GameBoard from "../components/HexBoardSVG";
 import { useState } from "react";
-import { gameGlobals, hexagon } from "../components/hexDefinitions";
+import { gameGlobals, hexagon } from "../helpers/hexDefinitions";
 import SaveRosterButton from "../forms/saveRoster";
-import { calcCenteredRectangle, cube_ring, hexOrientations } from "../components/hexMath";
+import { calcCenteredRectangle, cube_ring, hexOrientations } from "../helpers/hexMath";
 import CanvasControl from "../forms/CanvasControl";
 import BoardControl from "../forms/BoardControl";
-import aspectRatio from "../components/rectMath";
-import { clickMessage } from "../components/hexFunctions";
+import aspectRatio from "../helpers/rectMath";
+import { clickMessage } from "../helpers/hexFunctions";
 
 export default function CreateBoard(props: any) {
 	// <> States that control canvas parameters

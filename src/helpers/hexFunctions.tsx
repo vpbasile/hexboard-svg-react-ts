@@ -1,5 +1,5 @@
 import { hexagon, vector } from "./hexDefinitions"
-import { directionVectors } from "./hexMath";
+import { directionVectors, sCoordinate } from "./hexMath";
 
 export const centerHexagon: hexagon = { "q": 0, "r": 0, "cssClasses": "gameboard-center bg-gray" }
 
@@ -21,6 +21,15 @@ export function blackHexes(hexes: hexagon[]) {
 
 export function colorHexes(hexes: hexagon[], getNextCssClass: { (): string; }) {
 	hexes.forEach(hex => { hex.cssClasses = `hover-space ${getNextCssClass()}` })
+}
+
+export function reflectAcrossAxis(hex:hexagon, axis: string, cssClasses?:string): hexagon {
+	switch (axis) {
+		// Yes I know this looks silly, but I haven;t fixed the method for calculating s
+		case "q": return { q: hex.q, r: sCoordinate(hex), cssClasses };
+		case "r": return { q: sCoordinate(hex), r: hex.r, cssClasses };
+		default: return { q: hex.r, r: hex.q, cssClasses };
+	}
 }
 
 // <><> Click Handlers

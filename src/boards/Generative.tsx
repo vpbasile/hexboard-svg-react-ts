@@ -2,15 +2,15 @@ import ErrorBoundary from "../components/ErrorBoundary";
 import GameBoard from "../components/HexBoardSVG";
 import { useState } from "react";
 
-import { gameGlobals, hexagon, vector } from "../components/hexDefinitions";
-import { alreadyThere, clickMessage, randomMove } from "../components/hexFunctions";
+import { gameGlobals, hexagon, vector } from "../helpers/hexDefinitions";
+import { alreadyThere, clickMessage, randomMove } from "../helpers/hexFunctions";
 import SaveRosterButton from "../forms/saveRoster";
 
 import '../css/gameboard.css'
 import CanvasControl from "../forms/CanvasControl";
-import { calcCenteredRectangle, hexOrientations } from "../components/hexMath";
+import { calcCenteredRectangle, hexOrientations } from "../helpers/hexMath";
 import BoardControl from "../forms/BoardControl";
-import aspectRatio from "../components/rectMath";
+import aspectRatio from "../helpers/rectMath";
 
 export default function GenerativeBoard(props: any) {
 	// <> States that control canvas parameters

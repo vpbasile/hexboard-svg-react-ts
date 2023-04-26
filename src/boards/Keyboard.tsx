@@ -1,12 +1,12 @@
 import ErrorBoundary from '../components/ErrorBoundary';
 import GameBoard from '../components/HexBoardSVG';
 import { useState } from "react";
-import { gameGlobals, hexagon } from '../components/hexDefinitions';
-import { hexOrientations } from '../components/hexMath';
+import { gameGlobals, hexagon } from '../helpers/hexDefinitions';
+import { hexOrientations } from '../helpers/hexMath';
 import CanvasControl from '../forms/CanvasControl';
 import BoardControl from '../forms/BoardControl';
-import aspectRatio from '../components/rectMath';
-import { clickMessage } from '../components/hexFunctions';
+import aspectRatio from '../helpers/rectMath';
+import { clickMessage } from '../helpers/hexFunctions';
 
 
 export default function Keyboard(props: any) {

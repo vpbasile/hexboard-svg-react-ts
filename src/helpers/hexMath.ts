@@ -1,4 +1,5 @@
-import { canvasGlobals, coordinateXY, gameGlobals, hexagon, vector } from "./hexDefinitions"
+import { canvasGlobals, coordinateXY, direction, gameGlobals, hexagon, vector } from "./hexDefinitions"
+import { rollover } from "./math"
 const sqrt3 = Math.sqrt(3)
 
 export const hexOrientations = {
@@ -24,6 +25,9 @@ export function cube_neighbor(center: hexagon, direction: number): hexagon {
 export function cube_scale(hex: hexagon, factor: number): hexagon { return { "q": hex.q * factor, "r": hex.r * factor } }
 function cube_direction(direction: number) { return directionVectors[direction] }
 function cube_add(hexA: hexagon, hexB: hexagon): hexagon { return { "q": hexA.q + hexB.q, "r": hexA.r + hexB.r } }
+
+// <> FIX - This should be a class property, not a function
+export function sCoordinate(hex: hexagon) { return -hex.q - hex.r }
 
 export function cube_ring(center: hexagon, radius: number): hexagon[] {
 	let results: hexagon[] = []
@@ -94,3 +98,6 @@ export function calcCenteredRectangle(hexRoster: hexagon[], gameGlobals: gameGlo
 		, canvasBackgroundColor:""
 	}
 }
+
+export function rolloverDirection(value: number): direction { return (rollover(value, 5)) }
+

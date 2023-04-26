@@ -1,6 +1,6 @@
 
 import { Dispatch } from "react";
-import { coordinateXY } from "../components/hexDefinitions";
+import { coordinateXY } from "../helpers/hexDefinitions";
 import ValueField from "../components/ValueField";
 // import { useState } from 'react';
 
