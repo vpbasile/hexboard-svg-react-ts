@@ -5,7 +5,6 @@ import { randomBounded } from '../../helpers/math';
 import { BranchObject, hexplicate } from './snowFlake';
 import { centerHexagon, reflectAcrossAxis } from '../../helpers/hexFunctions';
 
-
 import ErrorBoundary from '../../components/ErrorBoundary';
 import { gameGlobals, hexagon } from '../../helpers/hexDefinitions';
 import GameBoard from '../../components/HexBoardSVG';
@@ -35,7 +34,7 @@ export default function Snowflake(props: any) {
 		}
 	}
 
-	// Define the main branch and add it ot the roster
+	// Define the main branch and add it to the roster
 	const mainBranch = new BranchObject({ seed: { q: 0, r: 0 }, direction: 0, length: branchLength }, null, "bg-ice");
 	mergeRoster(mainBranch.roster);
 
@@ -75,10 +74,13 @@ export default function Snowflake(props: any) {
 						gameGlobals={gameGlobals}
 						canvasGlobals={canvasGlobals}
 						hexRoster={hexRoster}
+						cssClasses={"viewHeight100"}
 					/>
 				</ErrorBoundary>
 			</div>
 			<div id="sideBar" className="col-md-2">
+				<h2>Sidebar</h2>
+				<p>This is the sidebar</p>
 				{/* <BoardControl
 					hexRadius={hexRadius}
 					separationMultiplier={separationMultiplier}

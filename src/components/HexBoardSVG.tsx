@@ -11,6 +11,7 @@ export interface gameBoardProps {
 	canvasGlobals: canvasGlobals;
 	hexRoster: hexagon[];
 	textSize?: number;
+	cssClasses?: string;
 }
 
 export default function GameBoard(props: gameBoardProps) {
@@ -21,6 +22,7 @@ export default function GameBoard(props: gameBoardProps) {
 	const canvasWidth = canvasGlobals.canvasWidth;
 	const canvasHeight = canvasGlobals.canvasHeight;
 	const hexGridOrigin = canvasGlobals.hexGridOrigin;
+	const cssClasses = props.cssClasses;
 
 	console.log(`Canvas size: ${Math.floor(canvasWidth)}, ${Math.floor(canvasHeight)}`)
 	console.log(`Grid origin: ${Math.floor(hexGridOrigin.x)}, ${Math.floor(hexGridOrigin.y)}`)
@@ -70,8 +72,9 @@ export default function GameBoard(props: gameBoardProps) {
 			<div className="gameboard">
 				<div className="gameboard-container">
 					<p className='caption'></p>
-					<div className="gameboard-canvas bg-gradient">
+					<div className="gameboard-canvas">
 						<svg
+							className={cssClasses}
 							viewBox={`${-hexGridOrigin.x} ${-hexGridOrigin.y} ${canvasWidth} ${canvasHeight}`}
 							style={{ rotate: "0deg", fill: "white", opacity: "0.8" }}
 							xmlns="<http://www.w3.org/2000/svg>">
